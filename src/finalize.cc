@@ -99,10 +99,10 @@ void global_mean_pooling(
 
 #pragma HLS ARRAY_PARTITION variable=convs_root_emb_weight_slice cyclic factor=APPLY_PARALLEL dim=1
 #pragma HLS ARRAY_PARTITION variable=degree_table_finalize cyclic factor=NODE_PARALLEL
-#pragma HLS ARRAY_PARTITION variable=bn_sqrt_var_final cyclic factor=APPLY_PARALLEL dim=1
-#pragma HLS ARRAY_PARTITION variable=bn_weight_final cyclic factor=APPLY_PARALLEL dim=1
-#pragma HLS ARRAY_PARTITION variable=bn_mean_final cyclic factor=APPLY_PARALLEL dim=1
-#pragma HLS ARRAY_PARTITION variable=bn_bias_final cyclic factor=APPLY_PARALLEL dim=1
+#pragma HLS ARRAY_PARTITION variable=GCN_bn_sqrt_var_final cyclic factor=APPLY_PARALLEL dim=1
+#pragma HLS ARRAY_PARTITION variable=GCN_bn_weight_final cyclic factor=APPLY_PARALLEL dim=1
+#pragma HLS ARRAY_PARTITION variable=GCN_bn_mean_final cyclic factor=APPLY_PARALLEL dim=1
+#pragma HLS ARRAY_PARTITION variable=GCN_bn_bias_final cyclic factor=APPLY_PARALLEL dim=1
 
     FM_TYPE sums[EMB_DIM];
 #pragma HLS ARRAY_PARTITION variable=sums cyclic factor=APPLY_PARALLEL dim=1
@@ -332,8 +332,8 @@ void linear_PNA_DGN(
 #pragma HLS INLINE off
 #pragma HLS DATAFLOW
 
-    hls::stream<mlp_xfer_t> PNA_DGN_graph_mlp_1_out ("PNA_graph_mlp_1_out");
-#pragma HLS STREAM variable=PNA_graph_mlp_1_out depth=ceildiv(DGN_MLP_PNA_GRAPH_MLP_1_OUT, APPLY_PARALLEL)
+    hls::stream<mlp_xfer_t> PNA_DGN_graph_mlp_1_out ("PNA_DGN_graph_mlp_1_out");
+#pragma HLS STREAM variable=PNA_DGN_graph_mlp_1_out depth=ceildiv(DGN_MLP_PNA_GRAPH_MLP_1_OUT, APPLY_PARALLEL)
 
     FM_TYPE PNA_DGN_graph_mlp_2_out[DGN_MLP_PNA_GRAPH_MLP_2_OUT];
 

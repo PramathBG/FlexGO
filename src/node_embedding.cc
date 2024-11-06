@@ -125,6 +125,8 @@ static void accumulate(
 #pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights complete dim=2
 #pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights complete dim=3
 #pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights cyclic factor=APPLY_PARALLEL dim=4
+//#pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights complete dim=4
+#pragma HLS AGGREGATE variable=layers_posttrans_fully_connected_0_linear_weights
 #pragma HLS ARRAY_PARTITION variable=GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias complete dim=2
 
     int max_dim_out = EMB_DIM;
@@ -175,6 +177,21 @@ static void accumulate(
         FM_TYPE GCN_GIN_DGN_activations_PNA_mean[2][NODE_PARALLEL];
 #pragma HLS ARRAY_PARTITION variable=GCN_GIN_DGN_activations_PNA_mean complete dim=1
 #pragma HLS ARRAY_PARTITION variable=GCN_GIN_DGN_activations_PNA_mean complete dim=2
+
+//        WT_TYPE layers_posttrans_fully_connected_0_linear_weights_dim_in[DGN_PNA_NUM_LAYERS][EMB_DIM][2][APPLY_PARALLEL];
+//#pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights_dim_in complete dim=2
+//#pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights_dim_in complete dim=3
+//#pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights_dim_in complete dim=4
+//        for(int dim_out = 0; dim_out < EMB_DIM; dim_out++)
+//        {
+//#pragma HLS UNROLL
+//            for(int i = 0; i < 2; i++)
+//            {
+//#pragma HLS UNROLL
+//                layers_posttrans_fully_connected_0_linear_weights_dim_in[layer_num][dim_out][i][dim_offset] = layers_posttrans_fully_connected_0_linear_weights[layer_num][dim_out][i][dim_in];
+//            }
+//        }
+
 
 
         for(int v_offset = 0; v_offset < NODE_PARALLEL; v_offset++)
@@ -266,78 +283,89 @@ static void accumulate(
         {
 #pragma HLS UNROLL
 
+            //WT_TYPE layers_posttrans_fully_connected_0_linear_weights_slice_0 = layers_posttrans_fully_connected_0_linear_weights_dim_in[layer_num][dim_out][0][dim_offset];
+            //WT_TYPE layers_posttrans_fully_connected_0_linear_weights_slice_1 = layers_posttrans_fully_connected_0_linear_weights_dim_in[layer_num][dim_out][0][dim_offset];
             if(dim_out < max_dim_out)
             {
+                WT_TYPE GCN_GIN_DGN_weight_dim_0;
+                WT_TYPE GCN_GIN_DGN_weight_dim_1;
+                GCN_GIN_DGN_weight_dim_0 = GCN_convs_GIN_node_mlp_1_weights[layer_num][dim_out][dim_in];
+                WT_TYPE GCN_GIN_DGN_bias = GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias[layer_num][dim_out];
+
+                if(instruction == DGN)
+                {
+                    GCN_GIN_DGN_weight_dim_0 = layers_posttrans_fully_connected_0_linear_weights[layer_num][dim_out][0][dim_in];
+                    GCN_GIN_DGN_weight_dim_1 = layers_posttrans_fully_connected_0_linear_weights[layer_num][dim_out][1][dim_in];
+                    /* GCN_GIN_DGN_weight_dim_0 = layers_posttrans_fully_connected_0_linear_weights_dim_in[layer_num][dim_out][0][dim_offset]; */
+                    /* GCN_GIN_DGN_weight_dim_1 = layers_posttrans_fully_connected_0_linear_weights_dim_in[layer_num][dim_out][1][dim_offset]; */ 
+                    //GCN_GIN_DGN_weight_dim_0 = layers_posttrans_fully_connected_0_linear_weights_slice_0;
+                    //GCN_GIN_DGN_weight_dim_1 = layers_posttrans_fully_connected_0_linear_weights_slice_1;
+                    GCN_GIN_DGN_bias = GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias[layer_num][dim_out];
+                }
+
+                std::array<std::array<WT_TYPE, NUM_AGGRS>, NUM_SCALERS> PNA_weights = PNA_node_conv_weights[layer_num][dim_out][dim_in];           
+#pragma HLS AGGREGATE variable=PNA_weights
+                if(instruction == GCN || instruction == GIN || instruction == DGN)
+                {
+                    PNA_weights[SCALER_NONE][AGGR_MEAN] = GCN_GIN_DGN_weight_dim_0;
+                    PNA_weights[SCALER_NONE][AGGR_STD] = (WT_TYPE)0;
+                    PNA_weights[SCALER_NONE][AGGR_MIN] = (WT_TYPE)0;
+                    PNA_weights[SCALER_NONE][AGGR_MAX] = (WT_TYPE)0;
+
+                    PNA_weights[SCALER_SCALE][AGGR_MEAN] = (WT_TYPE)0;
+                    PNA_weights[SCALER_SCALE][AGGR_STD] = (WT_TYPE)0;
+                    PNA_weights[SCALER_SCALE][AGGR_MIN] = (WT_TYPE)0;
+                    PNA_weights[SCALER_SCALE][AGGR_MAX] = (WT_TYPE)0;
+
+                    PNA_weights[SCALER_T][AGGR_MEAN] = (WT_TYPE)0;
+                    PNA_weights[SCALER_T][AGGR_STD] = (WT_TYPE)0;
+                    PNA_weights[SCALER_T][AGGR_MIN] = (WT_TYPE)0;
+                    PNA_weights[SCALER_T][AGGR_MAX] = (WT_TYPE)0;
+
+                    if(instruction == DGN)
+                    {
+                        PNA_weights[SCALER_NONE][AGGR_STD] = GCN_GIN_DGN_weight_dim_1;
+                    }
+
+                }
+
                 for (int v_offset = 0; v_offset < NODE_PARALLEL; v_offset++)
                 {
 #pragma HLS UNROLL
                     FM_TYPE addend;
-                    WT_TYPE GCN_GIN_DGN_weight[2];
-                    GCN_GIN_DGN_weight[0] = GCN_convs_GIN_node_mlp_1_weights[layer_num][dim_out][dim_in];
-                    WT_TYPE GCN_GIN_DGN_bias = GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias[layer_num][dim_out];
                     if(instruction == DGN)
                     {
-                        GCN_GIN_DGN_weight[0] = layers_posttrans_fully_connected_0_linear_weights[layer_num][dim_out][0][dim_in];
-                        GCN_GIN_DGN_weight[1] = layers_posttrans_fully_connected_0_linear_weights[layer_num][dim_out][1][dim_in];
-                        GCN_GIN_DGN_bias = GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias[layer_num][dim_out];
-
-                    }
-                    
-                        std::array<std::array<WT_TYPE, NUM_AGGRS>, NUM_SCALERS> PNA_weights = PNA_node_conv_weights[layer_num][dim_out][dim_in];           
-#pragma HLS AGGREGATE variable=PNA_weights
-                        if(instruction == GCN || instruction == GIN || instruction == DGN)
-                        {
-                            PNA_weights[SCALER_NONE][AGGR_MEAN] = GCN_GIN_DGN_weight[0];
-                            PNA_weights[SCALER_NONE][AGGR_STD] = (WT_TYPE)0;
-                            PNA_weights[SCALER_NONE][AGGR_MIN] = (WT_TYPE)0;
-                            PNA_weights[SCALER_NONE][AGGR_MAX] = (WT_TYPE)0;
-
-                            PNA_weights[SCALER_SCALE][AGGR_MEAN] = (WT_TYPE)0;
-                            PNA_weights[SCALER_SCALE][AGGR_STD] = (WT_TYPE)0;
-                            PNA_weights[SCALER_SCALE][AGGR_MIN] = (WT_TYPE)0;
-                            PNA_weights[SCALER_SCALE][AGGR_MAX] = (WT_TYPE)0;
-
-                            PNA_weights[SCALER_T][AGGR_MEAN] = (WT_TYPE)0;
-                            PNA_weights[SCALER_T][AGGR_STD] = (WT_TYPE)0;
-                            PNA_weights[SCALER_T][AGGR_MIN] = (WT_TYPE)0;
-                            PNA_weights[SCALER_T][AGGR_MAX] = (WT_TYPE)0;
-
-                            if(instruction == DGN)
-                            {
-                                PNA_stddev[v_offset] = GCN_GIN_DGN_activations_PNA_mean[1][v_offset];
-                                PNA_weights[SCALER_NONE][AGGR_STD] = GCN_GIN_DGN_weight[1];
-                            }
-
-                        }
-                        addend = FM_TYPE(
+                        PNA_stddev[v_offset] = GCN_GIN_DGN_activations_PNA_mean[1][v_offset];
+                    } 
+                    addend = FM_TYPE(
+                        FM_TYPE(
                             FM_TYPE(
-                                FM_TYPE(
-                                    FM_TYPE(GCN_GIN_DGN_activations_PNA_mean[0][v_offset] * PNA_weights[SCALER_NONE][AGGR_MEAN])
-                                    + FM_TYPE(PNA_stddev[v_offset] * PNA_weights[SCALER_NONE][AGGR_STD])
-                                ) + FM_TYPE(
-                                    FM_TYPE(PNA_min[v_offset] * PNA_weights[SCALER_NONE][AGGR_MIN])
-                                    + FM_TYPE(PNA_max[v_offset] * PNA_weights[SCALER_NONE][AGGR_MAX])
-                                )
+                                FM_TYPE(GCN_GIN_DGN_activations_PNA_mean[0][v_offset] * PNA_weights[SCALER_NONE][AGGR_MEAN])
+                                + FM_TYPE(PNA_stddev[v_offset] * PNA_weights[SCALER_NONE][AGGR_STD])
                             ) + FM_TYPE(
-                                FM_TYPE(FM_TYPE(
-                                    FM_TYPE(
-                                        FM_TYPE(GCN_GIN_DGN_activations_PNA_mean[0][v_offset] * PNA_weights[SCALER_T][AGGR_MEAN])
-                                        + FM_TYPE(PNA_stddev[v_offset] * PNA_weights[SCALER_T][AGGR_STD])
-                                    ) + FM_TYPE(
-                                        FM_TYPE(PNA_min[v_offset] * PNA_weights[SCALER_T][AGGR_MIN])
-                                        + FM_TYPE(PNA_max[v_offset] * PNA_weights[SCALER_T][AGGR_MAX])
-                                    )
-                                ) * PNA_T[v_offset]) + FM_TYPE(FM_TYPE(
-                                    FM_TYPE(
-                                        FM_TYPE(GCN_GIN_DGN_activations_PNA_mean[0][v_offset] * PNA_weights[SCALER_SCALE][AGGR_MEAN])
-                                        + FM_TYPE(PNA_stddev[v_offset] * PNA_weights[SCALER_SCALE][AGGR_STD])
-                                    ) + FM_TYPE(
-                                        FM_TYPE(PNA_min[v_offset] * PNA_weights[SCALER_SCALE][AGGR_MIN])
-                                        + FM_TYPE(PNA_max[v_offset] * PNA_weights[SCALER_SCALE][AGGR_MAX])
-                                    )
-                                ) * PNA_scale[v_offset])
+                                FM_TYPE(PNA_min[v_offset] * PNA_weights[SCALER_NONE][AGGR_MIN])
+                                + FM_TYPE(PNA_max[v_offset] * PNA_weights[SCALER_NONE][AGGR_MAX])
                             )
-                        );
+                        ) + FM_TYPE(
+                            FM_TYPE(FM_TYPE(
+                                FM_TYPE(
+                                    FM_TYPE(GCN_GIN_DGN_activations_PNA_mean[0][v_offset] * PNA_weights[SCALER_T][AGGR_MEAN])
+                                    + FM_TYPE(PNA_stddev[v_offset] * PNA_weights[SCALER_T][AGGR_STD])
+                                ) + FM_TYPE(
+                                    FM_TYPE(PNA_min[v_offset] * PNA_weights[SCALER_T][AGGR_MIN])
+                                    + FM_TYPE(PNA_max[v_offset] * PNA_weights[SCALER_T][AGGR_MAX])
+                                )
+                            ) * PNA_T[v_offset]) + FM_TYPE(FM_TYPE(
+                                FM_TYPE(
+                                    FM_TYPE(GCN_GIN_DGN_activations_PNA_mean[0][v_offset] * PNA_weights[SCALER_SCALE][AGGR_MEAN])
+                                    + FM_TYPE(PNA_stddev[v_offset] * PNA_weights[SCALER_SCALE][AGGR_STD])
+                                ) + FM_TYPE(
+                                    FM_TYPE(PNA_min[v_offset] * PNA_weights[SCALER_SCALE][AGGR_MIN])
+                                    + FM_TYPE(PNA_max[v_offset] * PNA_weights[SCALER_SCALE][AGGR_MAX])
+                                )
+                            ) * PNA_scale[v_offset])
+                        )
+                    );
                     FM_TYPE addend_slice_reg = addend;
                     FM_TYPE accs_v_offset_dim_out = accs[v_offset][dim_out];
                     FM_TYPE augend = (dim_in == 0) ? GCN_GIN_DGN_bias : accs_v_offset_dim_out;

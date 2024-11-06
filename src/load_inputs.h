@@ -33,7 +33,7 @@ void load_graph(
 void load_input_node_embeddings(
     hls::stream<ne_out_t> embeddings[NODE_PARALLEL],
     node_feature_t* node_feature,
-    WT_TYPE node_embedding_h_atom_embedding_list_weight_in[9][ND_FEATURE_TOTAL][EMB_DIM],
+    WT_TYPE node_embedding_h_atom_embedding_list_weight_in[ND_FEATURE][ND_FEATURE_TOTAL][EMB_DIM],
     std::array<FM_TYPE, NUM_AGGRS> messages[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
     int num_of_nodes
 );

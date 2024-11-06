@@ -20,7 +20,7 @@ node_eigen_t* node_eigen = (node_eigen_t*)malloc(roundup(MAX_NODE * sizeof(node_
 
 const char* GNN_to_infer;
 int GNN_instruction;
-
+int nd_feature_table_v1[ND_FEATURE] = {119, 4, 12, 12, 10, 6, 6, 2, 2};
 void read_instruction()
 {
     std::ifstream in("Instruction.txt", std::ios_base::in);
@@ -72,6 +72,18 @@ int main()
 
     load_weights(GNN_instruction);
 
+    //std::cout << "Printing embedding_h_atom_embedding_list_weights" << std::endl;
+    //for(int i = 0; i < ND_FEATURE; i++)
+    //{
+    //    for(int j = 0; j < nd_feature_table_v1[i]; j++)
+    //    {
+    //        for(int dim = 0; dim < EMB_DIM; dim++)
+    //        {
+    //            std::cout << node_embedding_h_atom_embedding_list_weight_fixed_DGN[i][j][dim] << std::endl;
+    //        }
+    //    }
+    //}
+
     FM_TYPE all_results[NUM_GRAPHS][NUM_TASK];
     int nums_of_nodes[NUM_GRAPHS];
     int nums_of_edges[NUM_GRAPHS];
@@ -117,6 +129,7 @@ int main()
             &node_feature[nodes_offset],
             &edge_list[edges_offset],
             &edge_attr[edges_offset],
+            &node_eigen[nodes_offset],
             num_of_nodes,
             num_of_edges
         );
@@ -142,33 +155,66 @@ int main()
         //printf("Computing DGN");
     }
 
-   GNN_compute_graphs(
-        static_cast<Instruction>(GNN_instruction),
-        NUM_GRAPHS,
-        nums_of_nodes,
-        nums_of_edges,
-        reload_weights,
-        all_results,
-        node_feature,
-        node_eigen,
-        edge_list,
-        edge_attr,
-        &node_embedding_h_atom_embedding_list_weight_fixed,
-        &edge_embedding_weight_fixed,
-        &GCN_convs_GIN_node_mlp_1_weight_fixed,
-        &GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_fixed,
-        &GIN_node_mlp_2_weight_fixed,
-        &layers_posttrans_fully_connected_0_linear_weight_fixed,
-        &GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_fixed,
-        &PNA_node_conv_weight_fixed,
-        &bn_weight_PNA_graph_DGN_MLP_1_weight_fixed,
-        &bn_bias_PNA_graph_DGN_MLP_1_bias_fixed,
-        &bn_mean_PNA_graph_DGN_MLP_2_weight_fixed,
-        &bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_fixed,
-        &graph_pred_PNA_graph_DGN_MLP_3_weight_fixed,
-        &graph_pred_PNA_graph_DGN_MLP_3_bias_fixed,
-        &GIN_node_mlp_eps_PNA_avg_deg_fixed
-    );
+    if(GNN_instruction == 3)
+    {
+        GNN_compute_graphs(
+            static_cast<Instruction>(GNN_instruction),
+            NUM_GRAPHS,
+            nums_of_nodes,
+            nums_of_edges,
+            reload_weights,
+            all_results,
+            node_feature,
+            node_eigen,
+            edge_list,
+            edge_attr,
+            &node_embedding_h_atom_embedding_list_weight_fixed_DGN,
+            &edge_embedding_weight_fixed,
+            &GCN_convs_GIN_node_mlp_1_weight_fixed,
+            &GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_fixed,
+            &GIN_node_mlp_2_weight_fixed,
+            &layers_posttrans_fully_connected_0_linear_weight_fixed,
+            &GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_fixed,
+            &PNA_node_conv_weight_fixed,
+            &bn_weight_PNA_graph_DGN_MLP_1_weight_fixed,
+            &bn_bias_PNA_graph_DGN_MLP_1_bias_fixed,
+            &bn_mean_PNA_graph_DGN_MLP_2_weight_fixed,
+            &bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_fixed,
+            &graph_pred_PNA_graph_DGN_MLP_3_weight_fixed,
+            &graph_pred_PNA_graph_DGN_MLP_3_bias_fixed,
+            &GIN_node_mlp_eps_PNA_avg_deg_fixed
+        );
+    }
+    else
+    {
+        GNN_compute_graphs(
+            static_cast<Instruction>(GNN_instruction),
+            NUM_GRAPHS,
+            nums_of_nodes,
+            nums_of_edges,
+            reload_weights,
+            all_results,
+            node_feature,
+            node_eigen,
+            edge_list,
+            edge_attr,
+            &node_embedding_h_atom_embedding_list_weight_fixed,
+            &edge_embedding_weight_fixed,
+            &GCN_convs_GIN_node_mlp_1_weight_fixed,
+            &GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_fixed,
+            &GIN_node_mlp_2_weight_fixed,
+            &layers_posttrans_fully_connected_0_linear_weight_fixed,
+            &GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_fixed,
+            &PNA_node_conv_weight_fixed,
+            &bn_weight_PNA_graph_DGN_MLP_1_weight_fixed,
+            &bn_bias_PNA_graph_DGN_MLP_1_bias_fixed,
+            &bn_mean_PNA_graph_DGN_MLP_2_weight_fixed,
+            &bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_fixed,
+            &graph_pred_PNA_graph_DGN_MLP_3_weight_fixed,
+            &graph_pred_PNA_graph_DGN_MLP_3_bias_fixed,
+            &GIN_node_mlp_eps_PNA_avg_deg_fixed
+        );
+    }
 
 
     FILE* c_output = fopen("C_sim_output.txt", "w+");

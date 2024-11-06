@@ -3,6 +3,7 @@
         {
             "name": "Linux",
             "includePath": [
+                "${cwd}",
                 "${workspaceFolder}/**",
                 "/tools/software/xilinx/Vitis_HLS/2022.2/include/",
                 "${workspaceFolder}/../common/includes/xcl2/",

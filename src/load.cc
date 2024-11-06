@@ -2,11 +2,11 @@
 #include <stdio.h>
 #include "testbench.h"
 
-int nd_feature_table[ND_FEATURE] = {119, 5, 12, 12, 10, 6, 6, 2, 2};
+int nd_feature_table[ND_FEATURE] = {119, 4, 12, 12, 10, 6, 6, 2, 2};
 int ed_feature_table[EDGE_ATTR] = {5, 6, 2};
 
 //Edge and node embedding parameters
-float node_embedding_h_atom_embedding_list_weight_float[9][ND_FEATURE_TOTAL][EMB_DIM];
+float node_embedding_h_atom_embedding_list_weight_float[ND_FEATURE][ND_FEATURE_TOTAL][EMB_DIM];
 float node_embedding_weight_float[ND_FEATURE_TOTAL][EMB_DIM];
 float GCN_edge_embedding_weight_float[NUM_LAYERS][ED_FEATURE_PER_LAYER][EMB_DIM];
 float GIN_edge_embedding_weight_float[NUM_LAYERS][ED_FEATURE_PER_LAYER][EMB_DIM];
@@ -31,6 +31,24 @@ float GIN_node_mlp_eps_PNA_avg_deg_float[NUM_LAYERS];
 
 float bn_mean_PNA_graph_DGN_MLP_2_weight_float_PNA[DGN_MLP_PNA_GRAPH_MLP_2_OUT][DGN_MLP_PNA_GRAPH_MLP_1_OUT];
 
+float embedding_h_atom_embedding_list_0_weight_float[119 * EMB_DIM];
+float embedding_h_atom_embedding_list_1_weight_float[4 * EMB_DIM];
+float embedding_h_atom_embedding_list_2_weight_float[12 * EMB_DIM];
+float embedding_h_atom_embedding_list_3_weight_float[12 * EMB_DIM];
+float embedding_h_atom_embedding_list_4_weight_float[10 * EMB_DIM];
+float embedding_h_atom_embedding_list_5_weight_float[6 * EMB_DIM];
+float embedding_h_atom_embedding_list_6_weight_float[6 * EMB_DIM];
+float embedding_h_atom_embedding_list_7_weight_float[2 * EMB_DIM];
+float embedding_h_atom_embedding_list_8_weight_float[2 * EMB_DIM];
+float layers_0_posttrans_fully_connected_0_linear_weight_float[2 * EMB_DIM * EMB_DIM];
+float layers_1_posttrans_fully_connected_0_linear_weight_float[2 * EMB_DIM * EMB_DIM];
+float layers_2_posttrans_fully_connected_0_linear_weight_float[2 * EMB_DIM * EMB_DIM];
+float layers_3_posttrans_fully_connected_0_linear_weight_float[2 * EMB_DIM * EMB_DIM];
+float layers_0_posttrans_fully_connected_0_linear_bias_float[EMB_DIM];
+float layers_1_posttrans_fully_connected_0_linear_bias_float[EMB_DIM];
+float layers_2_posttrans_fully_connected_0_linear_bias_float[EMB_DIM];
+float layers_3_posttrans_fully_connected_0_linear_bias_float[EMB_DIM];
+
 WT_TYPE GCN_convs_GIN_node_mlp_1_weight_fixed[NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT][EMB_DIM];
 WT_TYPE GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_fixed[NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT];
 WT_TYPE GIN_node_mlp_2_weight_fixed[NUM_LAYERS][EMB_DIM][DGN_LIN_GIN_MLP_1_OUT];
@@ -41,11 +59,12 @@ WT_TYPE bn_weight_PNA_graph_DGN_MLP_1_weight_fixed[DGN_MLP_PNA_GRAPH_MLP_1_OUT][
 WT_TYPE bn_bias_PNA_graph_DGN_MLP_1_bias_fixed[NUM_LAYERS][EMB_DIM];
 WT_TYPE bn_mean_PNA_graph_DGN_MLP_2_weight_fixed[DGN_MLP_PNA_GRAPH_MLP_2_OUT][EMB_DIM];
 WT_TYPE bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_fixed[NUM_LAYERS][EMB_DIM];
-WT_TYPE node_embedding_h_atom_embedding_list_weight_fixed[9][ND_FEATURE_TOTAL][EMB_DIM];
+WT_TYPE node_embedding_h_atom_embedding_list_weight_fixed[ND_FEATURE][ND_FEATURE_TOTAL][EMB_DIM];
 WT_TYPE edge_embedding_weight_fixed[NUM_LAYERS][ED_FEATURE_PER_LAYER][EMB_DIM];
 WT_TYPE graph_pred_PNA_graph_DGN_MLP_3_weight_fixed[NUM_TASK][EMB_DIM];
 WT_TYPE graph_pred_PNA_graph_DGN_MLP_3_bias_fixed[NUM_TASK];
 WT_TYPE GIN_node_mlp_eps_PNA_avg_deg_fixed[NUM_LAYERS];
+WT_TYPE node_embedding_h_atom_embedding_list_weight_fixed_DGN[ND_FEATURE][ND_FEATURE_TOTAL][EMB_DIM];
 
 void load_weights(int GNN_instruction)
 {
@@ -517,148 +536,233 @@ void load_weights(int GNN_instruction)
     }
     else if (GNN_instruction == 3)
     {
-        f = fopen("DGN_weights_biases/dgn_ep1_noBN_dim32.weights.all.bin", "rb");
-        fseek(f, 0*sizeof(float), SEEK_SET);
-        float *embedding_h_atom_embedding_list_0_weight_float = new float[3808];
-        fread(embedding_h_atom_embedding_list_0_weight_float, sizeof(float), 3808, f);
-        for (int i = 0; i < 3808; i++) node_embedding_h_atom_embedding_list_weight_fixed[0][i / 32][i % 32] = WT_TYPE(embedding_h_atom_embedding_list_0_weight_float[i]);
-        delete[] embedding_h_atom_embedding_list_0_weight_float;
+        f = fopen("/usr/scratch/pguruprasanna3/FlowGNN/DGN/dgn_ep1_noBN_dim100.weights.all.bin", "rb");
+	    fseek(f, 0*sizeof(float), SEEK_SET);	fseek(f, 0*sizeof(float), SEEK_SET);
+	    fread(embedding_h_atom_embedding_list_0_weight_float, sizeof(float), 11900, f);
 
-        fseek(f, 3808*sizeof(float), SEEK_SET);
-        float *embedding_h_atom_embedding_list_1_weight_float = new float[160];
-        fread(embedding_h_atom_embedding_list_1_weight_float, sizeof(float), 160, f);
-        for (int i = 0; i < 160; i++) node_embedding_h_atom_embedding_list_weight_fixed[1][i / 32][i % 32] = WT_TYPE(embedding_h_atom_embedding_list_1_weight_float[i]);
-        delete[] embedding_h_atom_embedding_list_1_weight_float;
+	    fseek(f, 11900*sizeof(float), SEEK_SET);
+	    fread(embedding_h_atom_embedding_list_1_weight_float, sizeof(float), 400, f);
 
-        fseek(f, 3968*sizeof(float), SEEK_SET);
-        float *embedding_h_atom_embedding_list_2_weight_float = new float[384];
-        fread(embedding_h_atom_embedding_list_2_weight_float, sizeof(float), 384, f);
-        for (int i = 0; i < 384; i++) node_embedding_h_atom_embedding_list_weight_fixed[2][i / 32][i % 32] = WT_TYPE(embedding_h_atom_embedding_list_2_weight_float[i]);
-        delete[] embedding_h_atom_embedding_list_2_weight_float;
+	    fseek(f, 12300*sizeof(float), SEEK_SET);
+	    fread(embedding_h_atom_embedding_list_2_weight_float, sizeof(float), 1200, f);
 
-        fseek(f, 4352*sizeof(float), SEEK_SET);
-        float *embedding_h_atom_embedding_list_3_weight_float = new float[384];
-        fread(embedding_h_atom_embedding_list_3_weight_float, sizeof(float), 384, f);
-        for (int i = 0; i < 384; i++) node_embedding_h_atom_embedding_list_weight_fixed[3][i / 32][i % 32] = WT_TYPE(embedding_h_atom_embedding_list_3_weight_float[i]);
-        delete[] embedding_h_atom_embedding_list_3_weight_float;
+	    fseek(f, 13500*sizeof(float), SEEK_SET);
+	    fread(embedding_h_atom_embedding_list_3_weight_float, sizeof(float), 1200, f);
 
-        fseek(f, 4736*sizeof(float), SEEK_SET);
-        float *embedding_h_atom_embedding_list_4_weight_float = new float[3200];
-        fread(embedding_h_atom_embedding_list_4_weight_float, sizeof(float), 3200, f);
-        for (int i = 0; i < 3200; i++) node_embedding_h_atom_embedding_list_weight_fixed[4][i / 32][i % 32] = WT_TYPE(embedding_h_atom_embedding_list_4_weight_float[i]);
-        delete[] embedding_h_atom_embedding_list_4_weight_float;
+	    fseek(f, 14700*sizeof(float), SEEK_SET);
+	    fread(embedding_h_atom_embedding_list_4_weight_float, sizeof(float), 1000, f);
 
-        fseek(f, 7936*sizeof(float), SEEK_SET);
-        float *embedding_h_atom_embedding_list_5_weight_float = new float[192];
-        fread(embedding_h_atom_embedding_list_5_weight_float, sizeof(float), 192, f);
-        for (int i = 0; i < 192; i++) node_embedding_h_atom_embedding_list_weight_fixed[5][i / 32][i % 32] = WT_TYPE(embedding_h_atom_embedding_list_5_weight_float[i]);
-        delete[] embedding_h_atom_embedding_list_5_weight_float;
+	    fseek(f, 15700*sizeof(float), SEEK_SET);
+	    fread(embedding_h_atom_embedding_list_5_weight_float, sizeof(float), 600, f);
 
-        fseek(f, 8128*sizeof(float), SEEK_SET);
-        float *embedding_h_atom_embedding_list_6_weight_float = new float[192];
-        fread(embedding_h_atom_embedding_list_6_weight_float, sizeof(float), 192, f);
-        for (int i = 0; i < 192; i++) node_embedding_h_atom_embedding_list_weight_fixed[6][i / 32][i % 32] = WT_TYPE(embedding_h_atom_embedding_list_6_weight_float[i]);
-        delete[] embedding_h_atom_embedding_list_6_weight_float;
+	    fseek(f, 16300*sizeof(float), SEEK_SET);
+	    fread(embedding_h_atom_embedding_list_6_weight_float, sizeof(float), 600, f);
 
-        fseek(f, 8320*sizeof(float), SEEK_SET);
-        float *embedding_h_atom_embedding_list_7_weight_float = new float[64];
-        fread(embedding_h_atom_embedding_list_7_weight_float, sizeof(float), 64, f);
-        for (int i = 0; i < 64; i++) node_embedding_h_atom_embedding_list_weight_fixed[7][i / 32][i % 32] = WT_TYPE(embedding_h_atom_embedding_list_7_weight_float[i]);
-        delete[] embedding_h_atom_embedding_list_7_weight_float;
+	    fseek(f, 16900*sizeof(float), SEEK_SET);
+	    fread(embedding_h_atom_embedding_list_7_weight_float, sizeof(float), 200, f);
 
-        fseek(f, 8384*sizeof(float), SEEK_SET);
-        float *embedding_h_atom_embedding_list_8_weight_float = new float[64];
-        fread(embedding_h_atom_embedding_list_8_weight_float, sizeof(float), 64, f);
-        for (int i = 0; i < 64; i++) node_embedding_h_atom_embedding_list_weight_fixed[8][i / 32][i % 32] = WT_TYPE(embedding_h_atom_embedding_list_8_weight_float[i]);
-        delete[] embedding_h_atom_embedding_list_8_weight_float;
+	    fseek(f, 17100*sizeof(float), SEEK_SET);
+	    fread(embedding_h_atom_embedding_list_8_weight_float, sizeof(float), 200, f);
 
-        fseek(f, 8448*sizeof(float), SEEK_SET);
-        float *layers_0_posttrans_fully_connected_0_linear_weight_float = new float[2048];
-        fread(layers_0_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 2048, f);
-        for (int i = 0; i < 2048; i++) layers_posttrans_fully_connected_0_linear_weight_fixed[0][i / 64][i % 64] = WT_TYPE(layers_0_posttrans_fully_connected_0_linear_weight_float[i]);
-        delete[] layers_0_posttrans_fully_connected_0_linear_weight_float;
+	    fseek(f, 17300*sizeof(float), SEEK_SET);
+	    fread(layers_0_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 20000, f);
 
-        fseek(f, 10496*sizeof(float), SEEK_SET);
-        float *layers_0_posttrans_fully_connected_0_linear_bias_float = new float[32];
-        fread(layers_0_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 32, f);
-        for (int i = 0; i < 32; i++) GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_fixed[0][i] = WT_TYPE(layers_0_posttrans_fully_connected_0_linear_bias_float[i]);
-        delete[] layers_0_posttrans_fully_connected_0_linear_bias_float;
+	    fseek(f, 37300*sizeof(float), SEEK_SET);
+	    fread(layers_0_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 100, f);
 
+	
+	    fseek(f, 37400*sizeof(float), SEEK_SET);
+	    fread(layers_1_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 20000, f);
 
-        fseek(f, 10528*sizeof(float), SEEK_SET);
-        float *layers_1_posttrans_fully_connected_0_linear_weight_float = new float[2048];
-        fread(layers_1_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 2048, f);
-        for (int i = 0; i < 2048; i++) layers_posttrans_fully_connected_0_linear_weight_fixed[1][i / 64][i % 64] = WT_TYPE(layers_1_posttrans_fully_connected_0_linear_weight_float[i]);
-        delete[] layers_1_posttrans_fully_connected_0_linear_weight_float;
+	    fseek(f, 57400*sizeof(float), SEEK_SET);
+	    fread(layers_1_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 100, f);
+	
+	    fseek(f, 57500*sizeof(float), SEEK_SET);
+	    fread(layers_2_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 20000, f);
 
-        fseek(f, 12576*sizeof(float), SEEK_SET);
-        float *layers_1_posttrans_fully_connected_0_linear_bias_float = new float[32];
-        fread(layers_1_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 32, f);
-        for (int i = 0; i < 32; i++) GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_fixed[1][i] = WT_TYPE(layers_1_posttrans_fully_connected_0_linear_bias_float[i]);
-        delete[] layers_1_posttrans_fully_connected_0_linear_bias_float;
+	    fseek(f, 77500*sizeof(float), SEEK_SET);
+	    fread(layers_2_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 100, f);
+	
+	    fseek(f, 77600*sizeof(float), SEEK_SET);
+	    fread(layers_3_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 20000, f);
 
-        fseek(f, 12608*sizeof(float), SEEK_SET);
-        float *layers_2_posttrans_fully_connected_0_linear_weight_float = new float[2048];
-        fread(layers_2_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 2048, f);
-        for (int i = 0; i < 2048; i++) layers_posttrans_fully_connected_0_linear_weight_fixed[2][i / 64][i % 64] = WT_TYPE(layers_2_posttrans_fully_connected_0_linear_weight_float[i]);
-        delete[] layers_2_posttrans_fully_connected_0_linear_weight_float;
+	    fseek(f, 97600*sizeof(float), SEEK_SET);
+	    fread(layers_3_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 100, f);
 
-        fseek(f, 14656*sizeof(float), SEEK_SET);
-        float *layers_2_posttrans_fully_connected_0_linear_bias_float = new float[32];
-        fread(layers_2_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 32, f);
-        for (int i = 0; i < 32; i++) GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_fixed[2][i] = WT_TYPE(layers_2_posttrans_fully_connected_0_linear_bias_float[i]);
-        delete[] layers_2_posttrans_fully_connected_0_linear_bias_float;
+	    fseek(f, 97700*sizeof(float), SEEK_SET);
+	    fread(bn_weight_PNA_graph_DGN_MLP_1_weight_float, sizeof(float), 5000, f);
 
-        fseek(f, 14688*sizeof(float), SEEK_SET);
-        float *layers_3_posttrans_fully_connected_0_linear_weight_float = new float[2048];
-        fread(layers_3_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 2048, f);
-        for (int i = 0; i < 2048; i++) layers_posttrans_fully_connected_0_linear_weight_fixed[3][i / 64][i % 64] = WT_TYPE(layers_3_posttrans_fully_connected_0_linear_weight_float[i]);
-        delete[] layers_3_posttrans_fully_connected_0_linear_weight_float;
+	    fseek(f, 102700*sizeof(float), SEEK_SET);
+	    fread(bn_bias_PNA_graph_DGN_MLP_1_bias_float, sizeof(float), 50, f);
+	
+	    fseek(f, 102750*sizeof(float), SEEK_SET);
+	    fread(bn_mean_PNA_graph_DGN_MLP_2_weight_float_PNA, sizeof(float), 1250, f);
 
-        fseek(f, 16736*sizeof(float), SEEK_SET);
-        float *layers_3_posttrans_fully_connected_0_linear_bias_float = new float[32];
-        fread(layers_3_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 32, f);
-        for (int i = 0; i < 32; i++) GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_fixed[3][i] = WT_TYPE(layers_3_posttrans_fully_connected_0_linear_bias_float[i]);
-        delete[] layers_3_posttrans_fully_connected_0_linear_bias_float;
+	    fseek(f, 104000*sizeof(float), SEEK_SET);
+	    fread(bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_float, sizeof(float), 25, f);
 
-        fseek(f, 16768*sizeof(float), SEEK_SET);
-        float *MLP_layer_FC_layers_0_weight_float = new float[512];
-        fread(MLP_layer_FC_layers_0_weight_float, sizeof(float), 512, f);
-        for (int i = 0; i < 512; i++) bn_weight_PNA_graph_DGN_MLP_1_weight_fixed[i / 32][i % 32] = WT_TYPE(MLP_layer_FC_layers_0_weight_float[i]);
-        delete[] MLP_layer_FC_layers_0_weight_float;
+	    fseek(f, 104025*sizeof(float), SEEK_SET);
+	    fread(graph_pred_PNA_graph_DGN_MLP_3_weight_float, sizeof(float), 25, f);
 
-        fseek(f, 17280*sizeof(float), SEEK_SET);
-        float *MLP_layer_FC_layers_0_bias_float = new float[16];
-        fread(MLP_layer_FC_layers_0_bias_float, sizeof(float), 16, f);
-        for (int i = 0; i < 16; i++) bn_bias_PNA_graph_DGN_MLP_1_bias_fixed[0][i] = WT_TYPE(MLP_layer_FC_layers_0_bias_float[i]);
-        delete[] MLP_layer_FC_layers_0_bias_float;
+	    fseek(f, 104050*sizeof(float), SEEK_SET);
+	    fread(graph_pred_PNA_graph_DGN_MLP_3_bias_float, sizeof(float), 1, f);
 
-        fseek(f, 17296*sizeof(float), SEEK_SET);
-        float *MLP_layer_FC_layers_1_weight_float = new float[128];
-        fread(MLP_layer_FC_layers_1_weight_float, sizeof(float), 128, f);
-        for (int i = 0; i < 128; i++) bn_mean_PNA_graph_DGN_MLP_2_weight_fixed[i / 16][i % 16] = WT_TYPE(MLP_layer_FC_layers_1_weight_float[i]);
-        delete[] MLP_layer_FC_layers_1_weight_float;
+	    fclose(f);
 
-        fseek(f, 17424*sizeof(float), SEEK_SET);
-        float *MLP_layer_FC_layers_1_bias_float = new float[8];
-        fread(MLP_layer_FC_layers_1_bias_float, sizeof(float), 8, f);
-        for (int i = 0; i < 8; i++) bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_fixed[0][i] = WT_TYPE(MLP_layer_FC_layers_1_bias_float[i]);
-        delete[] MLP_layer_FC_layers_1_bias_float;
+        for(int i = 0; i < ND_FEATURE; i++)
+	    {
+		    for(int j = 0; j < nd_feature_table[i]; j++)
+		    {
+		    	for(int dim = 0; dim < EMB_DIM; dim++)
+		    	{
+		    		if(i == 0)
+		    		{	
+		    			node_embedding_h_atom_embedding_list_weight_float[i][j][dim] = embedding_h_atom_embedding_list_0_weight_float[j * EMB_DIM + dim];
+		    		}
+		    		else if(i == 1)
+		    		{
+		    			node_embedding_h_atom_embedding_list_weight_float[i][j][dim] = embedding_h_atom_embedding_list_1_weight_float[j * EMB_DIM + dim];
+		    		}
+		    		else if(i == 2)
+		    		{
+		    			node_embedding_h_atom_embedding_list_weight_float[i][j][dim] = embedding_h_atom_embedding_list_2_weight_float[j * EMB_DIM + dim];
+		    		}
+		    		else if(i == 3)
+		    		{
+		    			node_embedding_h_atom_embedding_list_weight_float[i][j][dim] = embedding_h_atom_embedding_list_3_weight_float[j * EMB_DIM + dim];
+		    		}
+		    		else if(i == 4)
+		    		{
+		    			node_embedding_h_atom_embedding_list_weight_float[i][j][dim] = embedding_h_atom_embedding_list_4_weight_float[j * EMB_DIM + dim];
+		    		}
+		    		else if(i == 5)
+		    		{
+		    			node_embedding_h_atom_embedding_list_weight_float[i][j][dim] = embedding_h_atom_embedding_list_5_weight_float[j * EMB_DIM + dim];
+		    		}
+		    		else if(i == 6)
+		    		{	
+		    			node_embedding_h_atom_embedding_list_weight_float[i][j][dim] = embedding_h_atom_embedding_list_6_weight_float[j * EMB_DIM + dim];
+		    		}
+		    		else if(i == 7)
+		    		{
+		    			node_embedding_h_atom_embedding_list_weight_float[i][j][dim] = embedding_h_atom_embedding_list_7_weight_float[j * EMB_DIM + dim];
+		    		}
+		    		else if(i == 8)
+		    		{
+		    			node_embedding_h_atom_embedding_list_weight_float[i][j][dim] = embedding_h_atom_embedding_list_8_weight_float[j * EMB_DIM + dim];
+		    		}
+		    	}
+		    }
+	    }
 
-        fseek(f, 17432*sizeof(float), SEEK_SET);
-        float *MLP_layer_FC_layers_2_weight_float = new float[8];
-        fread(MLP_layer_FC_layers_2_weight_float, sizeof(float), 8, f);
-        for (int i = 0; i < 8; i++) graph_pred_PNA_graph_DGN_MLP_3_weight_fixed[i / 8][i % 8] = WT_TYPE(MLP_layer_FC_layers_2_weight_float[i]);
-        delete[] MLP_layer_FC_layers_2_weight_float;
+        for(int i = 0; i < ND_FEATURE; i++)
+	    {
+		    for(int j = 0; j < nd_feature_table[i]; j++)
+		    {
+		    	for(int dim = 0; dim < EMB_DIM; dim++)
+		    	{
+		    		node_embedding_h_atom_embedding_list_weight_fixed_DGN[i][j][dim] = (WT_TYPE)node_embedding_h_atom_embedding_list_weight_float[i][j][dim];
+                    //std::cout << node_embedding_h_atom_embedding_list_weight_fixed[i][j][dim] << std::endl;
 
-        fseek(f, 17440*sizeof(float), SEEK_SET);
-        float *MLP_layer_FC_layers_2_bias_float = new float[1];
-        fread(MLP_layer_FC_layers_2_bias_float, sizeof(float), 1, f);
-        for (int i = 0; i < 1; i++) graph_pred_PNA_graph_DGN_MLP_3_bias_fixed[i] = WT_TYPE(MLP_layer_FC_layers_2_bias_float[i]);
-        delete[] MLP_layer_FC_layers_2_bias_float;
+		    	}
+		    }
+	    }
 
-        fclose(f);
+        for(int i = 0; i < NUM_LAYERS; i++)
+	    {
+		    for(int dim_out = 0; dim_out < EMB_DIM; dim_out++)
+		    {
+		    	for(int dim_in = 0; dim_in < 2 * EMB_DIM; dim_in++)
+		    	{
+		    		if(i == 0)
+		    		{
+		    			layers_posttrans_fully_connected_0_linear_weight_float_in[i][dim_out][dim_in] = layers_0_posttrans_fully_connected_0_linear_weight_float[dim_out * 2 * EMB_DIM + dim_in];
+		    		}
+		    		else if(i == 1)
+		    		{
+		    			layers_posttrans_fully_connected_0_linear_weight_float_in[i][dim_out][dim_in] = layers_1_posttrans_fully_connected_0_linear_weight_float[dim_out * 2 * EMB_DIM + dim_in];
+		    		}
+		    		else if(i == 2)
+		    		{
+		    			layers_posttrans_fully_connected_0_linear_weight_float_in[i][dim_out][dim_in] = layers_2_posttrans_fully_connected_0_linear_weight_float[dim_out * 2 * EMB_DIM + dim_in];
+		    		}
+		    		else if(i == 3)
+		    		{
+		    			layers_posttrans_fully_connected_0_linear_weight_float_in[i][dim_out][dim_in] = layers_3_posttrans_fully_connected_0_linear_weight_float[dim_out * 2 * EMB_DIM + dim_in];
+		    		}
+		    	}
+		    }
+	    }
 
+        for(int i = 0; i < NUM_LAYERS; i++)
+	    {
+	    	for(int dim_out = 0; dim_out < EMB_DIM; dim_out++)
+	    	{
+	    		for(int dim_in = 0; dim_in < 2 * EMB_DIM; dim_in++)
+	    		{
+	    			layers_posttrans_fully_connected_0_linear_weight_fixed[i][dim_out][dim_in] = (WT_TYPE)layers_posttrans_fully_connected_0_linear_weight_float_in[i][dim_out][dim_in];
+    
+	    		}
+	    	}
+	    }
+
+        for(int i = 0; i < NUM_LAYERS; i++)
+	    {
+	    	for(int dim = 0; dim < EMB_DIM; dim++)
+	    	{
+	    		if(i == 0)
+	    		{
+	    			GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_float[i][dim] = layers_0_posttrans_fully_connected_0_linear_bias_float[dim];
+	    		}
+	    		else if(i == 1)
+	    		{
+	    			GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_float[i][dim] = layers_1_posttrans_fully_connected_0_linear_bias_float[dim];
+	    		}
+	    		else if(i == 2)
+	    		{
+	    			GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_float[i][dim] = layers_2_posttrans_fully_connected_0_linear_bias_float[dim];
+	    		}
+	    		else if(i == 3)
+	    		{
+	    			GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_float[i][dim] = layers_3_posttrans_fully_connected_0_linear_bias_float[dim];
+	    		}
+	    	}
+	    }
+
+        for(int i = 0; i < NUM_LAYERS; i++)
+	    {
+	    	for(int dim = 0; dim < EMB_DIM; dim++)
+	    	{
+	    		GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_fixed[i][dim] = (WT_TYPE)GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_float[i][dim];
+	    	}
+	    }
+
+        for(int i = 0; i < EMB_DIM / 2; i++)
+	    {
+	    	bn_bias_PNA_graph_DGN_MLP_1_bias_fixed[0][i] = (WT_TYPE)bn_bias_PNA_graph_DGN_MLP_1_bias_float[0][i];
+	    	for(int dim = 0; dim < EMB_DIM; dim++)
+	    	{
+	    		bn_weight_PNA_graph_DGN_MLP_1_weight_fixed[i][dim] = (WT_TYPE)bn_weight_PNA_graph_DGN_MLP_1_weight_float[i][dim];
+	    	}
+	    }
+
+        for(int i = 0; i < EMB_DIM / 4; i++)
+	    {
+	    	bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_fixed[0][i] = (WT_TYPE)bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_float[0][i];
+	    	for(int dim = 0; dim < EMB_DIM / 2; dim++)
+	    	{
+	    		bn_mean_PNA_graph_DGN_MLP_2_weight_fixed[i][dim] = (WT_TYPE)bn_mean_PNA_graph_DGN_MLP_2_weight_float_PNA[i][dim];
+	    	}
+	    }
+
+        for(int i = 0; i < 1; i++)
+	    {
+	    	graph_pred_PNA_graph_DGN_MLP_3_bias_fixed[i] = (WT_TYPE)graph_pred_PNA_graph_DGN_MLP_3_bias_float[i];
+	    	for(int dim = 0; dim < EMB_DIM / 4; dim++)
+	    	{
+	    		graph_pred_PNA_graph_DGN_MLP_3_weight_fixed[i][dim] = (WT_TYPE)graph_pred_PNA_graph_DGN_MLP_3_weight_float[i][dim];
+	    	}
+	    }
     }
 }
 
@@ -668,6 +772,7 @@ void fetch_one_graph(
     node_feature_t* node_feature,
     edge_t* edge_list,
     edge_attr_t* edge_attr,
+    node_eigen_t* node_eigen,
     int num_of_nodes,
     int num_of_edges
 )
@@ -678,10 +783,12 @@ void fetch_one_graph(
     char f_node_feature[128];
     char f_edge_list[128];
     char f_edge_attr[128];
+    char f_node_eigen[128];
 
     sprintf(f_node_feature, "%s_node_feature.bin", graph_name);
     sprintf(f_edge_list, "%s_edge_list.bin", graph_name);
     sprintf(f_edge_attr, "%s_edge_attr.bin", graph_name);
+    sprintf(f_node_eigen, "eig/g%d.txt", g);
 
     f = fopen(f_node_feature, "rb");
     if (!f)
@@ -709,4 +816,22 @@ void fetch_one_graph(
     }
     fread(edge_attr, sizeof(edge_attr_t), num_of_edges, f);
     fclose(f);
+
+    f = fopen(f_node_eigen, "r");
+	if(!f)
+	{
+		fprintf(stderr, "failed to open %s\n", f_node_eigen);
+        exit(1);
+	}
+	float node_eigen_float[4];
+	fscanf(f, "tensor([[%e, %e,%e,%e],\n", &node_eigen_float[0], &node_eigen_float[1], &node_eigen_float[2], &node_eigen_float[3]);
+	for(int i = 0; i < 4; i++) node_eigen[0][i] = (WT_TYPE)node_eigen_float[i];
+	for(int nd = 1; nd < num_of_nodes - 1; nd++)
+	{
+		fscanf(f, "[%e, %e,%e,%e],\n", &node_eigen_float[0], &node_eigen_float[1], &node_eigen_float[2], &node_eigen_float[3]);
+        for (int i = 0; i < 4; i++) node_eigen[nd][i] = WT_TYPE(node_eigen_float[i]);
+	}
+	fscanf(f, "[%e, %e,%e,%e]])", &node_eigen_float[0], &node_eigen_float[1], &node_eigen_float[2], &node_eigen_float[3]);
+    for (int i = 0; i < 4; i++) node_eigen[num_of_nodes - 1][i] = WT_TYPE(node_eigen_float[i]);
+	fclose(f);
 }

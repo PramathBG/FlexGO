@@ -10,15 +10,17 @@ static const int nd_feature_offsets[ND_FEATURE] = {
     // Defined by get_atom_feature_dims() in https://github.com/snap-stanford/ogb/blob/master/ogb/utils/features.py
     0,                                  // possible_atomic_num_list:       119 dims
     119,                                // possible_chirality_list:          5 dims
-    119 + 5,                            // possible_degree_list:            12 dims
-    119 + 5 + 12,                       // possible_formal_charge_list:     12 dims
-    119 + 5 + 12 + 12,                  // possible_numH_list:              10 dims
-    119 + 5 + 12 + 12 + 10,             // possible_number_radical_e_list:   6 dims
-    119 + 5 + 12 + 12 + 10 + 6,         // possible_hybridization_list:      6 dims
-    119 + 5 + 12 + 12 + 10 + 6 + 6,     // possible_is_aromatic_list:        2 dims
-    119 + 5 + 12 + 12 + 10 + 6 + 6 + 2  // possible_is_in_ring_list:         2 dims
+    119 + 4,                            // possible_degree_list:            12 dims
+    119 + 4 + 12,                       // possible_formal_charge_list:     12 dims
+    119 + 4 + 12 + 12,                  // possible_numH_list:              10 dims
+    119 + 4 + 12 + 12 + 10,             // possible_number_radical_e_list:   6 dims
+    119 + 4 + 12 + 12 + 10 + 6,         // possible_hybridization_list:      6 dims
+    119 + 4 + 12 + 12 + 10 + 6 + 6,     // possible_is_aromatic_list:        2 dims
+    119 + 4 + 12 + 12 + 10 + 6 + 6 + 2  // possible_is_in_ring_list:         2 dims
                                         // ND_FEATURE_TOTAL (dcl.h):       174 dims
 };
+
+static const int nd_feature_table[ND_FEATURE] = {119, 4, 12, 12, 10, 6, 6, 2, 2};
 
 void load_weights(
     WT_TYPE GCN_convs_GIN_node_mlp_1_weight_in[NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT][EMB_DIM],
@@ -128,13 +130,81 @@ void load_weights(
         {
             WT_TYPE graph_pred_PNA_graph_mlp_3_weight_dim = graph_pred_PNA_graph_DGN_MLP_3_weight_in[t][dim_in];
             graph_pred_weights[t][dim_in] = graph_pred_PNA_graph_mlp_3_weight_dim;
-            if(instruction == PNA && dim_in < max_dim)
+            if((instruction == PNA || instruction == DGN) && dim_in < max_dim)
             {
                 PNA_graph_DGN_MLP_3_weights[t][dim_in] = graph_pred_PNA_graph_mlp_3_weight_dim;
             }
             
         }
     }
+
+    /* std::cout << "Printing layers_posttrans_fully_connected_0_linear_weights" << std::endl;
+    for(int i = 0; i < DGN_PNA_NUM_LAYERS; i++)
+    {
+        for(int dim_out = 0; dim_out < EMB_DIM; dim_out++)
+        {
+            for(int j = 0; j < 2; j++)
+            {
+                for(int dim_in = 0; dim_in < EMB_DIM; dim_in++)
+                    std::cout << layers_posttrans_fully_connected_0_linear_weights[i][dim_out][j][dim_in] << std::endl;
+            }
+        }
+    }
+
+    std::cout << "Printing layers_posttrans_fully_connected_0_linear_bias" << std::endl;
+    for(int i = 0; i < DGN_PNA_NUM_LAYERS; i++)
+    {
+        for(int dim = 0; dim < EMB_DIM; dim++)
+        {
+            std::cout << GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias[i][dim] << std::endl;
+        }
+    }
+    
+
+    std::cout << "Printing MLP_layer_FC_layers_0_weight" << std::endl;
+    for(int dim_out = 0; dim_out < EMB_DIM / 2; dim_out++)
+    {
+        for(int dim_in = 0; dim_in < EMB_DIM; dim_in++)
+        {
+            std::cout << PNA_graph_DGN_MLP_1_weights[dim_out][dim_in] << std::endl;
+        }
+    }
+
+    std::cout << "Printing MLP_layer_FC_layers_0_bias" << std::endl;
+    for(int dim_out = 0; dim_out < EMB_DIM / 2; dim_out++)
+    {
+        std::cout << PNA_graph_DGN_MLP_1_bias[dim_out] << std::endl;
+    }
+
+    std::cout << "Printing MLP_layer_FC_layers_1_weight" <<std::endl;
+    for(int dim_out = 0; dim_out < EMB_DIM / 4; dim_out++)
+    {
+        for(int dim_in = 0; dim_in < EMB_DIM / 2; dim_in++)
+        {
+            std::cout << PNA_graph_DGN_MLP_2_weights[dim_out][dim_in] << std::endl;
+        }
+    }
+
+    std::cout << "Printing MLP_layer_FC_layers_1_bias" << std::endl;
+    for(int dim_out = 0; dim_out < EMB_DIM / 4; dim_out++)
+    {
+        std::cout << PNA_graph_DGN_MLP_2_bias[dim_out] << std::endl;
+    }
+
+    std::cout << "Printing MLP_layer_FC_layers_2_weight" << std::endl;
+    for(int dim_out = 0; dim_out < NUM_TASK; dim_out++)
+    {
+        for(int dim_in = 0; dim_in < EMB_DIM / 4; dim_in++)
+        {
+            std::cout << PNA_graph_DGN_MLP_3_weights[dim_out][dim_in] << std::endl;
+        }
+    }
+
+    std::cout << "MLP_layer_FC_layers_2_bias" << std::endl;
+    for(int dim_out = 0; dim_out < NUM_TASK; dim_out++)
+    {
+        std::cout << PNA_graph_DGN_MLP_3_bias[dim_out] << std::endl;
+    } */
 }
 
 void load_graph(
@@ -261,7 +331,7 @@ void load_graph(
 void load_input_node_embeddings(
     hls::stream<ne_out_t> embeddings[NODE_PARALLEL],
     node_feature_t* node_feature,
-    WT_TYPE node_embedding_h_atom_embedding_list_weight_in[9][ND_FEATURE_TOTAL][EMB_DIM],
+    WT_TYPE node_embedding_h_atom_embedding_list_weight_in[ND_FEATURE][ND_FEATURE_TOTAL][EMB_DIM],
     std::array<FM_TYPE, NUM_AGGRS> messages[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
     int num_of_nodes
 )
@@ -270,6 +340,18 @@ void load_input_node_embeddings(
 #pragma HLS ARRAY_PARTITION variable=nd_feature_offsets complete dim=1
 #pragma HLS BIND_STORAGE variable=node_embedding_h_atom_embedding_list_weight_in type=ram_1wnr
 #pragma HLS ARRAY_PARTITION variable=node_embedding_h_atom_embedding_list_weight_in cyclic factor=ND_FEATURE dim=1
+
+    /* std::cout << "Printing embedding_h_atom_embedding_list_weights" << std::endl;
+    for(int i = 0; i < ND_FEATURE; i++)
+    {
+        for(int j = 0; j < nd_feature_table[i]; j++)
+        {
+            for(int dim = 0; dim < EMB_DIM; dim++)
+            {
+                std::cout << node_embedding_h_atom_embedding_list_weight_in[i][j][dim] << std::endl;
+            }
+        }
+    } */
 
     for (int nd = 0; nd < num_of_nodes; nd++)
     {

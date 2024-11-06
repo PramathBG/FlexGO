@@ -18,7 +18,7 @@ void GNN_compute_graphs(
     node_eigen_t* node_eigen_in,
     edge_t* edge_list_in,
     edge_attr_t* edge_attr_in,
-    WT_TYPE node_embedding_h_atom_embedding_list_weight_in[][9][ND_FEATURE_TOTAL][EMB_DIM],
+    WT_TYPE node_embedding_h_atom_embedding_list_weight_in[][ND_FEATURE][ND_FEATURE_TOTAL][EMB_DIM],
     WT_TYPE edge_embedding_weight_in[][NUM_LAYERS][ED_FEATURE_PER_LAYER][EMB_DIM],
     WT_TYPE GCN_convs_GIN_node_mlp_1_weight_in[][NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT][EMB_DIM],
     WT_TYPE GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_in[][NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT],
@@ -62,8 +62,8 @@ void GNN_compute_graphs(
 #pragma HLS INTERFACE m_axi depth=(1) port=graph_pred_PNA_graph_DGN_MLP_3_bias_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=avg_deg_in offset=slave bundle=mem
 
-#pragma HLS BIND STORAGE variable=layers_posttrans_fully_connected_0_linear_weights type=RAM_2P impl=bram
-#pragma HLS BIND STORAGE variabe=GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias type=RAM_2P impl=bram
+#pragma HLS BIND_STORAGE variable=layers_posttrans_fully_connected_0_linear_weights type=RAM_2P impl=bram
+#pragma HLS BIND_STORAGE variable=GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias type=RAM_2P impl=bram
 
     instruction = instrcution_in;
     max_iter = ceildiv(EMB_DIM, SCATTER_PARALLEL);

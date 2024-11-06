@@ -10,7 +10,7 @@ void check_node_embedding(
     hls::stream<ne_out_t> embeddings[NODE_PARALLEL],
     std::array<FM_TYPE, NUM_AGGRS> message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
     node_feature_t* node_feature_in,
-    WT_TYPE node_embedding_h_atom_embedding_list_weight_in[9][ND_FEATURE_TOTAL][EMB_DIM],
+    WT_TYPE node_embedding_h_atom_embedding_list_weight_in[ND_FEATURE][ND_FEATURE_TOTAL][EMB_DIM],
     int i,
     int num_of_nodes
 );
@@ -39,7 +39,7 @@ void compute_CONV_layer(
     std::array<FM_TYPE, NUM_AGGRS> message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
     std::array<FM_TYPE, NUM_AGGRS> next_message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
     node_feature_t* node_feature_in,
-    WT_TYPE node_embedding_h_atom_embedding_list_weight_in[9][ND_FEATURE_TOTAL][EMB_DIM],
+    WT_TYPE node_embedding_h_atom_embedding_list_weight_in[ND_FEATURE][ND_FEATURE_TOTAL][EMB_DIM],
     FM_TYPE* result,
     int num_of_nodes
 )
@@ -68,7 +68,7 @@ void check_node_embedding(
     hls::stream<ne_out_t> embeddings[NODE_PARALLEL],
     std::array<FM_TYPE, NUM_AGGRS> message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
     node_feature_t* node_feature_in,
-    WT_TYPE node_embedding_h_atom_embedding_list_weight_in[9][ND_FEATURE_TOTAL][EMB_DIM],
+    WT_TYPE node_embedding_h_atom_embedding_list_weight_in[ND_FEATURE][ND_FEATURE_TOTAL][EMB_DIM],
     int i,
     int num_of_nodes
 )
