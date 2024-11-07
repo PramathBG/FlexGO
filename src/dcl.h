@@ -15,22 +15,22 @@
 constexpr int MAX_EDGE = 500;
 constexpr int MAX_NODE = 500;
 constexpr int ND_FEATURE = 9;
-constexpr int ND_FEATURE_TOTAL = 173;
+constexpr int ND_FEATURE_TOTAL = 174;
 constexpr int EDGE_ATTR = 3;
 constexpr int ED_FEATURE_PER_LAYER = 13;
-constexpr int EMB_DIM = 100; //DGN_LOUT is the same as EMB_DIM
+constexpr int EMB_DIM = 32; //DGN_LOUT is the same as EMB_DIM
 constexpr int NUM_LAYERS = 5;
 constexpr int NUM_TASK = 1;
 // #endregion
 
 // #region model parameters - GIN and DGN specific parameters
-constexpr int DGN_LIN_GIN_MLP_1_OUT = 200;
+constexpr int DGN_LIN_GIN_MLP_1_OUT = 64;
 // #endregion
 
 //#region model parameters - PNA and DGN specific parameters 
 constexpr int DGN_PNA_NUM_LAYERS = 4;
-constexpr int DGN_MLP_PNA_GRAPH_MLP_1_OUT = 50;
-constexpr int DGN_MLP_PNA_GRAPH_MLP_2_OUT = 25;
+constexpr int DGN_MLP_PNA_GRAPH_MLP_1_OUT = 16;
+constexpr int DGN_MLP_PNA_GRAPH_MLP_2_OUT = 8;
 
 typedef enum{
     AGGR_MEAN,
@@ -80,8 +80,8 @@ constexpr int ANALYSIS_AVG_EDGES = 40;
 
 // #region Data Types
 
-typedef ap_fixed<32, 10> FM_TYPE;
-typedef ap_fixed<32, 10> WT_TYPE;
+typedef ap_fixed<16, 6> FM_TYPE;
+typedef ap_fixed<16, 6> WT_TYPE;
 //typedef ap_fixed<18, 8, AP_RND, AP_SAT> FM_TYPE;
 //typedef ap_fixed<18, 8, AP_RND, AP_SAT> WT_TYPE;
 //typedef ap_fixed<18, 8> cast_type_FM_TYPE;

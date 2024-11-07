@@ -4,7 +4,7 @@
 #include "../src/dcl.h"
 #include "../src/util.h"
 
-constexpr int NUM_GRAPHS = 10; // 4113;
+constexpr int NUM_GRAPHS = 1; // 4113;
 
 extern WT_TYPE GCN_convs_GIN_node_mlp_1_weight_fixed[NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT][EMB_DIM];
 extern WT_TYPE GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_fixed[NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT];

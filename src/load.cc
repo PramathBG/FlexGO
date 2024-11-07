@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "testbench.h"
 
-int nd_feature_table[ND_FEATURE] = {119, 4, 12, 12, 10, 6, 6, 2, 2};
+int nd_feature_table[ND_FEATURE] = {119, 5, 12, 12, 10, 6, 6, 2, 2};
 int ed_feature_table[EDGE_ATTR] = {5, 6, 2};
 
 //Edge and node embedding parameters

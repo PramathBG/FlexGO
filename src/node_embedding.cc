@@ -107,7 +107,8 @@ static void accumulate(
 )
 {
 #pragma HLS INLINE 
-#pragma HLS ARRAY_PARTITION variable=GCN_convs_GIN_node_mlp_1_weights complete dim=2
+#pragma HLS ARRAY_PARTITION variable=GCN_convs_GIN_node_mlp_1_weights cyclic factor=APPLY_PARALLEL dim=2
+//#pragma HLS ARRAY_PARTITION variable=GCN_convs_GIN_node_mlp_1_weights complete dim=2
 #pragma HLS ARRAY_PARTITION variable=GCN_convs_GIN_node_mlp_1_weights cyclic factor=APPLY_PARALLEL dim=3
 #pragma HLS ARRAY_PARTITION variable=GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias complete dim=2
 
@@ -116,18 +117,19 @@ static void accumulate(
 #pragma HLS ARRAY_PARTITION variable=GCN_bn_mean cyclic factor=APPLY_PARALLEL dim=2
 #pragma HLS ARRAY_PARTITION variable=GCN_bn_bias cyclic factor=APPLY_PARALLEL dim=2
 
-#pragma HLS ARRAY_PARTITION variable=PNA_node_conv_weights complete dim=2
+//#pragma HLS ARRAY_PARTITION variable=PNA_node_conv_weights complete dim=2
+#pragma HLS ARRAY_PARTITION variable=PNA_node_conv_weights cyclic factor=APPLY_PARALLEL dim=2
 #pragma HLS ARRAY_PARTITION variable=PNA_node_conv_weights cyclic factor=APPLY_PARALLEL dim=3
 #pragma HLS AGGREGATE variable=PNA_node_conv_weights
 #pragma HLS ARRAY_PARTITION variable=DGN_abssums_PNA_log_degrees cyclic factor=NODE_PARALLEL dim=1
 #pragma HLS AGGREGATE variable=DGN_abssums_PNA_log_degrees
 
-#pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights complete dim=2
+//#pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights complete dim=2
+#pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights cyclic factor=APPLY_PARALLEL dim=2
 #pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights complete dim=3
 #pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights cyclic factor=APPLY_PARALLEL dim=4
-//#pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights complete dim=4
-#pragma HLS AGGREGATE variable=layers_posttrans_fully_connected_0_linear_weights
-#pragma HLS ARRAY_PARTITION variable=GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias complete dim=2
+//#pragma HLS ARRAY_PARTITION variable=GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias complete dim=2
+#pragma HLS ARRAY_PARTITION variable=GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias cyclic factor=APPLY_PARALLEL dim=2
 
     int max_dim_out = EMB_DIM;
 
@@ -177,22 +179,6 @@ static void accumulate(
         FM_TYPE GCN_GIN_DGN_activations_PNA_mean[2][NODE_PARALLEL];
 #pragma HLS ARRAY_PARTITION variable=GCN_GIN_DGN_activations_PNA_mean complete dim=1
 #pragma HLS ARRAY_PARTITION variable=GCN_GIN_DGN_activations_PNA_mean complete dim=2
-
-//        WT_TYPE layers_posttrans_fully_connected_0_linear_weights_dim_in[DGN_PNA_NUM_LAYERS][EMB_DIM][2][APPLY_PARALLEL];
-//#pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights_dim_in complete dim=2
-//#pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights_dim_in complete dim=3
-//#pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights_dim_in complete dim=4
-//        for(int dim_out = 0; dim_out < EMB_DIM; dim_out++)
-//        {
-//#pragma HLS UNROLL
-//            for(int i = 0; i < 2; i++)
-//            {
-//#pragma HLS UNROLL
-//                layers_posttrans_fully_connected_0_linear_weights_dim_in[layer_num][dim_out][i][dim_offset] = layers_posttrans_fully_connected_0_linear_weights[layer_num][dim_out][i][dim_in];
-//            }
-//        }
-
-
 
         for(int v_offset = 0; v_offset < NODE_PARALLEL; v_offset++)
         {
@@ -281,10 +267,8 @@ static void accumulate(
 
         for (int dim_out = 0; dim_out < DGN_LIN_GIN_MLP_1_OUT; dim_out++)
         {
-#pragma HLS UNROLL
+#pragma HLS UNROLL factor=APPLY_PARALLEL
 
-            //WT_TYPE layers_posttrans_fully_connected_0_linear_weights_slice_0 = layers_posttrans_fully_connected_0_linear_weights_dim_in[layer_num][dim_out][0][dim_offset];
-            //WT_TYPE layers_posttrans_fully_connected_0_linear_weights_slice_1 = layers_posttrans_fully_connected_0_linear_weights_dim_in[layer_num][dim_out][0][dim_offset];
             if(dim_out < max_dim_out)
             {
                 WT_TYPE GCN_GIN_DGN_weight_dim_0;
@@ -294,12 +278,8 @@ static void accumulate(
 
                 if(instruction == DGN)
                 {
-                    GCN_GIN_DGN_weight_dim_0 = layers_posttrans_fully_connected_0_linear_weights[layer_num][dim_out][0][dim_in];
-                    GCN_GIN_DGN_weight_dim_1 = layers_posttrans_fully_connected_0_linear_weights[layer_num][dim_out][1][dim_in];
-                    /* GCN_GIN_DGN_weight_dim_0 = layers_posttrans_fully_connected_0_linear_weights_dim_in[layer_num][dim_out][0][dim_offset]; */
-                    /* GCN_GIN_DGN_weight_dim_1 = layers_posttrans_fully_connected_0_linear_weights_dim_in[layer_num][dim_out][1][dim_offset]; */ 
-                    //GCN_GIN_DGN_weight_dim_0 = layers_posttrans_fully_connected_0_linear_weights_slice_0;
-                    //GCN_GIN_DGN_weight_dim_1 = layers_posttrans_fully_connected_0_linear_weights_slice_1;
+                    GCN_GIN_DGN_weight_dim_0 = layers_posttrans_fully_connected_0_linear_weights[layer_num][dim_out][0][dim_base + dim_offset];
+                    GCN_GIN_DGN_weight_dim_1 = layers_posttrans_fully_connected_0_linear_weights[layer_num][dim_out][1][dim_base + dim_offset];
                     GCN_GIN_DGN_bias = GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias[layer_num][dim_out];
                 }
 

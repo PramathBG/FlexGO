@@ -10,13 +10,13 @@ static const int nd_feature_offsets[ND_FEATURE] = {
     // Defined by get_atom_feature_dims() in https://github.com/snap-stanford/ogb/blob/master/ogb/utils/features.py
     0,                                  // possible_atomic_num_list:       119 dims
     119,                                // possible_chirality_list:          5 dims
-    119 + 4,                            // possible_degree_list:            12 dims
-    119 + 4 + 12,                       // possible_formal_charge_list:     12 dims
-    119 + 4 + 12 + 12,                  // possible_numH_list:              10 dims
-    119 + 4 + 12 + 12 + 10,             // possible_number_radical_e_list:   6 dims
-    119 + 4 + 12 + 12 + 10 + 6,         // possible_hybridization_list:      6 dims
-    119 + 4 + 12 + 12 + 10 + 6 + 6,     // possible_is_aromatic_list:        2 dims
-    119 + 4 + 12 + 12 + 10 + 6 + 6 + 2  // possible_is_in_ring_list:         2 dims
+    119 + 5,                            // possible_degree_list:            12 dims
+    119 + 5 + 12,                       // possible_formal_charge_list:     12 dims
+    119 + 5 + 12 + 12,                  // possible_numH_list:              10 dims
+    119 + 5 + 12 + 12 + 10,             // possible_number_radical_e_list:   6 dims
+    119 + 5 + 12 + 12 + 10 + 6,         // possible_hybridization_list:      6 dims
+    119 + 5 + 12 + 12 + 10 + 6 + 6,     // possible_is_aromatic_list:        2 dims
+    119 + 5 + 12 + 12 + 10 + 6 + 6 + 2  // possible_is_in_ring_list:         2 dims
                                         // ND_FEATURE_TOTAL (dcl.h):       174 dims
 };
 
