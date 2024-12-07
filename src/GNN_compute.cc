@@ -64,6 +64,7 @@ void GNN_compute_graphs(
 
 #pragma HLS BIND_STORAGE variable=layers_posttrans_fully_connected_0_linear_weights type=RAM_2P impl=bram
 #pragma HLS BIND_STORAGE variable=GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias type=RAM_2P impl=bram
+#pragma HLS BIND_STORAGE variable=GCN_convs_GIN_node_mlp_1_weights type=RAM_1WNR impl=bram
 
     instruction = instrcution_in;
     max_iter = ceildiv(EMB_DIM, SCATTER_PARALLEL);

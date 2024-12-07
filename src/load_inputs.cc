@@ -300,7 +300,7 @@ void load_graph(
     for (int i = 0; i < num_of_edges; i++)
     {
         // TODO: can we make this II=1?
-#pragma HLS PIPELINE II=4
+#pragma HLS PIPELINE II=5
 #pragma HLS LOOP_TRIPCOUNT min=ANALYSIS_MIN_EDGES max=ANALYSIS_MAX_EDGES avg=ANALYSIS_AVG_EDGES
         edge_t edge = edge_list_in[i];
         int u = edge.u;

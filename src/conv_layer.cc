@@ -49,12 +49,14 @@ void compute_CONV_layer(
 
 #pragma HLS ARRAY_PARTITION variable=message complete dim=1
 #pragma HLS ARRAY_PARTITION variable=message cyclic factor=NODE_PARALLEL dim=2
-#pragma HLS ARRAY_PARTITION variable=message cyclic factor=SCATTER_PARALLEL dim=3
+#pragma HLS ARRAY_PARTITION variable=message complete dim=3
+#pragma HLS ARRAY_PARTITION variable=message cyclic factor=SCATTER_PARALLEL dim=4
 #pragma HLS AGGREGATE variable=message
 
 #pragma HLS ARRAY_PARTITION variable=next_message complete dim=1
 #pragma HLS ARRAY_PARTITION variable=next_message cyclic factor=NODE_PARALLEL dim=2
-#pragma HLS ARRAY_PARTITION variable=next_message cyclic factor=SCATTER_PARALLEL dim=3
+#pragma HLS ARRAY_PARTITION variable=next_message complete dim=3
+#pragma HLS ARRAY_PARTITION variable=next_message cyclic factor=SCATTER_PARALLEL dim=4
 #pragma HLS AGGREGATE variable=next_message
 
     hls::stream<ne_out_t> embeddings[NODE_PARALLEL];

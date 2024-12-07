@@ -107,8 +107,9 @@ static void accumulate(
 )
 {
 #pragma HLS INLINE 
-#pragma HLS ARRAY_PARTITION variable=GCN_convs_GIN_node_mlp_1_weights cyclic factor=APPLY_PARALLEL dim=2
+
 //#pragma HLS ARRAY_PARTITION variable=GCN_convs_GIN_node_mlp_1_weights complete dim=2
+#pragma HLS ARRAY_PARTITION variable=GCN_convs_GIN_node_mlp_1_weights cyclic factor=APPLY_PARALLEL dim=2
 #pragma HLS ARRAY_PARTITION variable=GCN_convs_GIN_node_mlp_1_weights cyclic factor=APPLY_PARALLEL dim=3
 #pragma HLS ARRAY_PARTITION variable=GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias complete dim=2
 
@@ -128,8 +129,11 @@ static void accumulate(
 #pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights cyclic factor=APPLY_PARALLEL dim=2
 #pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights complete dim=3
 #pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights cyclic factor=APPLY_PARALLEL dim=4
+
 //#pragma HLS ARRAY_PARTITION variable=GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias complete dim=2
 #pragma HLS ARRAY_PARTITION variable=GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias cyclic factor=APPLY_PARALLEL dim=2
+
+#pragma HLS ARRAY_PARTITION variable=DGN_eigw_sums cyclic factor=NODE_PARALLEL dim=1
 
     int max_dim_out = EMB_DIM;
 
@@ -278,8 +282,8 @@ static void accumulate(
 
                 if(instruction == DGN)
                 {
-                    GCN_GIN_DGN_weight_dim_0 = layers_posttrans_fully_connected_0_linear_weights[layer_num][dim_out][0][dim_base + dim_offset];
-                    GCN_GIN_DGN_weight_dim_1 = layers_posttrans_fully_connected_0_linear_weights[layer_num][dim_out][1][dim_base + dim_offset];
+                    GCN_GIN_DGN_weight_dim_0 = layers_posttrans_fully_connected_0_linear_weights[layer_num][dim_out][0][dim_in];
+                    GCN_GIN_DGN_weight_dim_1 = layers_posttrans_fully_connected_0_linear_weights[layer_num][dim_out][1][dim_in];
                     GCN_GIN_DGN_bias = GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias[layer_num][dim_out];
                 }
 
