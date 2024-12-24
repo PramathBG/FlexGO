@@ -108,8 +108,7 @@ static void accumulate(
 {
 #pragma HLS INLINE 
 
-//#pragma HLS ARRAY_PARTITION variable=GCN_convs_GIN_node_mlp_1_weights complete dim=2
-#pragma HLS ARRAY_PARTITION variable=GCN_convs_GIN_node_mlp_1_weights cyclic factor=APPLY_PARALLEL dim=2
+#pragma HLS ARRAY_PARTITION variable=GCN_convs_GIN_node_mlp_1_weights complete dim=2
 #pragma HLS ARRAY_PARTITION variable=GCN_convs_GIN_node_mlp_1_weights cyclic factor=APPLY_PARALLEL dim=3
 #pragma HLS ARRAY_PARTITION variable=GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias complete dim=2
 
@@ -118,20 +117,17 @@ static void accumulate(
 #pragma HLS ARRAY_PARTITION variable=GCN_bn_mean cyclic factor=APPLY_PARALLEL dim=2
 #pragma HLS ARRAY_PARTITION variable=GCN_bn_bias cyclic factor=APPLY_PARALLEL dim=2
 
-//#pragma HLS ARRAY_PARTITION variable=PNA_node_conv_weights complete dim=2
-#pragma HLS ARRAY_PARTITION variable=PNA_node_conv_weights cyclic factor=APPLY_PARALLEL dim=2
+#pragma HLS ARRAY_PARTITION variable=PNA_node_conv_weights complete dim=2
 #pragma HLS ARRAY_PARTITION variable=PNA_node_conv_weights cyclic factor=APPLY_PARALLEL dim=3
 #pragma HLS AGGREGATE variable=PNA_node_conv_weights
 #pragma HLS ARRAY_PARTITION variable=DGN_abssums_PNA_log_degrees cyclic factor=NODE_PARALLEL dim=1
 #pragma HLS AGGREGATE variable=DGN_abssums_PNA_log_degrees
 
-//#pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights complete dim=2
-#pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights cyclic factor=APPLY_PARALLEL dim=2
+#pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights complete dim=2
 #pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights complete dim=3
 #pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weights cyclic factor=APPLY_PARALLEL dim=4
 
-//#pragma HLS ARRAY_PARTITION variable=GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias complete dim=2
-#pragma HLS ARRAY_PARTITION variable=GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias cyclic factor=APPLY_PARALLEL dim=2
+#pragma HLS ARRAY_PARTITION variable=GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias complete dim=2
 
 #pragma HLS ARRAY_PARTITION variable=DGN_eigw_sums cyclic factor=NODE_PARALLEL dim=1
 
@@ -187,6 +183,7 @@ static void accumulate(
         for(int v_offset = 0; v_offset < NODE_PARALLEL; v_offset++)
         {
 #pragma HLS UNROLL
+#pragma HLS DEPENDENCE variable=message inter false
             int v = v_base + v_offset;
             int message_bank;
             int message_bank_v;
@@ -196,8 +193,12 @@ static void accumulate(
             {   
                 message_bank = v % EDGE_PARALLEL;
                 message_bank_v = v / EDGE_PARALLEL;
-                message_dim_1 = message[message_bank][message_bank_v][0][dim_in];
-                message_dim_2 = message[message_bank][message_bank_v][1][dim_in];
+                message_dim_1 = message[(v_base + v_offset) % EDGE_PARALLEL][(v_base + v_offset) / EDGE_PARALLEL][0][dim_in];
+                message_dim_2 = message[(v_base + v_offset) % EDGE_PARALLEL][(v_base + v_offset) / EDGE_PARALLEL][1][dim_in];
+
+                //clear message table for the next round of message passing
+                reset_message(message[(v_base + v_offset) % EDGE_PARALLEL][(v_base + v_offset) / EDGE_PARALLEL], dim_in);
+
                 FM_TYPE h_node_v_dim = h_node[v][dim_in];
                 h_node_buf[v_offset][dim_in] = h_node_v_dim;
                 in_degree = degree_table[v];
@@ -263,15 +264,12 @@ static void accumulate(
                     GCN_GIN_DGN_activations_PNA_mean[0][v_offset] = message_dim_1[0] / in_degree;
                     GCN_GIN_DGN_activations_PNA_mean[1][v_offset] = hls::abs(FM_TYPE((message_dim_2[0] - DGN_eigw_sums_v * h_node_v_dim) / DGN_abssums_PNA_log_degrees_v));
                 }
-
-                //clear message table for the next round of message passing
-                reset_message(message[message_bank][message_bank_v], dim_in);
             }
         }
 
         for (int dim_out = 0; dim_out < DGN_LIN_GIN_MLP_1_OUT; dim_out++)
         {
-#pragma HLS UNROLL factor=APPLY_PARALLEL
+#pragma HLS UNROLL
 
             if(dim_out < max_dim_out)
             {
@@ -371,7 +369,7 @@ static void output(
     int num_of_nodes
 )
 {
-    #pragma HLS INLINE
+#pragma HLS INLINE
 #pragma HLS ARRAY_PARTITION variable=GIN_node_mlp_2_weights cyclic factor=APPLY_PARALLEL dim=2
 #pragma HLS ARRAY_PARTITION variable=GIN_node_mlp_2_weights complete dim=3
 
@@ -379,25 +377,13 @@ static void output(
 #pragma HLS ARRAY_PARTITION variable=outputs complete dim=1
 #pragma HLS AGGREGATE variable=outputs
 
-    FM_TYPE GCN_emb_result[MAX_NODE][EMB_DIM];
-#pragma HLS ARRAY_PARTITION variable=GCN_emb_result cyclic dim=1 factor=NODE_PARALLEL
-#pragma HLS ARRAY_PARTITION variable=GCN_emb_result cyclic dim=2 factor=APPLY_PARALLEL
+   FM_TYPE GCN_PNA_DGN_emb_result[MAX_NODE][EMB_DIM];
+#pragma HLS ARRAY_PARTITION variable=GCN_PNA_DGN_emb_result cyclic dim=1 factor=NODE_PARALLEL
+#pragma HLS ARRAY_PARTITION variable=GCN_PNA_DGN_emb_result cyclic dim=2 factor=APPLY_PARALLEL
 
     FM_TYPE GIN_emb_result[MAX_NODE][EMB_DIM];
 #pragma HLS ARRAY_PARTITION variable=GIN_emb_result cyclic dim=1 factor=NODE_PARALLEL
 #pragma HLS ARRAY_PARTITION variable=GIN_emb_result cyclic dim=2 factor=APPLY_PARALLEL
-
-    FM_TYPE PNA_emb_result[MAX_NODE][EMB_DIM];
-#pragma HLS ARRAY_PARTITION variable=PNA_emb_result cyclic dim=1 factor=NODE_PARALLEL
-#pragma HLS ARRAY_PARTITION variable=PNA_emb_result cyclic dim=2 factor=APPLY_PARALLEL
-
-    FM_TYPE DGN_emb_result[MAX_NODE][EMB_DIM];
-#pragma HLS ARRAY_PARTITION variable=DGN_emb_result cyclic dim=1 factor=NODE_PARALLEL
-#pragma HLS ARRAY_PARTITION variable=DGN_emb_result cyclic dim=2 factor=APPLY_PARALLEL
-
-    FM_TYPE h_node_tmp[MAX_NODE][EMB_DIM];
-#pragma HLS ARRAY_PARTITION variable=h_node_tmp cyclic dim=1 factor=NODE_PARALLEL
-#pragma HLS ARRAY_PARTITION variable=h_node_tmp cyclic dim=2 factor=APPLY_PARALLEL
 
     for(int dim_offset = 0; dim_offset < APPLY_PARALLEL; dim_offset++)
     {
@@ -422,9 +408,8 @@ static void output(
                 result = accs[v_offset][dim];
                 if(instruction == PNA || instruction == DGN)
                     result = h_node_buf[v_offset][dim] + relu_acc;
-                GCN_emb_result[v][dim] = result;
-                PNA_emb_result[v][dim] = result;
-                DGN_emb_result[v][dim] = result;
+
+                GCN_PNA_DGN_emb_result[v][dim] = result;
                 outputs[v_offset][dim_offset] = result;
             }
             GIN_bias = GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias[layer_num][dim];
@@ -465,21 +450,14 @@ static void output(
         {
 #pragma HLS UNROLL
             int v = v_base + v_offset;
+            FM_TYPE h_node_v_dim;
             if(v < num_of_nodes)
             {
-                if(instruction == GCN)
-                    h_node_tmp[v][dim] = GCN_emb_result[v][dim];
-                
+                h_node_v_dim = GCN_PNA_DGN_emb_result[v][dim];
                 if(instruction == GIN)
-                    h_node_tmp[v][dim] = GIN_emb_result[v][dim];
-                
-                if(instruction == PNA)
-                    h_node_tmp[v][dim] = PNA_emb_result[v][dim];
-                
-                if(instruction == DGN)
-                    h_node_tmp[v][dim] = DGN_emb_result[v][dim];
-            
-                FM_TYPE h_node_v_dim = h_node_tmp[v][dim];
+                {
+                    h_node_v_dim = GIN_emb_result[v][dim];
+                }
                 h_node[v][dim] = h_node_v_dim;
             }
         }

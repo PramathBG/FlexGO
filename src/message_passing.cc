@@ -200,6 +200,8 @@ static void scatter(
 
 void reset_message(std::array<FM_TYPE, NUM_AGGRS> message[2][EMB_DIM], int dim)
 {
+#pragma HLS INLINE
+
     message[0][dim][AGGR_MEAN] = 0;
     message[0][dim][AGGR_STD] = 0;
     message[0][dim][AGGR_MIN] = ap_fixed_max<FM_TYPE>();

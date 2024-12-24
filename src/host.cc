@@ -105,6 +105,8 @@ int main(int argc, char **argv) {
         case 2 :    printf("\n******* This is the HLS for PNA model *******\n");
                     break;
         
+        case 3 :    printf("\n******* This is the HLS for DGN model *******\n");
+        
         default  :  break;
     }
 
@@ -365,5 +367,6 @@ int main(int argc, char **argv) {
             printf("g%d: %.8f\n", g, float(result[(g - 1) * NUM_TASK + t]));
         }
     }
+    printf("Before segmentation fault\n");
     return 0;
 }

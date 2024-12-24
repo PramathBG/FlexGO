@@ -509,75 +509,74 @@ void load_weights(int GNN_instruction)
     }
     else if (GNN_instruction == 3)
     {
-        f = fopen("/usr/scratch/pguruprasanna3/FlowGNN/DGN/dgn_ep1_noBN_dim100.weights.all.bin", "rb");
-	    fseek(f, 0*sizeof(float), SEEK_SET);	fseek(f, 0*sizeof(float), SEEK_SET);
-	    fread(embedding_h_atom_embedding_list_0_weight_float, sizeof(float), 11900, f);
+        f = fopen("DGN_weights_biases/dgn_ep1_noBN_dim32.weights.all.bin", "rb");
+	    fseek(f, 0*sizeof(float), SEEK_SET);
+	    fread(embedding_h_atom_embedding_list_0_weight_float, sizeof(float), 3808, f);
 
-	    fseek(f, 11900*sizeof(float), SEEK_SET);
-	    fread(embedding_h_atom_embedding_list_1_weight_float, sizeof(float), 400, f);
+	    fseek(f, 3808*sizeof(float), SEEK_SET);
+	    fread(embedding_h_atom_embedding_list_1_weight_float, sizeof(float), 160, f);
 
-	    fseek(f, 12300*sizeof(float), SEEK_SET);
-	    fread(embedding_h_atom_embedding_list_2_weight_float, sizeof(float), 1200, f);
+	    fseek(f, 3968*sizeof(float), SEEK_SET);
+	    fread(embedding_h_atom_embedding_list_2_weight_float, sizeof(float), 384, f);
 
-	    fseek(f, 13500*sizeof(float), SEEK_SET);
-	    fread(embedding_h_atom_embedding_list_3_weight_float, sizeof(float), 1200, f);
+	    fseek(f, 4352*sizeof(float), SEEK_SET);
+	    fread(embedding_h_atom_embedding_list_3_weight_float, sizeof(float), 384, f);
 
-	    fseek(f, 14700*sizeof(float), SEEK_SET);
-	    fread(embedding_h_atom_embedding_list_4_weight_float, sizeof(float), 1000, f);
+	    fseek(f, 4736*sizeof(float), SEEK_SET);
+	    fread(embedding_h_atom_embedding_list_4_weight_float, sizeof(float), 320, f);
 
-	    fseek(f, 15700*sizeof(float), SEEK_SET);
-	    fread(embedding_h_atom_embedding_list_5_weight_float, sizeof(float), 600, f);
+	    fseek(f, 5056*sizeof(float), SEEK_SET);
+	    fread(embedding_h_atom_embedding_list_5_weight_float, sizeof(float), 192, f);
 
-	    fseek(f, 16300*sizeof(float), SEEK_SET);
-	    fread(embedding_h_atom_embedding_list_6_weight_float, sizeof(float), 600, f);
+	    fseek(f, 5248*sizeof(float), SEEK_SET);
+	    fread(embedding_h_atom_embedding_list_6_weight_float, sizeof(float), 192, f);
 
-	    fseek(f, 16900*sizeof(float), SEEK_SET);
-	    fread(embedding_h_atom_embedding_list_7_weight_float, sizeof(float), 200, f);
+	    fseek(f, 5440*sizeof(float), SEEK_SET);
+	    fread(embedding_h_atom_embedding_list_7_weight_float, sizeof(float), 64, f);
 
-	    fseek(f, 17100*sizeof(float), SEEK_SET);
-	    fread(embedding_h_atom_embedding_list_8_weight_float, sizeof(float), 200, f);
+	    fseek(f, 5504*sizeof(float), SEEK_SET);
+	    fread(embedding_h_atom_embedding_list_8_weight_float, sizeof(float), 64, f);
 
-	    fseek(f, 17300*sizeof(float), SEEK_SET);
-	    fread(layers_0_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 20000, f);
+	    fseek(f, 5568*sizeof(float), SEEK_SET);
+	    fread(layers_0_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 2048, f);
 
-	    fseek(f, 37300*sizeof(float), SEEK_SET);
-	    fread(layers_0_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 100, f);
+	    fseek(f, 7616*sizeof(float), SEEK_SET);
+	    fread(layers_0_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 32, f);
 
+	    fseek(f, 7648*sizeof(float), SEEK_SET);
+	    fread(layers_1_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 2048, f);
+
+	    fseek(f, 9696*sizeof(float), SEEK_SET);
+	    fread(layers_1_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 32, f);
 	
-	    fseek(f, 37400*sizeof(float), SEEK_SET);
-	    fread(layers_1_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 20000, f);
+	    fseek(f, 9728*sizeof(float), SEEK_SET);
+	    fread(layers_2_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 2048, f);
 
-	    fseek(f, 57400*sizeof(float), SEEK_SET);
-	    fread(layers_1_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 100, f);
+	    fseek(f, 11776*sizeof(float), SEEK_SET);
+	    fread(layers_2_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 32, f);
 	
-	    fseek(f, 57500*sizeof(float), SEEK_SET);
-	    fread(layers_2_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 20000, f);
+	    fseek(f, 11808*sizeof(float), SEEK_SET);
+	    fread(layers_3_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 2048, f);
 
-	    fseek(f, 77500*sizeof(float), SEEK_SET);
-	    fread(layers_2_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 100, f);
+	    fseek(f, 13856*sizeof(float), SEEK_SET);
+	    fread(layers_3_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 32, f);
+
+	    fseek(f, 13888*sizeof(float), SEEK_SET);
+	    fread(bn_weight_PNA_graph_DGN_MLP_1_weight_float, sizeof(float), 512, f);
+
+	    fseek(f, 14400*sizeof(float), SEEK_SET);
+	    fread(bn_bias_PNA_graph_DGN_MLP_1_bias_float, sizeof(float), 16, f);
 	
-	    fseek(f, 77600*sizeof(float), SEEK_SET);
-	    fread(layers_3_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 20000, f);
+	    fseek(f, 14416*sizeof(float), SEEK_SET);
+	    fread(bn_mean_PNA_graph_DGN_MLP_2_weight_float_PNA, sizeof(float), 128, f);
 
-	    fseek(f, 97600*sizeof(float), SEEK_SET);
-	    fread(layers_3_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 100, f);
+	    fseek(f, 14544*sizeof(float), SEEK_SET);
+	    fread(bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_float, sizeof(float), 8, f);
 
-	    fseek(f, 97700*sizeof(float), SEEK_SET);
-	    fread(bn_weight_PNA_graph_DGN_MLP_1_weight_float, sizeof(float), 5000, f);
+	    fseek(f, 14552*sizeof(float), SEEK_SET);
+	    fread(graph_pred_PNA_graph_DGN_MLP_3_weight_float, sizeof(float), 8, f);
 
-	    fseek(f, 102700*sizeof(float), SEEK_SET);
-	    fread(bn_bias_PNA_graph_DGN_MLP_1_bias_float, sizeof(float), 50, f);
-	
-	    fseek(f, 102750*sizeof(float), SEEK_SET);
-	    fread(bn_mean_PNA_graph_DGN_MLP_2_weight_float_PNA, sizeof(float), 1250, f);
-
-	    fseek(f, 104000*sizeof(float), SEEK_SET);
-	    fread(bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_float, sizeof(float), 25, f);
-
-	    fseek(f, 104025*sizeof(float), SEEK_SET);
-	    fread(graph_pred_PNA_graph_DGN_MLP_3_weight_float, sizeof(float), 25, f);
-
-	    fseek(f, 104050*sizeof(float), SEEK_SET);
+	    fseek(f, 14560*sizeof(float), SEEK_SET);
 	    fread(graph_pred_PNA_graph_DGN_MLP_3_bias_float, sizeof(float), 1, f);
 
 	    fclose(f);

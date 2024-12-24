@@ -137,74 +137,6 @@ void load_weights(
             
         }
     }
-
-    /* std::cout << "Printing layers_posttrans_fully_connected_0_linear_weights" << std::endl;
-    for(int i = 0; i < DGN_PNA_NUM_LAYERS; i++)
-    {
-        for(int dim_out = 0; dim_out < EMB_DIM; dim_out++)
-        {
-            for(int j = 0; j < 2; j++)
-            {
-                for(int dim_in = 0; dim_in < EMB_DIM; dim_in++)
-                    std::cout << layers_posttrans_fully_connected_0_linear_weights[i][dim_out][j][dim_in] << std::endl;
-            }
-        }
-    }
-
-    std::cout << "Printing layers_posttrans_fully_connected_0_linear_bias" << std::endl;
-    for(int i = 0; i < DGN_PNA_NUM_LAYERS; i++)
-    {
-        for(int dim = 0; dim < EMB_DIM; dim++)
-        {
-            std::cout << GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias[i][dim] << std::endl;
-        }
-    }
-    
-
-    std::cout << "Printing MLP_layer_FC_layers_0_weight" << std::endl;
-    for(int dim_out = 0; dim_out < EMB_DIM / 2; dim_out++)
-    {
-        for(int dim_in = 0; dim_in < EMB_DIM; dim_in++)
-        {
-            std::cout << PNA_graph_DGN_MLP_1_weights[dim_out][dim_in] << std::endl;
-        }
-    }
-
-    std::cout << "Printing MLP_layer_FC_layers_0_bias" << std::endl;
-    for(int dim_out = 0; dim_out < EMB_DIM / 2; dim_out++)
-    {
-        std::cout << PNA_graph_DGN_MLP_1_bias[dim_out] << std::endl;
-    }
-
-    std::cout << "Printing MLP_layer_FC_layers_1_weight" <<std::endl;
-    for(int dim_out = 0; dim_out < EMB_DIM / 4; dim_out++)
-    {
-        for(int dim_in = 0; dim_in < EMB_DIM / 2; dim_in++)
-        {
-            std::cout << PNA_graph_DGN_MLP_2_weights[dim_out][dim_in] << std::endl;
-        }
-    }
-
-    std::cout << "Printing MLP_layer_FC_layers_1_bias" << std::endl;
-    for(int dim_out = 0; dim_out < EMB_DIM / 4; dim_out++)
-    {
-        std::cout << PNA_graph_DGN_MLP_2_bias[dim_out] << std::endl;
-    }
-
-    std::cout << "Printing MLP_layer_FC_layers_2_weight" << std::endl;
-    for(int dim_out = 0; dim_out < NUM_TASK; dim_out++)
-    {
-        for(int dim_in = 0; dim_in < EMB_DIM / 4; dim_in++)
-        {
-            std::cout << PNA_graph_DGN_MLP_3_weights[dim_out][dim_in] << std::endl;
-        }
-    }
-
-    std::cout << "MLP_layer_FC_layers_2_bias" << std::endl;
-    for(int dim_out = 0; dim_out < NUM_TASK; dim_out++)
-    {
-        std::cout << PNA_graph_DGN_MLP_3_bias[dim_out] << std::endl;
-    } */
 }
 
 void load_graph(
@@ -300,7 +232,7 @@ void load_graph(
     for (int i = 0; i < num_of_edges; i++)
     {
         // TODO: can we make this II=1?
-#pragma HLS PIPELINE II=5
+#pragma HLS PIPELINE II=6
 #pragma HLS LOOP_TRIPCOUNT min=ANALYSIS_MIN_EDGES max=ANALYSIS_MAX_EDGES avg=ANALYSIS_AVG_EDGES
         edge_t edge = edge_list_in[i];
         int u = edge.u;
@@ -338,20 +270,8 @@ void load_input_node_embeddings(
 {
 #pragma HLS INLINE off
 #pragma HLS ARRAY_PARTITION variable=nd_feature_offsets complete dim=1
-#pragma HLS BIND_STORAGE variable=node_embedding_h_atom_embedding_list_weight_in type=ram_1wnr
+#pragma HLS BIND_STORAGE variable=node_embedding_h_atom_embedding_list_weight_in type=RAM_1WNR
 #pragma HLS ARRAY_PARTITION variable=node_embedding_h_atom_embedding_list_weight_in cyclic factor=ND_FEATURE dim=1
-
-    /* std::cout << "Printing embedding_h_atom_embedding_list_weights" << std::endl;
-    for(int i = 0; i < ND_FEATURE; i++)
-    {
-        for(int j = 0; j < nd_feature_table[i]; j++)
-        {
-            for(int dim = 0; dim < EMB_DIM; dim++)
-            {
-                std::cout << node_embedding_h_atom_embedding_list_weight_in[i][j][dim] << std::endl;
-            }
-        }
-    } */
 
     for (int nd = 0; nd < num_of_nodes; nd++)
     {
@@ -359,6 +279,8 @@ void load_input_node_embeddings(
 #pragma HLS LOOP_TRIPCOUNT min=ANALYSIS_MIN_NODES max=ANALYSIS_MAX_NODES avg=ANALYSIS_AVG_NODES
 
         array<WT_TYPE, EMB_DIM> weights[ND_FEATURE];
+#pragma HLS ARRAY_PARTITION variable=weights complete dim=1
+
         node_feature_t node_feature_nd = node_feature[nd];
         for (int nf = 0; nf < ND_FEATURE; nf++)
         {
