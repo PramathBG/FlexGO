@@ -156,12 +156,12 @@ void linear_input_stationary(
 // From finalize.cc
 
 //template instantiation for GIN
-template void linear<EMB_DIM, NUM_TASK, NUM_TASK, false>(
-    FM_TYPE input[EMB_DIM],
-    WT_TYPE weight[NUM_TASK][EMB_DIM],
-    WT_TYPE bias[NUM_TASK],
-    FM_TYPE output[NUM_TASK]
-);
+//template void linear<EMB_DIM, NUM_TASK, NUM_TASK, false>(
+//    FM_TYPE input[EMB_DIM],
+//    WT_TYPE weight[NUM_TASK][EMB_DIM],
+//    WT_TYPE bias[NUM_TASK],
+//    FM_TYPE output[NUM_TASK]
+//);
 
 //template instantiation for GCN 
 template void linear_input_stationary<EMB_DIM, NUM_TASK, APPLY_PARALLEL, false>(
@@ -173,25 +173,25 @@ template void linear_input_stationary<EMB_DIM, NUM_TASK, APPLY_PARALLEL, false>(
 
 
 //template instantiation for PNA and DGN
-template void linear_output_stationary<EMB_DIM, DGN_MLP_PNA_GRAPH_MLP_1_OUT, APPLY_PARALLEL, true>(
-    FM_TYPE input[EMB_DIM],
-    WT_TYPE weight[DGN_MLP_PNA_GRAPH_MLP_1_OUT][EMB_DIM],
-    WT_TYPE bias[DGN_MLP_PNA_GRAPH_MLP_1_OUT],
-    hls::stream<array<FM_TYPE, APPLY_PARALLEL>>& output
-);
+//template void linear_output_stationary<EMB_DIM, DGN_MLP_PNA_GRAPH_MLP_1_OUT, APPLY_PARALLEL, true>(
+//    FM_TYPE input[EMB_DIM],
+//    WT_TYPE weight[DGN_MLP_PNA_GRAPH_MLP_1_OUT][EMB_DIM],
+//    WT_TYPE bias[DGN_MLP_PNA_GRAPH_MLP_1_OUT],
+//    hls::stream<array<FM_TYPE, APPLY_PARALLEL>>& output
+//);
 
-template void linear_input_stationary<DGN_MLP_PNA_GRAPH_MLP_1_OUT, DGN_MLP_PNA_GRAPH_MLP_2_OUT, APPLY_PARALLEL, true>(
-    hls::stream<array<FM_TYPE, APPLY_PARALLEL>>& input,
-    WT_TYPE weight[DGN_MLP_PNA_GRAPH_MLP_2_OUT][DGN_MLP_PNA_GRAPH_MLP_1_OUT],
-    WT_TYPE bias[DGN_MLP_PNA_GRAPH_MLP_2_OUT],
-    FM_TYPE output[DGN_MLP_PNA_GRAPH_MLP_2_OUT]
-);
+//template void linear_input_stationary<DGN_MLP_PNA_GRAPH_MLP_1_OUT, DGN_MLP_PNA_GRAPH_MLP_2_OUT, APPLY_PARALLEL, true>(
+//    hls::stream<array<FM_TYPE, APPLY_PARALLEL>>& input,
+//    WT_TYPE weight[DGN_MLP_PNA_GRAPH_MLP_2_OUT][DGN_MLP_PNA_GRAPH_MLP_1_OUT],
+//    WT_TYPE bias[DGN_MLP_PNA_GRAPH_MLP_2_OUT],
+//    FM_TYPE output[DGN_MLP_PNA_GRAPH_MLP_2_OUT]
+//);
 
-template void linear<DGN_MLP_PNA_GRAPH_MLP_2_OUT, NUM_TASK, NUM_TASK, false>(
-    FM_TYPE input[DGN_MLP_PNA_GRAPH_MLP_2_OUT],
-    WT_TYPE weight[NUM_TASK][DGN_MLP_PNA_GRAPH_MLP_2_OUT],
-    WT_TYPE bias[NUM_TASK],
-    FM_TYPE output[NUM_TASK]
-);
+//template void linear<DGN_MLP_PNA_GRAPH_MLP_2_OUT, NUM_TASK, NUM_TASK, false>(
+//    FM_TYPE input[DGN_MLP_PNA_GRAPH_MLP_2_OUT],
+//    WT_TYPE weight[NUM_TASK][DGN_MLP_PNA_GRAPH_MLP_2_OUT],
+//    WT_TYPE bias[NUM_TASK],
+//    FM_TYPE output[NUM_TASK]
+//);
 
 // #endregion

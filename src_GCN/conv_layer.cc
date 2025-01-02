@@ -114,22 +114,23 @@ void check_message_passing(
     //        do_finalize = true;
     //    }
     //}
-    if(do_finalize)
-    {
-        finalize(embeddings, 
-                message, 
-                PNA_graph_DGN_MLP_1_weights,
-                PNA_graph_DGN_MLP_1_bias,
-                PNA_graph_DGN_MLP_2_weights,
-                PNA_graph_DGN_MLP_2_bias,
-                PNA_graph_DGN_MLP_3_weights,
-                PNA_graph_DGN_MLP_3_bias, 
-                graph_pred_weights, 
-                graph_pred_bias, 
-                result, 
-                num_of_nodes);
-    }   
-    else if (do_message_passing)
+    //if(do_finalize)
+    //{
+    //    finalize(embeddings, 
+    //            message, 
+    //            PNA_graph_DGN_MLP_1_weights,
+    //            PNA_graph_DGN_MLP_1_bias,
+    //            PNA_graph_DGN_MLP_2_weights,
+    //            PNA_graph_DGN_MLP_2_bias,
+    //            PNA_graph_DGN_MLP_3_weights,
+    //            PNA_graph_DGN_MLP_3_bias, 
+    //            graph_pred_weights, 
+    //            graph_pred_bias, 
+    //            result, 
+    //            num_of_nodes);
+    //}   
+    //else if (do_message_passing)
+    if (do_message_passing)
         message_passing_all_pes(embeddings, message, layer_num, num_of_nodes);
 }
 
