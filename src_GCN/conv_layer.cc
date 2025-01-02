@@ -100,7 +100,8 @@ void check_message_passing(
     //{
         if(layer_num > 0)
         {
-            do_message_passing = true;
+            //do_message_passing = true;
+            message_passing_all_pes(embeddings, message, layer_num, num_of_nodes);
         }
     //}
     //else
@@ -130,8 +131,8 @@ void check_message_passing(
     //            num_of_nodes);
     //}   
     //else if (do_message_passing)
-    if (do_message_passing)
-        message_passing_all_pes(embeddings, message, layer_num, num_of_nodes);
+    //if (do_message_passing)
+    //    message_passing_all_pes(embeddings, message, layer_num, num_of_nodes);
 }
 
 void message_passing_all_pes(
