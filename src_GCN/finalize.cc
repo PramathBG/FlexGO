@@ -318,43 +318,43 @@ void check_linear(
     }
 }
 
-void linear_PNA_DGN(
-    FM_TYPE PNA_DGN_h_graph[EMB_DIM],
-    WT_TYPE PNA_graph_DGN_MLP_1_weights[DGN_MLP_PNA_GRAPH_MLP_1_OUT][EMB_DIM],
-    WT_TYPE PNA_graph_DGN_MLP_1_bias[DGN_MLP_PNA_GRAPH_MLP_1_OUT],
-    WT_TYPE PNA_graph_DGN_MLP_2_weights[DGN_MLP_PNA_GRAPH_MLP_2_OUT][DGN_MLP_PNA_GRAPH_MLP_1_OUT],
-    WT_TYPE PNA_graph_DGN_MLP_2_bias[DGN_MLP_PNA_GRAPH_MLP_2_OUT],
-    WT_TYPE PNA_graph_DGN_MLP_3_weights[NUM_TASK][DGN_MLP_PNA_GRAPH_MLP_2_OUT],
-    WT_TYPE PNA_graph_DGN_MLP_3_bias[NUM_TASK],
-    FM_TYPE* result
-)
-{
-#pragma HLS INLINE off
-#pragma HLS DATAFLOW
-
-    hls::stream<mlp_xfer_t> PNA_DGN_graph_mlp_1_out ("PNA_DGN_graph_mlp_1_out");
-#pragma HLS STREAM variable=PNA_DGN_graph_mlp_1_out depth=ceildiv(DGN_MLP_PNA_GRAPH_MLP_1_OUT, APPLY_PARALLEL)
-
-    FM_TYPE PNA_DGN_graph_mlp_2_out[DGN_MLP_PNA_GRAPH_MLP_2_OUT];
-
-    linear_output_stationary<EMB_DIM, DGN_MLP_PNA_GRAPH_MLP_1_OUT, APPLY_PARALLEL, true>(
-        PNA_DGN_h_graph,
-        PNA_graph_DGN_MLP_1_weights,
-        PNA_graph_DGN_MLP_1_bias,
-        PNA_DGN_graph_mlp_1_out
-    );
-
-    linear_input_stationary<DGN_MLP_PNA_GRAPH_MLP_1_OUT, DGN_MLP_PNA_GRAPH_MLP_2_OUT, APPLY_PARALLEL, true>(
-        PNA_DGN_graph_mlp_1_out,
-        PNA_graph_DGN_MLP_2_weights,
-        PNA_graph_DGN_MLP_2_bias,
-        PNA_DGN_graph_mlp_2_out
-    );
-
-    linear<DGN_MLP_PNA_GRAPH_MLP_2_OUT, NUM_TASK, NUM_TASK, false>(
-        PNA_DGN_graph_mlp_2_out,
-        PNA_graph_DGN_MLP_3_weights,
-        PNA_graph_DGN_MLP_3_bias,
-        result
-    );
-}
+//void linear_PNA_DGN(
+//    FM_TYPE PNA_DGN_h_graph[EMB_DIM],
+//    WT_TYPE PNA_graph_DGN_MLP_1_weights[DGN_MLP_PNA_GRAPH_MLP_1_OUT][EMB_DIM],
+//    WT_TYPE PNA_graph_DGN_MLP_1_bias[DGN_MLP_PNA_GRAPH_MLP_1_OUT],
+//    WT_TYPE PNA_graph_DGN_MLP_2_weights[DGN_MLP_PNA_GRAPH_MLP_2_OUT][DGN_MLP_PNA_GRAPH_MLP_1_OUT],
+//    WT_TYPE PNA_graph_DGN_MLP_2_bias[DGN_MLP_PNA_GRAPH_MLP_2_OUT],
+//    WT_TYPE PNA_graph_DGN_MLP_3_weights[NUM_TASK][DGN_MLP_PNA_GRAPH_MLP_2_OUT],
+//    WT_TYPE PNA_graph_DGN_MLP_3_bias[NUM_TASK],
+//    FM_TYPE* result
+//)
+//{
+//#pragma HLS INLINE off
+//#pragma HLS DATAFLOW
+//
+//    hls::stream<mlp_xfer_t> PNA_DGN_graph_mlp_1_out ("PNA_DGN_graph_mlp_1_out");
+//#pragma HLS STREAM variable=PNA_DGN_graph_mlp_1_out depth=ceildiv(DGN_MLP_PNA_GRAPH_MLP_1_OUT, APPLY_PARALLEL)
+//
+//    FM_TYPE PNA_DGN_graph_mlp_2_out[DGN_MLP_PNA_GRAPH_MLP_2_OUT];
+//
+//    linear_output_stationary<EMB_DIM, DGN_MLP_PNA_GRAPH_MLP_1_OUT, APPLY_PARALLEL, true>(
+//        PNA_DGN_h_graph,
+//        PNA_graph_DGN_MLP_1_weights,
+//        PNA_graph_DGN_MLP_1_bias,
+//        PNA_DGN_graph_mlp_1_out
+//    );
+//
+//    linear_input_stationary<DGN_MLP_PNA_GRAPH_MLP_1_OUT, DGN_MLP_PNA_GRAPH_MLP_2_OUT, APPLY_PARALLEL, true>(
+//        PNA_DGN_graph_mlp_1_out,
+//        PNA_graph_DGN_MLP_2_weights,
+//        PNA_graph_DGN_MLP_2_bias,
+//        PNA_DGN_graph_mlp_2_out
+//    );
+//
+//    linear<DGN_MLP_PNA_GRAPH_MLP_2_OUT, NUM_TASK, NUM_TASK, false>(
+//        PNA_DGN_graph_mlp_2_out,
+//        PNA_graph_DGN_MLP_3_weights,
+//        PNA_graph_DGN_MLP_3_bias,
+//        result
+//    );
+//}
