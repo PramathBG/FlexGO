@@ -82,10 +82,6 @@ constexpr int ANALYSIS_AVG_EDGES = 40;
 
 typedef ap_fixed<16, 6> FM_TYPE;
 typedef ap_fixed<16, 6> WT_TYPE;
-//typedef ap_fixed<18, 8, AP_RND, AP_SAT> FM_TYPE;
-//typedef ap_fixed<18, 8, AP_RND, AP_SAT> WT_TYPE;
-//typedef ap_fixed<18, 8> cast_type_FM_TYPE;
-//typedef ap_fixed<18, 8> cast_type_WT_TYPE;
 typedef std::array<FM_TYPE, APPLY_PARALLEL> ne_out_t;
 typedef std::array<FM_TYPE, SCATTER_PARALLEL> mp_in_t;
 typedef std::array<FM_TYPE, SCATTER_PARALLEL> me_out_t;
@@ -113,9 +109,9 @@ extern Instruction instruction; // instruction to decide which GNN has to be inf
 // #region Global Variables
 // #Sub-region - Layer Weights of all models
 extern WT_TYPE GCN_convs_GIN_node_mlp_1_weights[NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT][EMB_DIM];
-extern WT_TYPE GIN_node_mlp_2_weights[NUM_LAYERS][EMB_DIM][DGN_LIN_GIN_MLP_1_OUT];
+// extern WT_TYPE GIN_node_mlp_2_weights[NUM_LAYERS][EMB_DIM][DGN_LIN_GIN_MLP_1_OUT];
 extern std::array<std::array<WT_TYPE, NUM_AGGRS>, NUM_SCALERS> PNA_node_conv_weights[NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT][EMB_DIM];
-extern WT_TYPE layers_posttrans_fully_connected_0_linear_weights[4][EMB_DIM][2][EMB_DIM];
+// extern WT_TYPE layers_posttrans_fully_connected_0_linear_weights[4][EMB_DIM][2][EMB_DIM];
 
 // #Sub-region - Layer Bias of all models and Convolution root embedding weights for GCN
 extern WT_TYPE GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias[NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT];
@@ -133,7 +129,7 @@ extern WT_TYPE GCN_bn_mean_final[EMB_DIM];
 extern WT_TYPE GCN_bn_sqrt_var_final[EMB_DIM];
 
 // #Sub-region - GIN Epsilon values and PNA Average Degree
-extern WT_TYPE GIN_node_mlp_eps_PNA_avg_deg[NUM_LAYERS];
+// extern WT_TYPE GIN_node_mlp_eps_PNA_avg_deg[NUM_LAYERS];
 
 // #Sub-region - Edge Embedding Weights for GCN and GIN
 extern WT_TYPE edge_embedding_weights[EDGE_PARALLEL][NUM_LAYERS][ED_FEATURE_PER_LAYER][EMB_DIM];
@@ -151,8 +147,8 @@ extern int neighbor_tables[EDGE_PARALLEL][MAX_EDGE];
 extern edge_attr_t edge_attrs[EDGE_PARALLEL][MAX_EDGE];
 extern int num_of_edges_per_pe[EDGE_PARALLEL];
 extern WT_TYPE DGN_eig_w_GCN_norms[EDGE_PARALLEL][MAX_EDGE];
-extern FM_TYPE DGN_abssums_PNA_log_degrees[MAX_NODE];
-extern WT_TYPE DGN_eigw_sums[MAX_NODE];
+// extern FM_TYPE DGN_abssums_PNA_log_degrees[MAX_NODE];
+// extern WT_TYPE DGN_eigw_sums[MAX_NODE];
 
 
 // #Sub-region - Message Buffers
@@ -163,37 +159,37 @@ extern FM_TYPE h_node[MAX_NODE][EMB_DIM];
 
 
 // #Sub-region - PNA Graph MLP Parameters
-extern WT_TYPE PNA_graph_DGN_MLP_1_weights[DGN_MLP_PNA_GRAPH_MLP_1_OUT][EMB_DIM];
-extern WT_TYPE PNA_graph_DGN_MLP_1_bias[DGN_MLP_PNA_GRAPH_MLP_1_OUT];
-extern WT_TYPE PNA_graph_DGN_MLP_2_weights[DGN_MLP_PNA_GRAPH_MLP_2_OUT][DGN_MLP_PNA_GRAPH_MLP_1_OUT];
-extern WT_TYPE PNA_graph_DGN_MLP_2_bias[DGN_MLP_PNA_GRAPH_MLP_2_OUT];
-extern WT_TYPE PNA_graph_DGN_MLP_3_weights[NUM_TASK][DGN_MLP_PNA_GRAPH_MLP_2_OUT];
-extern WT_TYPE PNA_graph_DGN_MLP_3_bias[NUM_TASK];
+// extern WT_TYPE PNA_graph_DGN_MLP_1_weights[DGN_MLP_PNA_GRAPH_MLP_1_OUT][EMB_DIM];
+// extern WT_TYPE PNA_graph_DGN_MLP_1_bias[DGN_MLP_PNA_GRAPH_MLP_1_OUT];
+// extern WT_TYPE PNA_graph_DGN_MLP_2_weights[DGN_MLP_PNA_GRAPH_MLP_2_OUT][DGN_MLP_PNA_GRAPH_MLP_1_OUT];
+// extern WT_TYPE PNA_graph_DGN_MLP_2_bias[DGN_MLP_PNA_GRAPH_MLP_2_OUT];
+// extern WT_TYPE PNA_graph_DGN_MLP_3_weights[NUM_TASK][DGN_MLP_PNA_GRAPH_MLP_2_OUT];
+// extern WT_TYPE PNA_graph_DGN_MLP_3_bias[NUM_TASK];
 
-extern int max_EMB_DIM;
-extern int max_iter;
-extern int max_NUM_LAYERS;
+// extern int max_EMB_DIM;
+// extern int max_iter;
+// extern int max_NUM_LAYERS;
 
 //Top Function
 extern "C"{
 
 void GNN_compute_graphs(
-    Instruction instrcution_in,
+    // Instruction instrcution_in,
     int num_graphs,
     int* nums_of_nodes,
     int* nums_of_edges,
     int* reload_weights,
     FM_TYPE out[][NUM_TASK],
     node_feature_t* node_feature_in,
-    node_eigen_t* node_eigen_in,
+    // node_eigen_t* node_eigen_in,
     edge_t* edge_list_in,
     edge_attr_t* edge_attr_in,
     WT_TYPE node_embedding_h_atom_embedding_list_weight_in[][ND_FEATURE][ND_FEATURE_TOTAL][EMB_DIM],
     WT_TYPE edge_embedding_weight_in[][NUM_LAYERS][ED_FEATURE_PER_LAYER][EMB_DIM],
     WT_TYPE GCN_convs_GIN_node_mlp_1_weight_in[][NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT][EMB_DIM],
     WT_TYPE GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_in[][NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT],
-    WT_TYPE GIN_node_mlp_2_weight_in[][NUM_LAYERS][EMB_DIM][DGN_LIN_GIN_MLP_1_OUT],
-    WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[][4][EMB_DIM][2 * EMB_DIM],
+    // WT_TYPE GIN_node_mlp_2_weight_in[][NUM_LAYERS][EMB_DIM][DGN_LIN_GIN_MLP_1_OUT],
+    // WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[][4][EMB_DIM][2 * EMB_DIM],
     WT_TYPE GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_in [][NUM_LAYERS][EMB_DIM],
     WT_TYPE PNA_node_conv_weight_in[][DGN_PNA_NUM_LAYERS][EMB_DIM][NUM_SCALERS][NUM_AGGRS][EMB_DIM],
     WT_TYPE bn_weight_PNA_graph_DGN_MLP_1_weight_in[][DGN_MLP_PNA_GRAPH_MLP_1_OUT][EMB_DIM],
@@ -201,8 +197,8 @@ void GNN_compute_graphs(
     WT_TYPE bn_mean_PNA_graph_DGN_MLP_2_weight_in[][DGN_MLP_PNA_GRAPH_MLP_2_OUT][EMB_DIM],
     WT_TYPE bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_in[][NUM_LAYERS][EMB_DIM],
     WT_TYPE graph_pred_PNA_graph_DGN_MLP_3_weight_in[][NUM_TASK][EMB_DIM],
-    WT_TYPE graph_pred_PNA_graph_DGN_MLP_3_bias_in[][NUM_TASK],
-    WT_TYPE avg_deg_in[][NUM_LAYERS]
+    WT_TYPE graph_pred_PNA_graph_DGN_MLP_3_bias_in[][NUM_TASK]
+    // WT_TYPE avg_deg_in[][NUM_LAYERS]
 );
 }
 

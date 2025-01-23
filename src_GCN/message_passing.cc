@@ -106,7 +106,7 @@ static void scatter(
         int v = neighbor_tables[pe_id][e];
         edge_attr_t attrs = edge_attrs[pe_id][e];
         WT_TYPE GCN_norm = DGN_eig_w_GCN_norms[pe_id][e];
-        WT_TYPE DGN_eigen_w_e = DGN_eig_w_GCN_norms[pe_id][e];
+        // WT_TYPE DGN_eigen_w_e = DGN_eig_w_GCN_norms[pe_id][e];
         //if(instruction == GIN)
         //    GCN_norm = (FM_TYPE)1;
 

@@ -1,8 +1,8 @@
 #ifndef __TESTBENCH_H__
 #define __TESTBENCH_H__
 
-#include "../src/dcl.h"
-#include "../src/util.h"
+#include "../src_GCN/dcl.h"
+#include "../src_GCN/util.h"
 
 constexpr int NUM_GRAPHS = 1; // 4113;
 

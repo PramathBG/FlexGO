@@ -25,8 +25,8 @@ static const int nd_feature_table[ND_FEATURE] = {119, 4, 12, 12, 10, 6, 6, 2, 2}
 void load_weights(
     WT_TYPE GCN_convs_GIN_node_mlp_1_weight_in[NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT][EMB_DIM],
     WT_TYPE GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_in[NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT],
-    WT_TYPE GIN_node_mlp_2_weight_in[NUM_LAYERS][EMB_DIM][DGN_LIN_GIN_MLP_1_OUT],
-    WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][EMB_DIM][2 * EMB_DIM],
+    // WT_TYPE GIN_node_mlp_2_weight_in[NUM_LAYERS][EMB_DIM][DGN_LIN_GIN_MLP_1_OUT],
+    // WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][EMB_DIM][2 * EMB_DIM],
     WT_TYPE GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_in[NUM_LAYERS][EMB_DIM],
     WT_TYPE PNA_node_conv_weight_in[DGN_PNA_NUM_LAYERS][EMB_DIM][NUM_SCALERS][NUM_AGGRS][EMB_DIM],
     WT_TYPE edge_embedding_weight_in[NUM_LAYERS][ED_FEATURE_PER_LAYER][EMB_DIM],
@@ -35,39 +35,39 @@ void load_weights(
     WT_TYPE bn_mean_PNA_graph_DGN_MLP_2_weight_in[DGN_MLP_PNA_GRAPH_MLP_2_OUT][EMB_DIM],
     WT_TYPE bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_in[NUM_LAYERS][EMB_DIM],
     WT_TYPE graph_pred_PNA_graph_DGN_MLP_3_weight_in[NUM_TASK][EMB_DIM],
-    WT_TYPE graph_pred_PNA_graph_DGN_MLP_3_bias_in[NUM_TASK],
-    WT_TYPE avg_deg_in
+    WT_TYPE graph_pred_PNA_graph_DGN_MLP_3_bias_in[NUM_TASK]
+   // WT_TYPE avg_deg_in
 )
 {
 #pragma HLS INLINE off
 
-    GIN_node_mlp_eps_PNA_avg_deg[0] = avg_deg_in;
+    // GIN_node_mlp_eps_PNA_avg_deg[0] = avg_deg_in;
     std::memcpy(GCN_convs_GIN_node_mlp_1_weights, GCN_convs_GIN_node_mlp_1_weight_in, sizeof(WT_TYPE) * NUM_LAYERS * DGN_LIN_GIN_MLP_1_OUT * EMB_DIM);
     std::memcpy(GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias, GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_in, sizeof(WT_TYPE) * NUM_LAYERS * DGN_LIN_GIN_MLP_1_OUT);
-    std::memcpy(GIN_node_mlp_2_weights, GIN_node_mlp_2_weight_in, sizeof(WT_TYPE) * NUM_LAYERS * EMB_DIM * DGN_LIN_GIN_MLP_1_OUT);
-    std::memcpy(layers_posttrans_fully_connected_0_linear_weights, layers_posttrans_fully_connected_0_linear_weight_in, sizeof(WT_TYPE) * 4 * EMB_DIM * 2 * EMB_DIM);
+    // std::memcpy(GIN_node_mlp_2_weights, GIN_node_mlp_2_weight_in, sizeof(WT_TYPE) * NUM_LAYERS * EMB_DIM * DGN_LIN_GIN_MLP_1_OUT);
+    // std::memcpy(layers_posttrans_fully_connected_0_linear_weights, layers_posttrans_fully_connected_0_linear_weight_in, sizeof(WT_TYPE) * 4 * EMB_DIM * 2 * EMB_DIM);
     std::memcpy(GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias, GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_in, sizeof(WT_TYPE) * NUM_LAYERS * EMB_DIM);
 
-    load_layer_2D_params: for(int l = 0; l < DGN_MLP_PNA_GRAPH_MLP_1_OUT; l++)
+    //load_layer_2D_params: for(int l = 0; l < DGN_MLP_PNA_GRAPH_MLP_1_OUT; l++)
+    load_layer_2D_params: for(int l = 0; l < NUM_LAYERS; l++)
     {
-        PNA_graph_DGN_MLP_1_bias[l] = bn_bias_PNA_graph_DGN_MLP_1_bias_in[0][l];
-        if(l < DGN_MLP_PNA_GRAPH_MLP_2_OUT)
-        {
-            PNA_graph_DGN_MLP_2_bias[l] = bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_in[0][l];
-        }
+        // PNA_graph_DGN_MLP_1_bias[l] = bn_bias_PNA_graph_DGN_MLP_1_bias_in[0][l];
+        // if(l < DGN_MLP_PNA_GRAPH_MLP_2_OUT)
+        // {
+        //     PNA_graph_DGN_MLP_2_bias[l] = bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_in[0][l];
+        // }
 
         load_layer_2D_params_dim: for(int dim = 0; dim < EMB_DIM; dim++)
         {
 #pragma HLS PIPELINE II=6
-            if (l < NUM_LAYERS)
-            {
+            //if (l < NUM_LAYERS)
+            //{
                 if(l != NUM_LAYERS - 1)
                 {
                     GCN_bn_weights[l][dim] = bn_weight_PNA_graph_DGN_MLP_1_weight_in[l][dim];
                     GCN_bn_bias[l][dim] = bn_bias_PNA_graph_DGN_MLP_1_bias_in[l][dim];
                     GCN_bn_mean[l][dim] = bn_mean_PNA_graph_DGN_MLP_2_weight_in[l][dim];
-                    GCN_bn_sqrt_var[l][dim] = hls::sqrt(bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_in[l][dim] + ap_fixed_epsilon<WT_TYPE>());
-                }
+                    GCN_bn_sqrt_var[l][dim] = hls::sqrt(bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_in[l][dim] + ap_fixed_epsilon<WT_TYPE>());                }
                 else
                 {
                     GCN_bn_weight_final[dim] = bn_weight_PNA_graph_DGN_MLP_1_weight_in[l][dim];
@@ -76,12 +76,12 @@ void load_weights(
                     GCN_bn_sqrt_var_final[dim] = hls::sqrt(bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_in[l][dim] + ap_fixed_epsilon<WT_TYPE>());
                     convs_root_emb_weight_slice[dim] = GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_in[l][dim];
                 }
-            }           
-            PNA_graph_DGN_MLP_1_weights[l][dim] = bn_weight_PNA_graph_DGN_MLP_1_weight_in[l][dim];
-            if(l < DGN_MLP_PNA_GRAPH_MLP_2_OUT && dim < DGN_MLP_PNA_GRAPH_MLP_1_OUT)
-            {
-                PNA_graph_DGN_MLP_2_weights[l][dim] = bn_mean_PNA_graph_DGN_MLP_2_weight_in[l][dim];
-            }
+            //}           
+            // PNA_graph_DGN_MLP_1_weights[l][dim] = bn_weight_PNA_graph_DGN_MLP_1_weight_in[l][dim];
+            // if(l < DGN_MLP_PNA_GRAPH_MLP_2_OUT && dim < DGN_MLP_PNA_GRAPH_MLP_1_OUT)
+            // {
+            //     PNA_graph_DGN_MLP_2_weights[l][dim] = bn_mean_PNA_graph_DGN_MLP_2_weight_in[l][dim];
+            // }
         }
     }
 
@@ -120,20 +120,20 @@ void load_weights(
         }
     }
 
-    int max_dim = (instruction == PNA || instruction == DGN) ? DGN_MLP_PNA_GRAPH_MLP_2_OUT : EMB_DIM;
+    // int max_dim = (instruction == PNA || instruction == DGN) ? DGN_MLP_PNA_GRAPH_MLP_2_OUT : EMB_DIM;
     load_graph_pred_weights: for (int t = 0; t < NUM_TASK; t++)
     {
         graph_pred_bias[t] = graph_pred_PNA_graph_DGN_MLP_3_bias_in[t];
-        PNA_graph_DGN_MLP_3_bias[t] = graph_pred_PNA_graph_DGN_MLP_3_bias_in[t];
+        // PNA_graph_DGN_MLP_3_bias[t] = graph_pred_PNA_graph_DGN_MLP_3_bias_in[t];
 
         load_graph_pred_weights_dim: for (int dim_in = 0; dim_in < EMB_DIM; dim_in++)
         {
             WT_TYPE graph_pred_PNA_graph_mlp_3_weight_dim = graph_pred_PNA_graph_DGN_MLP_3_weight_in[t][dim_in];
             graph_pred_weights[t][dim_in] = graph_pred_PNA_graph_mlp_3_weight_dim;
-            if((instruction == PNA || instruction == DGN) && dim_in < max_dim)
-            {
-                PNA_graph_DGN_MLP_3_weights[t][dim_in] = graph_pred_PNA_graph_mlp_3_weight_dim;
-            }
+            // if((instruction == PNA || instruction == DGN) && dim_in < max_dim)
+            // {
+            //     PNA_graph_DGN_MLP_3_weights[t][dim_in] = graph_pred_PNA_graph_mlp_3_weight_dim;
+            // }
             
         }
     }
@@ -142,7 +142,7 @@ void load_weights(
 void load_graph(
     edge_t* edge_list_in,
     edge_attr_t* edge_attr_in,
-    node_eigen_t* node_eigen_in,
+    // node_eigen_t* node_eigen_in,
     int num_of_nodes,
     int num_of_edges
 )
@@ -168,8 +168,8 @@ void load_graph(
         degree_table[i] = 0; //in_degree_table in PNA
         degree_table_finalize[i] = 0;
         degree_inv_sqrt_PNA_out_degree_table[i] = 0;
-        DGN_abssums_PNA_log_degrees[i] = 0;
-        DGN_eigw_sums[i] = 0;
+        // DGN_abssums_PNA_log_degrees[i] = 0;
+        // DGN_eigw_sums[i] = 0;
 
         for (int j = 0; j < EDGE_PARALLEL; j++)
         {
@@ -187,7 +187,8 @@ void load_graph(
         int u = edge.u;
         int v = edge.v;
         int pe_id = v % EDGE_PARALLEL;
-        int node = (instruction == PNA) ? v : u;
+        // int node = (instruction == PNA) ? v : u;
+        int node = u;
         degree_table[node]++;
         degree_table_finalize[node]++;
         //if(instruction == GCN || instruction == GIN)
@@ -248,15 +249,15 @@ void load_graph(
         //{
             DGN_eig_w_GCN_norms[pe_id][e_pe] = degree_inv_sqrt_PNA_out_degree_table[u] * degree_inv_sqrt_PNA_out_degree_table[v];
         //}
-        WT_TYPE u_eigen = node_eigen_in[u][1];
-        WT_TYPE v_eigen = node_eigen_in[v][1];
-        WT_TYPE diff_eigen = u_eigen - v_eigen;
+        // WT_TYPE u_eigen = node_eigen_in[u][1];
+        // WT_TYPE v_eigen = node_eigen_in[v][1];
+        // WT_TYPE diff_eigen = u_eigen - v_eigen;
         //if(instruction == DGN)
         //{
         //    DGN_eig_w_GCN_norms[pe_id][e_pe] = diff_eigen;
         //    DGN_abssums_PNA_log_degrees[v] += hls::abs(diff_eigen);
         //}
-        DGN_eigw_sums[v] += diff_eigen;
+        // DGN_eigw_sums[v] += diff_eigen;
     }
 }
 

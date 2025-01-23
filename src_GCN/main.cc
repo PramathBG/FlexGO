@@ -158,22 +158,22 @@ int main()
     if(GNN_instruction == 3)
     {
         GNN_compute_graphs(
-            static_cast<Instruction>(GNN_instruction),
+            // static_cast<Instruction>(GNN_instruction),
             NUM_GRAPHS,
             nums_of_nodes,
             nums_of_edges,
             reload_weights,
             all_results,
             node_feature,
-            node_eigen,
+            // node_eigen,
             edge_list,
             edge_attr,
             &node_embedding_h_atom_embedding_list_weight_fixed_DGN,
             &edge_embedding_weight_fixed,
             &GCN_convs_GIN_node_mlp_1_weight_fixed,
             &GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_fixed,
-            &GIN_node_mlp_2_weight_fixed,
-            &layers_posttrans_fully_connected_0_linear_weight_fixed,
+            // &GIN_node_mlp_2_weight_fixed,
+            // &layers_posttrans_fully_connected_0_linear_weight_fixed,
             &GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_fixed,
             &PNA_node_conv_weight_fixed,
             &bn_weight_PNA_graph_DGN_MLP_1_weight_fixed,
@@ -181,29 +181,29 @@ int main()
             &bn_mean_PNA_graph_DGN_MLP_2_weight_fixed,
             &bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_fixed,
             &graph_pred_PNA_graph_DGN_MLP_3_weight_fixed,
-            &graph_pred_PNA_graph_DGN_MLP_3_bias_fixed,
-            &GIN_node_mlp_eps_PNA_avg_deg_fixed
+            &graph_pred_PNA_graph_DGN_MLP_3_bias_fixed
+            // &GIN_node_mlp_eps_PNA_avg_deg_fixed
         );
     }
     else
     {
         GNN_compute_graphs(
-            static_cast<Instruction>(GNN_instruction),
+            // static_cast<Instruction>(GNN_instruction),
             NUM_GRAPHS,
             nums_of_nodes,
             nums_of_edges,
             reload_weights,
             all_results,
             node_feature,
-            node_eigen,
+            // node_eigen,
             edge_list,
             edge_attr,
             &node_embedding_h_atom_embedding_list_weight_fixed,
             &edge_embedding_weight_fixed,
             &GCN_convs_GIN_node_mlp_1_weight_fixed,
             &GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_fixed,
-            &GIN_node_mlp_2_weight_fixed,
-            &layers_posttrans_fully_connected_0_linear_weight_fixed,
+            // &GIN_node_mlp_2_weight_fixed,
+            // &layers_posttrans_fully_connected_0_linear_weight_fixed,
             &GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_fixed,
             &PNA_node_conv_weight_fixed,
             &bn_weight_PNA_graph_DGN_MLP_1_weight_fixed,
@@ -211,8 +211,8 @@ int main()
             &bn_mean_PNA_graph_DGN_MLP_2_weight_fixed,
             &bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_fixed,
             &graph_pred_PNA_graph_DGN_MLP_3_weight_fixed,
-            &graph_pred_PNA_graph_DGN_MLP_3_bias_fixed,
-            &GIN_node_mlp_eps_PNA_avg_deg_fixed
+            &graph_pred_PNA_graph_DGN_MLP_3_bias_fixed
+            // &GIN_node_mlp_eps_PNA_avg_deg_fixed
         );
     }
 

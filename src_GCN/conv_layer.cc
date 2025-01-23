@@ -94,8 +94,8 @@ void check_message_passing(
 #pragma HLS INLINE off
 #pragma HLS ARRAY_PARTITION variable=message complete dim=1
 
-    bool do_finalize = false;
-    bool do_message_passing = false;
+    // bool do_finalize = false;
+    // bool do_message_passing = false;
     //if(instruction == GCN)
     //{
         if(layer_num > 0)
