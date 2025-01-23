@@ -201,7 +201,8 @@ static void accumulate(
 
                 FM_TYPE h_node_v_dim = h_node[v][dim_in];
                 // h_node_buf[v_offset][dim_in] = h_node_v_dim;
-                GCN_h_node_els[v_offset] = (instruction == GCN) ? h_node_v_dim : (FM_TYPE)0;
+                // GCN_h_node_els[v_offset] = (instruction == GCN) ? h_node_v_dim : (FM_TYPE)0;
+		GCN_h_node_els[v_offset] = h_node_v_dim;
                 // GIN_h_node_els[v_offset] = (instruction == GIN) ? h_node_v_dim : (FM_TYPE)0;
                 GIN_h_node_els[v_offset] = (FM_TYPE)0;
                 
