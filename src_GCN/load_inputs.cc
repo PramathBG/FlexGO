@@ -20,8 +20,6 @@ static const int nd_feature_offsets[ND_FEATURE] = {
                                         // ND_FEATURE_TOTAL (dcl.h):       174 dims
 };
 
-static const int nd_feature_table[ND_FEATURE] = {119, 4, 12, 12, 10, 6, 6, 2, 2};
-
 void load_weights(
     WT_TYPE GCN_convs_GIN_node_mlp_1_weight_in[NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT][EMB_DIM],
     WT_TYPE GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_in[NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT],
