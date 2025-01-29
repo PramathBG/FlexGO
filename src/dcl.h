@@ -12,7 +12,7 @@
 #include <array>
 
 // #region model parameters common to all the Graph Neural Networks
-constexpr int MAX_EDGE = 500;
+constexpr int MAX_EDGE = 2500;
 constexpr int MAX_NODE = 500;
 constexpr int ND_FEATURE = 9;
 constexpr int ND_FEATURE_TOTAL = 174;

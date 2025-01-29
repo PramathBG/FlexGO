@@ -492,6 +492,10 @@ void load_weights(int GNN_instruction)
                         for(int aggr = 0; aggr < NUM_AGGRS; aggr++)
                         {
                             PNA_node_conv_weight_fixed[l][dim_out][scaler][aggr][dim_in] = (WT_TYPE)PNA_node_conv_weight_float[l][dim_out][scaler][aggr][dim_in];
+                            if(GNN_instruction != PNA)
+                            {
+                                PNA_node_conv_weight_fixed[l][dim_out][scaler][aggr][dim_in] = (WT_TYPE)0;
+                            }
                         }
                     }
                 }

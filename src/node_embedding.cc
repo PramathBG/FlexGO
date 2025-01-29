@@ -193,36 +193,23 @@ static void accumulate(
             {   
                 message_bank = v % EDGE_PARALLEL;
                 message_bank_v = v / EDGE_PARALLEL;
-                message_dim_1 = message[(v_base + v_offset) % EDGE_PARALLEL][(v_base + v_offset) / EDGE_PARALLEL][0][dim_in];
-                message_dim_2 = message[(v_base + v_offset) % EDGE_PARALLEL][(v_base + v_offset) / EDGE_PARALLEL][1][dim_in];
+                message_dim_1 = message[message_bank][message_bank_v][0][dim_in];
+                message_dim_2 = message[message_bank][message_bank_v][1][dim_in];
 
                 //clear message table for the next round of message passing
-                reset_message(message[(v_base + v_offset) % EDGE_PARALLEL][(v_base + v_offset) / EDGE_PARALLEL], dim_in);
+                reset_message(message[message_bank][message_bank_v], dim_in);
 
                 FM_TYPE h_node_v_dim = h_node[v][dim_in];
                 h_node_buf[v_offset][dim_in] = h_node_v_dim;
-                in_degree = degree_table[v];
-                if(in_degree == 0) 
-                {
-                    in_degree = 1;
-                }
-                WT_TYPE DGN_eigw_sums_v = DGN_eigw_sums[v];
-                WT_TYPE DGN_abssums_PNA_log_degrees_v = DGN_abssums_PNA_log_degrees[v];
-                if(DGN_abssums_PNA_log_degrees_v == 0.0 && instruction == DGN)
-                {
-                    DGN_abssums_PNA_log_degrees_v = ap_fixed_epsilon<WT_TYPE>();
-                }
                 GCN_h_node_els[v_offset] = (instruction == GCN) ? h_node_v_dim : (FM_TYPE)0;
                 GIN_h_node_els[v_offset] = (instruction == GIN) ? h_node_v_dim : (FM_TYPE)0;
-                PNA_stddev[v_offset] = (FM_TYPE)0;
-                PNA_T[v_offset] = (FM_TYPE)0;
-                PNA_scale[v_offset] = (FM_TYPE)0;
-                PNA_min[v_offset] = (FM_TYPE)0;
-                PNA_max[v_offset] = (FM_TYPE)0;
+                
+                in_degree = (degree_table[v] == 0) ? 1 : degree_table[v];
+                WT_TYPE DGN_eigw_sums_v = DGN_eigw_sums[v];
+                WT_TYPE DGN_abssums_PNA_log_degrees_v = DGN_abssums_PNA_log_degrees[v];
+                
                 if(layer_num == 0)
                 {
-                    if(instruction == GCN)
-                        message_dim_1[0] = (FM_TYPE)0;
                     GCN_GIN_DGN_activations_PNA_mean[0][v_offset] = GCN_h_node_els[v_offset] + message_dim_1[0] + GIN_h_node_els[v_offset];
                 }
                 else 
@@ -248,6 +235,10 @@ static void accumulate(
                 PNA_sum_squares[v_offset] = message_dim_1[AGGR_STD];
                 PNA_min[v_offset] = message_dim_1[AGGR_MIN];
                 PNA_max[v_offset] = message_dim_1[AGGR_MAX];
+                PNA_stddev[v_offset] = (FM_TYPE)0;
+                PNA_T[v_offset] = (FM_TYPE)0;
+                PNA_scale[v_offset] = (FM_TYPE)0;
+
                 if(instruction == PNA)
                 {   
                     GCN_GIN_DGN_activations_PNA_mean[0][v_offset] = PNA_sum[v_offset] / in_degree;
@@ -261,8 +252,10 @@ static void accumulate(
 
                 if(instruction == DGN)
                 {
+                    DGN_abssums_PNA_log_degrees_v = (DGN_abssums_PNA_log_degrees_v == 0) ? ap_fixed_epsilon<WT_TYPE>() : DGN_abssums_PNA_log_degrees_v;
                     GCN_GIN_DGN_activations_PNA_mean[0][v_offset] = message_dim_1[0] / in_degree;
                     GCN_GIN_DGN_activations_PNA_mean[1][v_offset] = hls::abs(FM_TYPE((message_dim_2[0] - DGN_eigw_sums_v * h_node_v_dim) / DGN_abssums_PNA_log_degrees_v));
+                    PNA_stddev[v_offset] = GCN_GIN_DGN_activations_PNA_mean[1][v_offset];
                 }
             }
         }
@@ -276,6 +269,7 @@ static void accumulate(
                 WT_TYPE GCN_GIN_DGN_weight_dim_0;
                 WT_TYPE GCN_GIN_DGN_weight_dim_1;
                 GCN_GIN_DGN_weight_dim_0 = GCN_convs_GIN_node_mlp_1_weights[layer_num][dim_out][dim_in];
+                GCN_GIN_DGN_weight_dim_1 = (WT_TYPE)0;
                 WT_TYPE GCN_GIN_DGN_bias = GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias[layer_num][dim_out];
 
                 if(instruction == DGN)
@@ -287,38 +281,19 @@ static void accumulate(
 
                 std::array<std::array<WT_TYPE, NUM_AGGRS>, NUM_SCALERS> PNA_weights = PNA_node_conv_weights[layer_num][dim_out][dim_in];           
 #pragma HLS AGGREGATE variable=PNA_weights
-                if(instruction == GCN || instruction == GIN || instruction == DGN)
+
+                PNA_weights[SCALER_NONE][AGGR_MEAN] = GCN_GIN_DGN_weight_dim_0;
+                PNA_weights[SCALER_NONE][AGGR_STD] = GCN_GIN_DGN_weight_dim_1;
+
+                if(instruction == PNA)
                 {
-                    PNA_weights[SCALER_NONE][AGGR_MEAN] = GCN_GIN_DGN_weight_dim_0;
-                    PNA_weights[SCALER_NONE][AGGR_STD] = (WT_TYPE)0;
-                    PNA_weights[SCALER_NONE][AGGR_MIN] = (WT_TYPE)0;
-                    PNA_weights[SCALER_NONE][AGGR_MAX] = (WT_TYPE)0;
-
-                    PNA_weights[SCALER_SCALE][AGGR_MEAN] = (WT_TYPE)0;
-                    PNA_weights[SCALER_SCALE][AGGR_STD] = (WT_TYPE)0;
-                    PNA_weights[SCALER_SCALE][AGGR_MIN] = (WT_TYPE)0;
-                    PNA_weights[SCALER_SCALE][AGGR_MAX] = (WT_TYPE)0;
-
-                    PNA_weights[SCALER_T][AGGR_MEAN] = (WT_TYPE)0;
-                    PNA_weights[SCALER_T][AGGR_STD] = (WT_TYPE)0;
-                    PNA_weights[SCALER_T][AGGR_MIN] = (WT_TYPE)0;
-                    PNA_weights[SCALER_T][AGGR_MAX] = (WT_TYPE)0;
-
-                    if(instruction == DGN)
-                    {
-                        PNA_weights[SCALER_NONE][AGGR_STD] = GCN_GIN_DGN_weight_dim_1;
-                    }
-
+                    PNA_weights = PNA_node_conv_weights[layer_num][dim_out][dim_in];
                 }
 
                 for (int v_offset = 0; v_offset < NODE_PARALLEL; v_offset++)
                 {
 #pragma HLS UNROLL
                     FM_TYPE addend;
-                    if(instruction == DGN)
-                    {
-                        PNA_stddev[v_offset] = GCN_GIN_DGN_activations_PNA_mean[1][v_offset];
-                    } 
                     addend = FM_TYPE(
                         FM_TYPE(
                             FM_TYPE(
