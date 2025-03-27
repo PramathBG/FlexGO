@@ -1,1 +1,0 @@
-/usr/scratch/pguruprasanna3/FlowGNN/DGN/build/og_output.txt
