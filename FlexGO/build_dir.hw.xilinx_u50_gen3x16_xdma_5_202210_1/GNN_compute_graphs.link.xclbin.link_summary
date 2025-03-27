@@ -1,0 +1,1271 @@
+<ENTRY>
+{
+ "thisFile": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/build_dir.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.link.xclbin.link_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Tue Mar  4 03:16:11 2025",
+ "timestampMillis": "1741076171386",
+ "buildStep": {
+  "cmdId": "df348506-5a75-45b7-af4b-a4418c5b34e7",
+  "name": "v++",
+  "logFile": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/link.steps.log",
+  "commandLine": "/projects/tools/x86_64/rhel-8/xilinx/Vitis/2022.1/bin/unwrapped/lnx64.o/v++  --vivado.prop \"run.__KERNEL__.{STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS}={-directive sdx_optimization_effort_high}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_route_design_summary steps {route_design} runs {impl_1} options {-max_paths 10}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_post_route_phys_opt_design_summary steps {post_route_phys_opt_design} runs {impl_1} options {-max_paths 10}\" -t hw --platform xilinx_u50_gen3x16_xdma_5_202210_1 --save-temps --vivado.prop run.synth_1.steps.retiming.is_enabled=1 --vivado.prop run.synth_1.steps.keep_equivalent_registers.is_enabled=0 --vivado.prop run.impl_1.strategy=Performance_ExploreWithRemap -l --hls.clock 100000000:GNN_compute_graphs --temp_dir ./_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1 -o./build_dir.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.link.xclbin _x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.xo ",
+  "args": [
+   "-t",
+   "hw",
+   "--platform",
+   "xilinx_u50_gen3x16_xdma_5_202210_1",
+   "--save-temps",
+   "--vivado.prop",
+   "run.synth_1.steps.retiming.is_enabled=1",
+   "--vivado.prop",
+   "run.synth_1.steps.keep_equivalent_registers.is_enabled=0",
+   "--vivado.prop",
+   "run.impl_1.strategy=Performance_ExploreWithRemap",
+   "-l",
+   "--hls.clock",
+   "100000000:GNN_compute_graphs",
+   "--temp_dir",
+   "./_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1",
+   "-o./build_dir.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.link.xclbin",
+   "_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.xo"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 03:16:11 2025",
+ "timestampMillis": "1741076171388",
+ "status": {
+  "cmdId": "df348506-5a75-45b7-af4b-a4418c5b34e7",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "Tue Mar  4 03:19:10 2025",
+ "timestampMillis": "1741076350801",
+ "buildSummary": {
+  "hardwarePlatform": "xilinx_u50_gen3x16_xdma_5_202210_1.xpfm",
+  "hardwareDsa": "",
+  "platformDirectory": "/opt/xilinx/platforms/xilinx_u50_gen3x16_xdma_5_202210_1",
+  "runtime": "OpenCL",
+  "systemConfig": "Linux",
+  "flow": "BF_LINK",
+  "target": "TT_HW",
+  "binaryContainer": {
+   "base": {
+    "type": "BT_UKNOWN",
+    "name": "GNN_compute_graphs.link",
+    "file": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/build_dir.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.link.xclbin",
+    "reports": [],
+    "uuid": ""
+   },
+   "kernels": []
+  },
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "GNN_compute_graphs",
+     "file": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.xo",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/finalize.cc",
+     "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/conv_layer.cc",
+     "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/load_inputs.cc",
+     "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/globals.cc",
+     "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/linear.cc",
+     "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/message_passing.cc",
+     "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/GNN_compute.cc",
+     "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/node_embedding.cc"
+    ],
+    "psSources": [],
+    "cuNames": [
+     "GNN_compute_graphs_1"
+    ],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "Vitis V++ Compiler Release 2022.1. SW Build 3524075 on 2022-04-13-17:42:45"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Mar  4 03:20:36 2025",
+ "timestampMillis": "1741076436770",
+ "buildStep": {
+  "cmdId": "f6c71a10-1832-47ad-932e-a0a891bb2035",
+  "name": "system_link",
+  "logFile": "",
+  "commandLine": "system_link --xo /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.xo -keep --xpfm /opt/xilinx/platforms/xilinx_u50_gen3x16_xdma_5_202210_1/xilinx_u50_gen3x16_xdma_5_202210_1.xpfm --target hw --output_dir /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int --temp_dir /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/sys_link",
+  "args": [
+   "--xo",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.xo",
+   "-keep",
+   "--xpfm",
+   "/opt/xilinx/platforms/xilinx_u50_gen3x16_xdma_5_202210_1/xilinx_u50_gen3x16_xdma_5_202210_1.xpfm",
+   "--target",
+   "hw",
+   "--output_dir",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int",
+   "--temp_dir",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/sys_link"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 03:20:36 2025",
+ "timestampMillis": "1741076436771",
+ "status": {
+  "cmdId": "f6c71a10-1832-47ad-932e-a0a891bb2035",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 03:25:09 2025",
+ "timestampMillis": "1741076709198",
+ "status": {
+  "cmdId": "f6c71a10-1832-47ad-932e-a0a891bb2035",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Mar  4 03:25:09 2025",
+ "timestampMillis": "1741076709205",
+ "buildStep": {
+  "cmdId": "ee565ccd-8e07-4c74-832d-27e6f6b4589e",
+  "name": "cf2sw",
+  "logFile": "",
+  "commandLine": "cf2sw -sdsl /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/sdsl.dat -rtd /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/cf2sw.rtd -nofilter /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/cf2sw_full.rtd -xclbin /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/xclbin_orig.xml -o /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/xclbin_orig.1.xml",
+  "args": [
+   "-sdsl",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/sdsl.dat",
+   "-rtd",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/cf2sw.rtd",
+   "-nofilter",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/cf2sw_full.rtd",
+   "-xclbin",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/xclbin_orig.xml",
+   "-o",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/xclbin_orig.1.xml"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 03:25:09 2025",
+ "timestampMillis": "1741076709206",
+ "status": {
+  "cmdId": "ee565ccd-8e07-4c74-832d-27e6f6b4589e",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 03:26:38 2025",
+ "timestampMillis": "1741076798380",
+ "status": {
+  "cmdId": "ee565ccd-8e07-4c74-832d-27e6f6b4589e",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Mar  4 03:26:38 2025",
+ "timestampMillis": "1741076798393",
+ "buildStep": {
+  "cmdId": "eafcd90d-6795-4920-b198-3e1051163d23",
+  "name": "rtd2_system_diagram",
+  "logFile": "",
+  "commandLine": "rtd2SystemDiagram",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 03:26:38 2025",
+ "timestampMillis": "1741076798393",
+ "status": {
+  "cmdId": "eafcd90d-6795-4920-b198-3e1051163d23",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 03:28:04 2025",
+ "timestampMillis": "1741076884476",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/systemDiagramModel.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 03:28:04 2025",
+ "timestampMillis": "1741076884480",
+ "status": {
+  "cmdId": "eafcd90d-6795-4920-b198-3e1051163d23",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Mar  4 03:28:04 2025",
+ "timestampMillis": "1741076884496",
+ "buildStep": {
+  "cmdId": "97ab7534-e5c5-4d88-93bd-07ef2b3b3037",
+  "name": "vpl",
+  "logFile": "",
+  "commandLine": "vpl -t hw -f xilinx_u50_gen3x16_xdma_5_202210_1 --remote_ip_cache /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/.ipcache -s --output_dir /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int --log_dir /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/logs/link --report_dir /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link --config /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/vplConfig.ini -k /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/kernel_info.dat --webtalk_flag Vitis --temp_dir /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link --no-info --iprepo /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/xo/ip_repo/xilinx_com_hls_GNN_compute_graphs_1_0 --messageDb /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/run_link/vpl.pb /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/dr.bd.tcl",
+  "args": [
+   "-t",
+   "hw",
+   "-f",
+   "xilinx_u50_gen3x16_xdma_5_202210_1",
+   "--remote_ip_cache",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/.ipcache",
+   "-s",
+   "--output_dir",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int",
+   "--log_dir",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/logs/link",
+   "--report_dir",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link",
+   "--config",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/vplConfig.ini",
+   "-k",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/kernel_info.dat",
+   "--webtalk_flag",
+   "Vitis",
+   "--temp_dir",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link",
+   "--no-info",
+   "--iprepo",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/xo/ip_repo/xilinx_com_hls_GNN_compute_graphs_1_0",
+   "--messageDb",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/run_link/vpl.pb",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/dr.bd.tcl"
+  ],
+  "iniFiles": [
+   {
+    "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/vplConfig.ini",
+    "content": "[advanced]\nmisc=report=type report_timing_summary name impl_report_timing_summary_route_design_summary steps {route_design} runs {impl_1} options {-max_paths 10}\nmisc=report=type report_timing_summary name impl_report_timing_summary_post_route_phys_opt_design_summary steps {post_route_phys_opt_design} runs {impl_1} options {-max_paths 10}\nparam=compiler.enablePerformanceTrace=1\nparam=compiler.vppCurrentWorkingDir=/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified\nmisc=BinaryName=GNN_compute_graphs.link\n\n[connectivity]\nnk=GNN_compute_graphs:1:GNN_compute_graphs_1\n\n[vivado]\nprop=run.__KERNEL__.{STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS}={-directive sdx_optimization_effort_high}\nprop=run.synth_1.steps.retiming.is_enabled=1\nprop=run.synth_1.steps.keep_equivalent_registers.is_enabled=0\nprop=run.impl_1.strategy=Performance_ExploreWithRemap\n\n"
+   }
+  ],
+  "cwd": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 03:28:04 2025",
+ "timestampMillis": "1741076884497",
+ "status": {
+  "cmdId": "97ab7534-e5c5-4d88-93bd-07ef2b3b3037",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Tue Mar  4 03:28:06 2025",
+ "timestampMillis": "1741076886418",
+ "buildStep": {
+  "cmdId": "2d98f663-69ca-48b4-9dcf-68145dd73b8b",
+  "name": "vpl",
+  "logFile": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/link.steps.log",
+  "commandLine": "/projects/tools/x86_64/rhel-8/xilinx/Vitis/2022.1/bin/unwrapped/lnx64.o/vpl -t hw -f xilinx_u50_gen3x16_xdma_5_202210_1 --remote_ip_cache /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/.ipcache -s --output_dir /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int --log_dir /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/logs/link --report_dir /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link --config /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/vplConfig.ini -k /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/kernel_info.dat --webtalk_flag Vitis --temp_dir /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link --no-info --iprepo /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/xo/ip_repo/xilinx_com_hls_GNN_compute_graphs_1_0 --messageDb /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/run_link/vpl.pb /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/dr.bd.tcl ",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/run_link"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 03:28:06 2025",
+ "timestampMillis": "1741076886418",
+ "status": {
+  "cmdId": "2d98f663-69ca-48b4-9dcf-68145dd73b8b",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_VivadoProject",
+ "dateTimestamp": "Tue Mar  4 03:29:36 2025",
+ "timestampMillis": "1741076976483",
+ "vivadoProject": {
+  "openDir": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/vivado/vpl",
+  "openScript": "openprj.tcl",
+  "relativeProject": "prj/prj.xpr"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Mar  4 03:29:36 2025",
+ "timestampMillis": "1741076976487",
+ "buildStep": {
+  "cmdId": "5ca61b3a-ac59-4e61-8468-60bda3664794",
+  "name": "vivado",
+  "logFile": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/vivado/vpl/vivado.log",
+  "commandLine": "vivado -log vivado.log -applog -m64 -messageDb vivado.pb -mode batch -source vpl.tcl -notrace",
+  "args": [
+   "-log",
+   "vivado.log",
+   "-applog",
+   " -m64",
+   "-messageDb",
+   "vivado.pb",
+   "-mode",
+   "batch",
+   "-source",
+   "vpl.tcl",
+   "-notrace"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/run_link"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 03:29:36 2025",
+ "timestampMillis": "1741076976488",
+ "status": {
+  "cmdId": "5ca61b3a-ac59-4e61-8468-60bda3664794",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 03:43:06 2025",
+ "timestampMillis": "1741077786541",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/automation_summary_update_bd.txt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "VITIS_DESIGN_FLOW",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Tue Mar  4 09:43:57 2025",
+ "timestampMillis": "1741099437584",
+ "buildStep": {
+  "cmdId": "b1125788-a4f7-496b-8847-da0faef609fd",
+  "name": "vivado.impl",
+  "logFile": "",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/vivado/vpl"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 09:43:57 2025",
+ "timestampMillis": "1741099437585",
+ "status": {
+  "cmdId": "b1125788-a4f7-496b-8847-da0faef609fd",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Tue Mar  4 09:43:57 2025",
+ "timestampMillis": "1741099437587",
+ "buildStep": {
+  "cmdId": "3e69b5e1-fffd-4a16-a502-ce55a84ce988",
+  "name": "vivado.impl.impl_1",
+  "logFile": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/vivado/vpl/prj/prj.runs/impl_1/runme.log",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/vivado/vpl/prj/prj.runs/impl_1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 09:43:57 2025",
+ "timestampMillis": "1741099437588",
+ "status": {
+  "cmdId": "3e69b5e1-fffd-4a16-a502-ce55a84ce988",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 16:47:53 2025",
+ "timestampMillis": "1741124873250",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/vivado/vpl/prj/prj.runs/impl_1/system_diagram.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM_PLUS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 16:51:45 2025",
+ "timestampMillis": "1741125105712",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/kernel_service.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "KERNEL_SERVICE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 16:51:45 2025",
+ "timestampMillis": "1741125105715",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/kernel_service.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "KERNEL_SERVICE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419082",
+ "status": {
+  "cmdId": "5ca61b3a-ac59-4e61-8468-60bda3664794",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419309",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/imp/impl_1_kernel_util_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "KERNEL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419313",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/imp/impl_1_kernel_util_placed.xutil",
+  "name": "",
+  "fileType": "XUTIL",
+  "reportType": "KERNEL_UTILIZATION_PLACEMENT",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419316",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/imp/impl_1_full_util_synthed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419319",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/imp/impl_1_full_util_routed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419321",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/imp/impl_1_slr_util_routed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_SLR_UTIL_ROUTED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419324",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/imp/impl_1_kernel_util_placed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "KERNEL_UTILIZATION_PLACEMENT",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419329",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/imp/impl_1_slr_util_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_SLR_UTIL_ROUTED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419332",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/imp/impl_1_kernel_util_synthed.xutil",
+  "name": "",
+  "fileType": "XUTIL",
+  "reportType": "KERNEL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419335",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/imp/impl_1_slr_util_placed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_SLR_UTIL_PLACED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419337",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/imp/impl_1_full_util_synthed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419340",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/imp/impl_1_slr_util_placed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_SLR_UTIL_PLACED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419343",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/imp/impl_1_kernel_util_routed.xutil",
+  "name": "",
+  "fileType": "XUTIL",
+  "reportType": "KERNEL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419346",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/imp/impl_1_kernel_util_synthed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "KERNEL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419351",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/imp/impl_1_full_util_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419365",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/syn/ulp_GNN_compute_graphs_1_0_synth_1_ulp_GNN_compute_graphs_1_0_utilization_synth.rpt",
+  "name": "GNN_compute_graphs",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419369",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/imp/impl_1_system_diagram.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM_PLUS",
+  "cmdId": "3e69b5e1-fffd-4a16-a502-ce55a84ce988"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419417",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/imp/impl_1_hw_bb_locked_timing_summary_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_TIMING_SUMMARY",
+  "cmdId": "3e69b5e1-fffd-4a16-a502-ce55a84ce988"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419462",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/imp/impl_1_hw_bb_locked_timing_summary_routed.rpx",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_REPORT_TIMING_SUMMARY",
+  "cmdId": "3e69b5e1-fffd-4a16-a502-ce55a84ce988"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419466",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/imp/impl_1_hw_bb_locked_timing_summary_routed.rpv",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_REPORT_TIMING_SUMMARY_CONCISE",
+  "cmdId": "3e69b5e1-fffd-4a16-a502-ce55a84ce988"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419517",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/imp/impl_1_hw_bb_locked_timing_summary_postroute_physopted.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_TIMING_SUMMARY",
+  "cmdId": "3e69b5e1-fffd-4a16-a502-ce55a84ce988"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419562",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/imp/impl_1_hw_bb_locked_timing_summary_postroute_physopted.rpx",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_REPORT_TIMING_SUMMARY",
+  "cmdId": "3e69b5e1-fffd-4a16-a502-ce55a84ce988"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419565",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/imp/impl_1_hw_bb_locked_timing_summary_postroute_physopted.rpv",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_REPORT_TIMING_SUMMARY_CONCISE",
+  "cmdId": "3e69b5e1-fffd-4a16-a502-ce55a84ce988"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419595",
+ "status": {
+  "cmdId": "2d98f663-69ca-48b4-9dcf-68145dd73b8b",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419621",
+ "status": {
+  "cmdId": "97ab7534-e5c5-4d88-93bd-07ef2b3b3037",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419631",
+ "buildStep": {
+  "cmdId": "660997f6-aef1-4756-9c01-875aac5adb31",
+  "name": "rtdgen",
+  "logFile": "",
+  "commandLine": "rtdgen",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419631",
+ "status": {
+  "cmdId": "660997f6-aef1-4756-9c01-875aac5adb31",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419872",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/GNN_compute_graphs.link_xml.rtd",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "XCLBIN_INFO",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419888",
+ "buildStep": {
+  "cmdId": "ea023826-12b5-4406-ba6d-e7d74bffa05a",
+  "name": "cf2sw",
+  "logFile": "",
+  "commandLine": "cf2sw -a /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/address_map.xml -sdsl /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/sdsl.dat -xclbin /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/xclbin_orig.xml -rtd /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/GNN_compute_graphs.link.rtd -o /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/GNN_compute_graphs.link.xml",
+  "args": [
+   "-a",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/address_map.xml",
+   "-sdsl",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/sdsl.dat",
+   "-xclbin",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/xclbin_orig.xml",
+   "-rtd",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/GNN_compute_graphs.link.rtd",
+   "-o",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/GNN_compute_graphs.link.xml"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 23:36:59 2025",
+ "timestampMillis": "1741149419889",
+ "status": {
+  "cmdId": "ea023826-12b5-4406-ba6d-e7d74bffa05a",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 23:37:04 2025",
+ "timestampMillis": "1741149424701",
+ "status": {
+  "cmdId": "ea023826-12b5-4406-ba6d-e7d74bffa05a",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Mar  4 23:37:04 2025",
+ "timestampMillis": "1741149424702",
+ "buildStep": {
+  "cmdId": "ebd916ac-30f8-476a-9833-531bb612da8e",
+  "name": "rtdgen",
+  "logFile": "",
+  "commandLine": "writeSystemDiagram",
+  "args": [
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/GNN_compute_graphs.link.rtd",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/systemDiagramModelSlrBaseAddress.json"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 23:37:04 2025",
+ "timestampMillis": "1741149424703",
+ "status": {
+  "cmdId": "ebd916ac-30f8-476a-9833-531bb612da8e",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:37:04 2025",
+ "timestampMillis": "1741149424710",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/systemDiagramModelSlrBaseAddress.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM_PLUS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 23:37:04 2025",
+ "timestampMillis": "1741149424712",
+ "status": {
+  "cmdId": "ebd916ac-30f8-476a-9833-531bb612da8e",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Mar  4 23:37:04 2025",
+ "timestampMillis": "1741149424712",
+ "buildStep": {
+  "cmdId": "7446b503-be80-4e3a-9b50-8128e6fb0ad9",
+  "name": "rtdgen",
+  "logFile": "",
+  "commandLine": "writeAutomationSummary",
+  "args": [
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/automation_summary.txt"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 23:37:04 2025",
+ "timestampMillis": "1741149424712",
+ "status": {
+  "cmdId": "7446b503-be80-4e3a-9b50-8128e6fb0ad9",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:37:04 2025",
+ "timestampMillis": "1741149424715",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/automation_summary.txt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "VITIS_DESIGN_FLOW",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 23:37:04 2025",
+ "timestampMillis": "1741149424716",
+ "status": {
+  "cmdId": "7446b503-be80-4e3a-9b50-8128e6fb0ad9",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 23:37:04 2025",
+ "timestampMillis": "1741149424719",
+ "status": {
+  "cmdId": "660997f6-aef1-4756-9c01-875aac5adb31",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Mar  4 23:37:04 2025",
+ "timestampMillis": "1741149424727",
+ "buildStep": {
+  "cmdId": "7c420aef-0032-44b8-9046-2511bf7a9cf4",
+  "name": "xclbinutil",
+  "logFile": "",
+  "commandLine": "xclbinutil --add-section BITSTREAM:RAW:/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/partial.bit --force --target hw --key-value SYS:dfx_enable:true --add-section :JSON:/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/GNN_compute_graphs.link.rtd --append-section :JSON:/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/appendSection.rtd --add-section CLOCK_FREQ_TOPOLOGY:JSON:/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/GNN_compute_graphs.link_xml.rtd --add-section BUILD_METADATA:JSON:/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/GNN_compute_graphs.link_build.rtd --add-section EMBEDDED_METADATA:RAW:/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/GNN_compute_graphs.link.xml --add-section SYSTEM_METADATA:RAW:/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/systemDiagramModelSlrBaseAddress.json --key-value SYS:PlatformVBNV:xilinx_u50_gen3x16_xdma_5_202210_1 --output /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/./build_dir.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.link.xclbin",
+  "args": [
+   "--add-section",
+   "BITSTREAM:RAW:/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/partial.bit",
+   "--force",
+   "--target",
+   "hw",
+   "--key-value",
+   "SYS:dfx_enable:true",
+   "--add-section",
+   ":JSON:/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/GNN_compute_graphs.link.rtd",
+   "--append-section",
+   ":JSON:/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/appendSection.rtd",
+   "--add-section",
+   "CLOCK_FREQ_TOPOLOGY:JSON:/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/GNN_compute_graphs.link_xml.rtd",
+   "--add-section",
+   "BUILD_METADATA:JSON:/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/GNN_compute_graphs.link_build.rtd",
+   "--add-section",
+   "EMBEDDED_METADATA:RAW:/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/GNN_compute_graphs.link.xml",
+   "--add-section",
+   "SYSTEM_METADATA:RAW:/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/link/int/systemDiagramModelSlrBaseAddress.json",
+   "--key-value",
+   "SYS:PlatformVBNV:xilinx_u50_gen3x16_xdma_5_202210_1",
+   "--output",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/./build_dir.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.link.xclbin"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 23:37:04 2025",
+ "timestampMillis": "1741149424728",
+ "status": {
+  "cmdId": "7c420aef-0032-44b8-9046-2511bf7a9cf4",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 23:37:05 2025",
+ "timestampMillis": "1741149425270",
+ "status": {
+  "cmdId": "7c420aef-0032-44b8-9046-2511bf7a9cf4",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Mar  4 23:37:05 2025",
+ "timestampMillis": "1741149425277",
+ "buildStep": {
+  "cmdId": "c00a66e3-6873-452f-964c-662dc8767f87",
+  "name": "xclbinutilinfo",
+  "logFile": "",
+  "commandLine": "xclbinutil --quiet --force --info /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/./build_dir.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.link.xclbin.info --input /net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/./build_dir.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.link.xclbin",
+  "args": [
+   "--quiet",
+   "--force",
+   "--info",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/./build_dir.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.link.xclbin.info",
+   "--input",
+   "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/./build_dir.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.link.xclbin"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 23:37:05 2025",
+ "timestampMillis": "1741149425277",
+ "status": {
+  "cmdId": "c00a66e3-6873-452f-964c-662dc8767f87",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 23:37:05 2025",
+ "timestampMillis": "1741149425858",
+ "status": {
+  "cmdId": "c00a66e3-6873-452f-964c-662dc8767f87",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Mar  4 23:37:05 2025",
+ "timestampMillis": "1741149425864",
+ "buildStep": {
+  "cmdId": "a547495d-5d89-489c-89dd-1cf5a169b47f",
+  "name": "generate_sc_driver",
+  "logFile": "",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 23:37:05 2025",
+ "timestampMillis": "1741149425864",
+ "status": {
+  "cmdId": "a547495d-5d89-489c-89dd-1cf5a169b47f",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 23:37:05 2025",
+ "timestampMillis": "1741149425866",
+ "status": {
+  "cmdId": "a547495d-5d89-489c-89dd-1cf5a169b47f",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:37:06 2025",
+ "timestampMillis": "1741149426687",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/system_estimate_GNN_compute_graphs.link.xtxt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_SYSTEM_ESTIMATE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:37:06 2025",
+ "timestampMillis": "1741149426861",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/reports/link/v++_link_GNN_compute_graphs.link_guidance.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:37:06 2025",
+ "timestampMillis": "1741149426862",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/v++_link_GNN_compute_graphs.link_guidance.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Mar  4 23:37:06 2025",
+ "timestampMillis": "1741149426865",
+ "report": {
+  "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/logs/optraceViewer.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "OPERATION_TRACE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Mar  4 23:37:06 2025",
+ "timestampMillis": "1741149426868",
+ "status": {
+  "cmdId": "df348506-5a75-45b7-af4b-a4418c5b34e7",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>

@@ -1,0 +1,290 @@
+
+****** Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2022.1 (64-bit)
+  **** SW Build 3526262 on Mon Apr 18 15:47:01 MDT 2022
+  **** IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+source /projects/tools/x86_64/rhel-8/xilinx/Vitis_HLS/2022.1/scripts/vitis_hls/hls.tcl -notrace
+INFO: [HLS 200-10] Running '/projects/tools/x86_64/rhel-8/xilinx/Vitis_HLS/2022.1/bin/unwrapped/lnx64.o/vitis_hls'
+INFO: [HLS 200-10] For user 'pguruprasanna3' on host 'flubber1' (Linux_x86_64 version 5.15.0-124-generic) on Wed Dec 18 13:18:11 EST 2024
+INFO: [HLS 200-10] On os Ubuntu 22.04.5 LTS
+INFO: [HLS 200-10] In directory '/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/src'
+[2Kvitis_hls> [11C[2Kvitis_hls> g[12C[2Kvitis_hls> ge[13C[2Kvitis_hls> get[14C[2Kvitis_hls> get_[15C[2Kvitis_hls> get_f[16C[2Kvitis_hls> get_fi[17C[2Kvitis_hls> get_fil[18C[2Kvitis_hls> get_file[19C[2Kvitis_hls> get_files[20C[2Kvitis_hls> get_file[19C[2Kvitis_hls> get_fil[18C[2Kvitis_hls> get_fi[17C[2Kvitis_hls> get_f[16C[2Kvitis_hls> get_[15C[2Kvitis_hls> get[14C[2Kvitis_hls> ge[13C[2Kvitis_hls> g[12C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> o[12C[2Kvitis_hls> opo[14C[2Kvitis_hls> op[13C[2Kvitis_hls> o[12C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> o[12C[2Kvitis_hls> op[13C[2Kvitis_hls> ope[14C[2Kvitis_hls> open[15C[2Kvitis_hls> open_[16C[2Kvitis_hls> open_s[17C[2Kvitis_hls> open_so[18C[2Kvitis_hls> open_sol[19C[2Kvitis_hls> open_solu[20C[2Kvitis_hls> open_solut[21C[2Kvitis_hls> open_solu[20C[2Kvitis_hls> open_sol[19C[2Kvitis_hls> open_so[18C[2Kvitis_hls> open_s[17C[2Kvitis_hls> open_[16C[2Kvitis_hls> open_v[17C[2Kvitis_hls> open_vh[18C[2Kvitis_hls> open_vhl[19C[2Kvitis_hls> open_vhls[20C[2Kvitis_hls> open_vhls_[21C[2Kvitis_hls> open_vhls_p[22C[2Kvitis_hls> open_vhls_pr[23C[2Kvitis_hls> open_vhls_pro[24C[2Kvitis_hls> open_vhls_proj[25C[2Kvitis_hls> open_vhls_proje[26C[2Kvitis_hls> open_vhls_projec[27C[2Kvitis_hls> open_vhls_project[28C[2Kvitis_hls> open_vhls_project [29C[2Kvitis_hls> open_vhls_project[28C[2Kvitis_hls> open_vhls_projec[27C[2Kvitis_hls> open_vhls_proje[26C[2Kvitis_hls> open_vhls_proj[25C[2Kvitis_hls> open_vhls_pro[24C[2Kvitis_hls> open_vhls_pr[23C[2Kvitis_hls> open_vhls_p[22C[2Kvitis_hls> open_vhls_[21C[2Kvitis_hls> open_vhls[20C[2Kvitis_hls> open_vhl[19C[2Kvitis_hls> open_vh[18C[2Kvitis_hls> open_v[17C[2Kvitis_hls> open_[16C[2Kvitis_hls> open[15C[2Kvitis_hls> open_[16C[2Kvitis_hls> open_p[17C[2Kvitis_hls> open_pr[18C[2Kvitis_hls> open_pro[19C[2Kvitis_hls> open_proj[20C[2Kvitis_hls> open_proje[21C[2Kvitis_hls> open_projec[22C[2Kvitis_hls> open_project[23C[2Kvitis_hls> open_project [24C[2Kvitis_hls> open_project v[25C[2Kvitis_hls> open_project vh[26C[2Kvitis_hls> open_project vhs[27C[2Kvitis_hls> open_project vhsl[28C[2Kvitis_hls> open_project vhsl_[29C[2Kvitis_hls> open_project vhsl_p[30C[2Kvitis_hls> open_project vhsl_pr[31C[2Kvitis_hls> open_project vhsl_pro[32C[2Kvitis_hls> open_project vhsl_proj[33C[2Kvitis_hls> open_project vhsl_proje[34C[2Kvitis_hls> open_project vhsl_projec[35C[2Kvitis_hls> open_project vhsl_project[36C[2Kvitis_hls> open_project vhsl_projec[35C[2Kvitis_hls> open_project vhsl_proje[34C[2Kvitis_hls> open_project vhsl_proj[33C[2Kvitis_hls> open_project vhsl_pro[32C[2Kvitis_hls> open_project vhsl_pr[31C[2Kvitis_hls> open_project vhsl_p[30C[2Kvitis_hls> open_project vhsl_[29C[2Kvitis_hls> open_project vhsl[28C[2Kvitis_hls> open_project vhs[27C[2Kvitis_hls> open_project vh[26C[2Kvitis_hls> open_project vhl[27C[2Kvitis_hls> open_project vhls[28C[2Kvitis_hls> open_project vhls_[29C[2Kvitis_hls> open_project vhls_p[30C[2Kvitis_hls> open_project vhls_pr[31C[2Kvitis_hls> open_project vhls_pro[32C[2Kvitis_hls> open_project vhls_proj[33C[2Kvitis_hls> open_project vhls_proje[34C[2Kvitis_hls> open_project vhls_projec[35C[2Kvitis_hls> open_project vhls_project[36C
+INFO: [HLS 200-1510] Running: open_project vhls_project 
+INFO: [HLS 200-10] Creating and opening project '/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/src/vhls_project'.
+[2Kvitis_hls> [11C[2Kvitis_hls> o[12C[2Kvitis_hls> op[13C[2Kvitis_hls> opn[14C[2Kvitis_hls> opne[15C[2Kvitis_hls> opn[14C[2Kvitis_hls> op[13C[2Kvitis_hls> o[12C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> l[12C[2Kvitis_hls> ls[13C
+conv_layer.cc
+conv_layer.h
+dcl.h
+finalize.cc
+finalize.h
+globals.cc
+GNN_compute.cc
+host.cc
+host_dir_backup
+host.h
+host_load.cc
+linear.cc
+linear.h
+load.cc
+load_inputs.cc
+load_inputs.h
+main.cc
+message_passing.cc
+message_passing.h
+node_embedding.cc
+node_embedding.h
+README.md
+testbench.h
+util.h
+vhls_project
+vitis_hls.log
+[2Kvitis_hls> [11C[2Kvitis_hls> r[12C[2Kvitis_hls> rm[13C[2Kvitis_hls> rm-[14C[2Kvitis_hls> rm-r[15C[2Kvitis_hls> rm-rf[16C[2Kvitis_hls> rm-rf [17C[2Kvitis_hls> rm-rf[16C[2Kvitis_hls> rm-r[15C[2Kvitis_hls> rm-[14C[2Kvitis_hls> rm[13C[2Kvitis_hls> rm [14C[2Kvitis_hls> rm -[15C[2Kvitis_hls> rm -r[16C[2Kvitis_hls> rm -rf[17C[2Kvitis_hls> rm -rf [18C[2Kvitis_hls> rm -rf v[19C[2Kvitis_hls> rm -rf vh[20C[2Kvitis_hls> rm -rf vhl[21C[2Kvitis_hls> rm -rf vhls[22C[2Kvitis_hls> rm -rf vhls_[23C[2Kvitis_hls> rm -rf vhls_p[24C[2Kvitis_hls> rm -rf vhls_pr[25C[2Kvitis_hls> rm -rf vhls_project/[31C
+[2Kvitis_hls> [11C[2Kvitis_hls> c[12C[2Kvitis_hls> cd[13C[2Kvitis_hls> cd [14C[2Kvitis_hls> cd .[15C[2Kvitis_hls> cd ..[16C[2Kvitis_hls> cd ../[17C
+[2Kvitis_hls> [11C[2Kvitis_hls> c[12C[2Kvitis_hls> cl[13C[2Kvitis_hls> cle[14C[2Kvitis_hls> clea[15C[2Kvitis_hls> clear[16C
+[H[J[2Kvitis_hls> [11C[2Kvitis_hls> l[12C[2Kvitis_hls> ls[13C
+&1
+build
+build_1
+CMakeLists.txt
+config_slr.cfg
+csynth_design.log
+csynth_design.tcl
+DGN_weights_biases
+eig
+GCN_weights_biases
+GIN_weights_biases
+HLS_output_DGN.txt
+HLS_output_GCN.txt
+HLS_output_GIN.txt
+HLS_output_PNA.txt
+HLS_output.txt
+Instruction.txt
+load_backup.cc
+logFiles
+main.tcl
+Makefile
+original_weights
+PNA
+PNA_weights_biases
+README.md
+run
+src
+src_backup_v2
+testbench
+test.txt
+utils.mk
+version.txt
+vhls_project
+vitis_hls.log
+xrt.ini
+xrt.run_summary
+xsim.dir
+[2Kvitis_hls> [11C[2Kvitis_hls> p[12C[2Kvitis_hls> pw[13C[2Kvitis_hls> pwd[14C
+/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified
+[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> l[12C[2Kvitis_hls> [11C[2Kvitis_hls> c[12C[2Kvitis_hls> cl[13C[2Kvitis_hls> cle[14C[2Kvitis_hls> clea[15C[2Kvitis_hls> clear[16C
+[H[J[2Kvitis_hls> [11C[2Kvitis_hls> o[12C[2Kvitis_hls> op[13C[2Kvitis_hls> ope[14C[2Kvitis_hls> open[15C[2Kvitis_hls> open_[16C[2Kvitis_hls> open_p[17C[2Kvitis_hls> open_pr[18C[2Kvitis_hls> open_pro[19C[2Kvitis_hls> open_proj[20C[2Kvitis_hls> open_proje[21C[2Kvitis_hls> open_projec[22C[2Kvitis_hls> open_project[23C[2Kvitis_hls> open_project [24C[2Kvitis_hls> open_project v[25C[2Kvitis_hls> open_project vh[26C[2Kvitis_hls> open_project vhl[27C[2Kvitis_hls> open_project vhls[28C[2Kvitis_hls> open_project vhls_[29C[2Kvitis_hls> open_project vhls_p[30C[2Kvitis_hls> open_project vhls_po[31C[2Kvitis_hls> open_project vhls_poj[32C[2Kvitis_hls> open_project vhls_po[31C[2Kvitis_hls> open_project vhls_p[30C[2Kvitis_hls> open_project vhls_pr[31C[2Kvitis_hls> open_project vhls_pro[32C[2Kvitis_hls> open_project vhls_proj[33C[2Kvitis_hls> open_project vhls_proje[34C[2Kvitis_hls> open_project vhls_projec[35C[2Kvitis_hls> open_project vhls_project[36C
+INFO: [HLS 200-1510] Running: open_project vhls_project 
+INFO: [HLS 200-10] Opening project '/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/vhls_project'.
+[2Kvitis_hls> [11C[2Kvitis_hls> o[12C[2Kvitis_hls> op[13C[2Kvitis_hls> opn[14C[2Kvitis_hls> op[13C[2Kvitis_hls> ope[14C[2Kvitis_hls> open[15C[2Kvitis_hls> open_[16C[2Kvitis_hls> open_s[17C[2Kvitis_hls> open_so[18C[2Kvitis_hls> open_sol[19C[2Kvitis_hls> open_solu[20C[2Kvitis_hls> open_solut[21C[2Kvitis_hls> open_soluti[22C[2Kvitis_hls> open_solutio[23C[2Kvitis_hls> open_solution[24C[2Kvitis_hls> open_solution [25C[2Kvitis_hls> open_solution "[26C[2Kvitis_hls> open_solution "s[27C[2Kvitis_hls> open_solution "so[28C[2Kvitis_hls> open_solution "sol[29C[2Kvitis_hls> open_solution "solu[30C[2Kvitis_hls> open_solution "solut[31C[2Kvitis_hls> open_solution "soluti[32C[2Kvitis_hls> open_solution "solutio[33C[2Kvitis_hls> open_solution "solution[34C[2Kvitis_hls> open_solution "solution1[35C[2Kvitis_hls> open_solution "solution1"[36C[2Kvitis_hls> open_solution "solution1" [37C[2Kvitis_hls> open_solution "solution1" -[38C[2Kvitis_hls> open_solution "solution1" -f[39C[2Kvitis_hls> open_solution "solution1" -fl[40C[2Kvitis_hls> open_solution "solution1" -flo[41C[2Kvitis_hls> open_solution "solution1" -flow[42C[2Kvitis_hls> open_solution "solution1" -flow_[43C[2Kvitis_hls> open_solution "solution1" -flow_t[44C[2Kvitis_hls> open_solution "solution1" -flow_ta[45C[2Kvitis_hls> open_solution "solution1" -flow_tar[46C[2Kvitis_hls> open_solution "solution1" -flow_targ[47C[2Kvitis_hls> open_solution "solution1" -flow_targe[48C[2Kvitis_hls> open_solution "solution1" -flow_target[49C[2Kvitis_hls> open_solution "solution1" -flow_target [50C[2Kvitis_hls> open_solution "solution1" -flow_target v[51C[2Kvitis_hls> open_solution "solution1" -flow_target vi[52C[2Kvitis_hls> open_solution "solution1" -flow_target vit[53C[2Kvitis_hls> open_solution "solution1" -flow_target viti[54C[2Kvitis_hls> open_solution "solution1" -flow_target vitis[55C
+INFO: [HLS 200-1510] Running: open_solution solution1 -flow_target vitis 
+INFO: [HLS 200-10] Opening solution '/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/vhls_project/solution1'.
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 3.333ns.
+INFO: [HLS 200-1611] Setting target device to 'xcu50-fsvh2104-2-e'
+INFO: [HLS 200-1505] Using flow_target 'vitis'
+Resolution: For help on HLS 200-1505 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.1;t=hls+guidance;d=200-1505.html
+INFO: [HLS 200-1464] Running solution command: config_interface -m_axi_latency=64
+INFO: [HLS 200-1464] Running solution command: config_interface -m_axi_alignment_byte_size=64
+INFO: [HLS 200-1464] Running solution command: config_interface -m_axi_max_widen_bitwidth=512
+INFO: [HLS 200-1464] Running solution command: config_interface -default_interface=kernel
+INFO: [HLS 200-1464] Running solution command: config_rtl -register_reset_num=3
+[2Kvitis_hls> [11C[2Kvitis_hls> g[12C[2Kvitis_hls> ge[13C[2Kvitis_hls> get[14C[2Kvitis_hls> get_[15C[2Kvitis_hls> get_f[16C[2Kvitis_hls> get_fi[17C[2Kvitis_hls> get_fil[18C[2Kvitis_hls> get_file[19C[2Kvitis_hls> get_files[20C
+src/message_passing.cc src/node_embedding.cc message_passing.cc src/load_inputs.cc src/linear.cc src/GNN_compute.cc src/globals.cc src/finalize.cc src/conv_layer.cc
+[2Kvitis_hls> [11C[2Kvitis_hls> s[12C[2Kvitis_hls> se[13C[2Kvitis_hls> set[14C[2Kvitis_hls> set_[15C[2Kvitis_hls> set_t[16C[2Kvitis_hls> set_to[17C[2Kvitis_hls> set_top[18C[2Kvitis_hls> set_top [19C[2Kvitis_hls> set_top G[20C[2Kvitis_hls> set_top GN[21C[2Kvitis_hls> set_top GNN[22C[2Kvitis_hls> set_top GNN_[23C[2Kvitis_hls> set_top GNN_c[24C[2Kvitis_hls> set_top GNN_co[25C[2Kvitis_hls> set_top GNN_com[26C[2Kvitis_hls> set_top GNN_comp[27C[2Kvitis_hls> set_top GNN_compu[28C[2Kvitis_hls> set_top GNN_comput[29C[2Kvitis_hls> set_top GNN_compute[30C[2Kvitis_hls> set_top GNN_compute_[31C[2Kvitis_hls> set_top GNN_compute_g[32C[2Kvitis_hls> set_top GNN_compute_gr[33C[2Kvitis_hls> set_top GNN_compute_gra[34C[2Kvitis_hls> set_top GNN_compute_grap[35C[2Kvitis_hls> set_top GNN_compute_graph[36C[2Kvitis_hls> set_top GNN_compute_graphs[37C
+INFO: [HLS 200-1510] Running: set_top GNN_compute_graphs 
+[2Kvitis_hls> [11C[2Kvitis_hls> g[12C[2Kvitis_hls> ge[13C[2Kvitis_hls> get[14C[2Kvitis_hls> get_[15C[2Kvitis_hls> get_f[16C[2Kvitis_hls> get_fi[17C[2Kvitis_hls> get_fil[18C[2Kvitis_hls> get_file[19C[2Kvitis_hls> get_files[20C[2Kvitis_hls> get_files [21C[2Kvitis_hls> get_files -[22C[2Kvitis_hls> get_files -t[23C[2Kvitis_hls> get_files -tb[24C
+../../main.cc
+[2Kvitis_hls> [11C[2Kvitis_hls> d[12C[2Kvitis_hls> de[13C[2Kvitis_hls> del[14C[2Kvitis_hls> dele[15C[2Kvitis_hls> delet[16C[2Kvitis_hls> delete[17C[2Kvitis_hls> delete [18C[2Kvitis_hls> delete f[19C[2Kvitis_hls> delete [18C[2Kvitis_hls> delete[17C[2Kvitis_hls> delet[16C[2Kvitis_hls> dele[15C[2Kvitis_hls> del[14C[2Kvitis_hls> de[13C[2Kvitis_hls> d[12C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> f[12C[2Kvitis_hls> fi[13C[2Kvitis_hls> fil[14C[2Kvitis_hls> file[15C[2Kvitis_hls> file [16C[2Kvitis_hls> file d[17C[2Kvitis_hls> file de[18C[2Kvitis_hls> file det[19C[2Kvitis_hls> file de[18C[2Kvitis_hls> file del[19C[2Kvitis_hls> file dele[20C[2Kvitis_hls> file delet[21C[2Kvitis_hls> file delete[22C[2Kvitis_hls> file delete [23C[2Kvitis_hls> file delete -[24C[2Kvitis_hls> file delete -f[25C[2Kvitis_hls> file delete -fr[26C[2Kvitis_hls> file delete -frc[27C[2Kvitis_hls> file delete -frce[28C[2Kvitis_hls> file delete -frc[27C[2Kvitis_hls> file delete -fr[26C[2Kvitis_hls> file delete -f[25C[2Kvitis_hls> file delete -fo[26C[2Kvitis_hls> file delete -for[27C[2Kvitis_hls> file delete -forc[28C[2Kvitis_hls> file delete -force[29C[2Kvitis_hls> file delete -force [30C[2Kvitis_hls> file delete -force t[31C[2Kvitis_hls> file delete -force tb[32C[2Kvitis_hls> file delete -force tb/[33C[2Kvitis_hls> file delete -force tb/m[34C[2Kvitis_hls> file delete -force tb/ma[35C[2Kvitis_hls> file delete -force tb/mai[36C[2Kvitis_hls> file delete -force tb/main[37C[2Kvitis_hls> file delete -force tb/main.[38C[2Kvitis_hls> file delete -force tb/main.c[39C[2Kvitis_hls> file delete -force tb/main.cc[40C
+[2Kvitis_hls> [11C[2Kvitis_hls> g[12C[2Kvitis_hls> ge[13C[2Kvitis_hls> get[14C[2Kvitis_hls> get_[15C[2Kvitis_hls> get_f[16C[2Kvitis_hls> get_fi[17C[2Kvitis_hls> get_fil[18C[2Kvitis_hls> get_file[19C[2Kvitis_hls> get_files[20C[2Kvitis_hls> get_files [21C[2Kvitis_hls> get_files -[22C[2Kvitis_hls> get_files -t[23C[2Kvitis_hls> get_files -tb[24C
+../../main.cc
+[2Kvitis_hls> [11C[2Kvitis_hls> c[12C[2Kvitis_hls> cd[13C[2Kvitis_hls> cd [14C[2Kvitis_hls> cd t[15C[2Kvitis_hls> cd ts[16C[2Kvitis_hls> cd tsc[17C[2Kvitis_hls> cd ts[16C[2Kvitis_hls> cd t[15C[2Kvitis_hls> cd [14C[2Kvitis_hls> cd[13C[2Kvitis_hls> cd [14C[2Kvitis_hls> cd s[15C[2Kvitis_hls> cd sr[16C[2Kvitis_hls> cd src[17C
+[2Kvitis_hls> [11C[2Kvitis_hls> l[12C[2Kvitis_hls> ls[13C
+conv_layer.cc
+conv_layer.h
+dcl.h
+finalize.cc
+finalize.h
+globals.cc
+GNN_compute.cc
+host.cc
+host_dir_backup
+host.h
+host_load.cc
+linear.cc
+linear.h
+load.cc
+load_inputs.cc
+load_inputs.h
+main.cc
+message_passing.cc
+message_passing.h
+node_embedding.cc
+node_embedding.h
+README.md
+testbench.h
+util.h
+vitis_hls.log
+[2Kvitis_hls> [11C[2Kvitis_hls> c[12C[2Kvitis_hls> cl[13C[2Kvitis_hls> cle[14C[2Kvitis_hls> clea[15C[2Kvitis_hls> clear[16C
+[H[J[2Kvitis_hls> [11C[2Kvitis_hls> clear[16C[2Kvitis_hls> ls[13C[2Kvitis_hls> cd src[17C[2Kvitis_hls> get_files -tb[24C[2Kvitis_hls> file delete -force tb/main.cc[40C[2Kvitis_hls> file delete -force tb/main.c[39C[2Kvitis_hls> file delete -force tb/main.[38C[2Kvitis_hls> file delete -force tb/main[37C[2Kvitis_hls> file delete -force tb/mai[36C[2Kvitis_hls> file delete -force tb/ma[35C[2Kvitis_hls> file delete -force tb/m[34C[2Kvitis_hls> file delete -force tb/[33C[2Kvitis_hls> file delete -force tb[32C[2Kvitis_hls> file delete -force t[31C[2Kvitis_hls> file delete -force [30C[2Kvitis_hls> file delete -force[29C[2Kvitis_hls> file delete -forc[28C[2Kvitis_hls> file delete -for[27C[2Kvitis_hls> file delete -fo[26C[2Kvitis_hls> file delete -f[25C[2Kvitis_hls> file delete -[24C[2Kvitis_hls> file delete [23C[2Kvitis_hls> file delete[22C[2Kvitis_hls> file delet[21C[2Kvitis_hls> file dele[20C[2Kvitis_hls> file del[19C[2Kvitis_hls> file de[18C[2Kvitis_hls> file d[17C[2Kvitis_hls> file [16C[2Kvitis_hls> file[15C[2Kvitis_hls> fil[14C[2Kvitis_hls> fi[13C[2Kvitis_hls> f[12C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> a[12C[2Kvitis_hls> ad[13C[2Kvitis_hls> add[14C[2Kvitis_hls> add_[15C[2Kvitis_hls> add_f[16C[2Kvitis_hls> add_fi[17C[2Kvitis_hls> add_fil[18C[2Kvitis_hls> add_file[19C[2Kvitis_hls> add_files[20C[2Kvitis_hls> add_files [21C[2Kvitis_hls> add_files s[22C[2Kvitis_hls> add_files [21C[2Kvitis_hls> add_files -[22C[2Kvitis_hls> add_files -t[23C[2Kvitis_hls> add_files -tb[24C[2Kvitis_hls> add_files -tb [25C[2Kvitis_hls> add_files -tb s[26C[2Kvitis_hls> add_files -tb sr[27C[2Kvitis_hls> add_files -tb src[28C[2Kvitis_hls> add_files -tb sr[27C[2Kvitis_hls> add_files -tb s[26C[2Kvitis_hls> add_files -tb [25C[2Kvitis_hls> add_files -tb[24C[2Kvitis_hls> add_files -t[23C[2Kvitis_hls> add_files -[22C[2Kvitis_hls> add_files [21C[2Kvitis_hls> add_files[20C[2Kvitis_hls> add_file[19C[2Kvitis_hls> add_fil[18C[2Kvitis_hls> add_fi[17C[2Kvitis_hls> add_f[16C[2Kvitis_hls> add_[15C[2Kvitis_hls> add[14C[2Kvitis_hls> ad[13C[2Kvitis_hls> a[12C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> p[12C[2Kvitis_hls> pw[13C[2Kvitis_hls> pwd[14C
+/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/src
+[2Kvitis_hls> [11C[2Kvitis_hls> pwd[14C[2Kvitis_hls> pw[13C[2Kvitis_hls> p[12C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> c[12C[2Kvitis_hls> cd[13C[2Kvitis_hls> cd [14C[2Kvitis_hls> cd .[15C[2Kvitis_hls> cd ..[16C[2Kvitis_hls> cd ../[17C
+[2Kvitis_hls> [11C[2Kvitis_hls> c[12C[2Kvitis_hls> cl[13C[2Kvitis_hls> cle[14C[2Kvitis_hls> clea[15C[2Kvitis_hls> clear[16C
+[H[J[2Kvitis_hls> [11C[2Kvitis_hls> l[12C[2Kvitis_hls> ls[13C
+&1
+build
+build_1
+CMakeLists.txt
+config_slr.cfg
+csynth_design.log
+csynth_design.tcl
+DGN_weights_biases
+eig
+GCN_weights_biases
+GIN_weights_biases
+HLS_output_DGN.txt
+HLS_output_GCN.txt
+HLS_output_GIN.txt
+HLS_output_PNA.txt
+HLS_output.txt
+Instruction.txt
+load_backup.cc
+logFiles
+main.tcl
+Makefile
+original_weights
+PNA
+PNA_weights_biases
+README.md
+run
+src
+src_backup_v2
+testbench
+test.txt
+utils.mk
+version.txt
+vhls_project
+vitis_hls.log
+xrt.ini
+xrt.run_summary
+xsim.dir
+[2Kvitis_hls> [11C[2Kvitis_hls> a[12C[2Kvitis_hls> ad[13C[2Kvitis_hls> add[14C[2Kvitis_hls> add_[15C[2Kvitis_hls> add_f[16C[2Kvitis_hls> add_fi[17C[2Kvitis_hls> add_fie[18C[2Kvitis_hls> add_fi[17C[2Kvitis_hls> add_f[16C[2Kvitis_hls> add_[15C[2Kvitis_hls> add[14C[2Kvitis_hls> ad[13C[2Kvitis_hls> a[12C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> g[12C[2Kvitis_hls> ge[13C[2Kvitis_hls> get[14C[2Kvitis_hls> get_[15C[2Kvitis_hls> get_f[16C[2Kvitis_hls> get_fi[17C[2Kvitis_hls> get_fil[18C[2Kvitis_hls> get_file[19C[2Kvitis_hls> get_files[20C[2Kvitis_hls> get_files [21C[2Kvitis_hls> get_files -[22C[2Kvitis_hls> get_files -t[23C[2Kvitis_hls> get_files -tb[24C[2Kvitis_hls> get_files -tb [25C
+../../main.cc
+[2Kvitis_hls> [11C[2Kvitis_hls> p[12C[2Kvitis_hls> pw[13C[2Kvitis_hls> pwd[14C[2Kvitis_hls> pw[13C[2Kvitis_hls> p[12C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> c[12C[2Kvitis_hls> cd[13C[2Kvitis_hls> cd [14C[2Kvitis_hls> cd s[15C[2Kvitis_hls> cd sr[16C[2Kvitis_hls> cd src[17C[2Kvitis_hls> cd src [18C
+[2Kvitis_hls> [11C[2Kvitis_hls> l[12C[2Kvitis_hls> ls[13C
+conv_layer.cc
+conv_layer.h
+dcl.h
+finalize.cc
+finalize.h
+globals.cc
+GNN_compute.cc
+host.cc
+host_dir_backup
+host.h
+host_load.cc
+linear.cc
+linear.h
+load.cc
+load_inputs.cc
+load_inputs.h
+main.cc
+message_passing.cc
+message_passing.h
+node_embedding.cc
+node_embedding.h
+README.md
+testbench.h
+util.h
+vitis_hls.log
+[2Kvitis_hls> [11C[2Kvitis_hls> c[12C[2Kvitis_hls> cd[13C[2Kvitis_hls> cd [14C[2Kvitis_hls> cd .[15C[2Kvitis_hls> cd ./[16C[2Kvitis_hls> cd .//[17C
+[2Kvitis_hls> [11C[2Kvitis_hls> c[12C[2Kvitis_hls> cc[13C[2Kvitis_hls> ccd[14C[2Kvitis_hls> cc[13C[2Kvitis_hls> c[12C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> p[12C[2Kvitis_hls> pw[13C[2Kvitis_hls> pwd[14C
+/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/src
+[2Kvitis_hls> [11C[2Kvitis_hls> c[12C[2Kvitis_hls> cd[13C[2Kvitis_hls> cd [14C[2Kvitis_hls> cd .[15C[2Kvitis_hls> cd ..[16C[2Kvitis_hls> cd ../[17C
+[2Kvitis_hls> [11C[2Kvitis_hls> c[12C[2Kvitis_hls> cl[13C[2Kvitis_hls> cle[14C[2Kvitis_hls> clea[15C[2Kvitis_hls> clear[16C
+[H[J[2Kvitis_hls> [11C[2Kvitis_hls> l[12C[2Kvitis_hls> ls[13C
+&1
+build
+build_1
+CMakeLists.txt
+config_slr.cfg
+csynth_design.log
+csynth_design.tcl
+DGN_weights_biases
+eig
+GCN_weights_biases
+GIN_weights_biases
+HLS_output_DGN.txt
+HLS_output_GCN.txt
+HLS_output_GIN.txt
+HLS_output_PNA.txt
+HLS_output.txt
+Instruction.txt
+load_backup.cc
+logFiles
+main.tcl
+Makefile
+original_weights
+PNA
+PNA_weights_biases
+README.md
+run
+src
+src_backup_v2
+testbench
+test.txt
+utils.mk
+version.txt
+vhls_project
+vitis_hls.log
+xrt.ini
+xrt.run_summary
+xsim.dir
+[2Kvitis_hls> [11C[2Kvitis_hls> c[12C[2Kvitis_hls> cl[13C[2Kvitis_hls> cle[14C[2Kvitis_hls> clea[15C[2Kvitis_hls> clear[16C
+[H[J[2Kvitis_hls> [11C[2Kvitis_hls> p[12C[2Kvitis_hls> pw[13C[2Kvitis_hls> pwd[14C
+/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified
+[2Kvitis_hls> [11C[2Kvitis_hls> s[12C[2Kvitis_hls> [11C[2Kvitis_hls> a[12C[2Kvitis_hls> ad[13C[2Kvitis_hls> add[14C[2Kvitis_hls> add_[15C[2Kvitis_hls> add_f[16C[2Kvitis_hls> add_fi[17C[2Kvitis_hls> add_fie[18C[2Kvitis_hls> add_fi[17C[2Kvitis_hls> add_fil[18C[2Kvitis_hls> add_file[19C[2Kvitis_hls> add_files[20C[2Kvitis_hls> add_files [21C[2Kvitis_hls> add_files -[22C[2Kvitis_hls> add_files -t[23C[2Kvitis_hls> add_files -tb[24C[2Kvitis_hls> add_files -tb [25C[2Kvitis_hls> add_files -tb s[26C[2Kvitis_hls> add_files -tb sr[27C[2Kvitis_hls> add_files -tb src[28C[2Kvitis_hls> add_files -tb src/[29C[2Kvitis_hls> add_files -tb src/m[30C[2Kvitis_hls> add_files -tb src/ma[31C[2Kvitis_hls> add_files -tb src/mai[32C[2Kvitis_hls> add_files -tb src/main[33C[2Kvitis_hls> add_files -tb src/main.[34C[2Kvitis_hls> add_files -tb src/main.c[35C[2Kvitis_hls> add_files -tb src/main.cc[36C
+INFO: [HLS 200-1510] Running: add_files -tb src/main.cc 
+INFO: [HLS 200-10] Adding test bench file 'src/main.cc' to the project
+[2Kvitis_hls> [11C[2Kvitis_hls> a[12C[2Kvitis_hls> ad[13C[2Kvitis_hls> add[14C[2Kvitis_hls> add_[15C[2Kvitis_hls> add_f[16C[2Kvitis_hls> add_fi[17C[2Kvitis_hls> add_fil[18C[2Kvitis_hls> add_file[19C[2Kvitis_hls> add_files[20C[2Kvitis_hls> add_files [21C[2Kvitis_hls> add_files -[22C[2Kvitis_hls> add_files [21C[2Kvitis_hls> add_files[20C[2Kvitis_hls> add_file[19C[2Kvitis_hls> add_fil[18C[2Kvitis_hls> add_fi[17C[2Kvitis_hls> add_f[16C[2Kvitis_hls> add_[15C[2Kvitis_hls> add[14C[2Kvitis_hls> ad[13C[2Kvitis_hls> a[12C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> [11C[2Kvitis_hls> g[12C[2Kvitis_hls> ge[13C[2Kvitis_hls> get[14C[2Kvitis_hls> get_[15C[2Kvitis_hls> get_f[16C[2Kvitis_hls> get_fi[17C[2Kvitis_hls> get_fil[18C[2Kvitis_hls> get_file[19C[2Kvitis_hls> get_files[20C[2Kvitis_hls> get_files [21C[2Kvitis_hls> get_files -[22C[2Kvitis_hls> get_files -y[23C[2Kvitis_hls> get_files -[22C[2Kvitis_hls> get_files -t[23C[2Kvitis_hls> get_files -tb[24C
+../../src/main.cc ../../main.cc
+[2Kvitis_hls> [11C[2Kvitis_hls> a[12C[2Kvitis_hls> ad[13C[2Kvitis_hls> add[14C[2Kvitis_hls> add_[15C[2Kvitis_hls> add_f[16C[2Kvitis_hls> add_fi[17C[2Kvitis_hls> add_fil[18C[2Kvitis_hls> add_file[19C[2Kvitis_hls> add_files[20C[2Kvitis_hls> add_files [21C[2Kvitis_hls> add_files -[22C[2Kvitis_hls> add_files -t[23C[2Kvitis_hls> add_files -tb[24C[2Kvitis_hls> add_files -tb [25C[2Kvitis_hls> add_files -tb s[26C[2Kvitis_hls> add_files -tb sr[27C[2Kvitis_hls> add_files -tb src[28C[2Kvitis_hls> add_files -tb src [29C[2Kvitis_hls> add_files -tb src[28C[2Kvitis_hls> add_files -tb src/[29C[2Kvitis_hls> add_files -tb src/l[30C[2Kvitis_hls> add_files -tb src/lo[31C[2Kvitis_hls> add_files -tb src/loa[32C[2Kvitis_hls> add_files -tb src/load[33C[2Kvitis_hls> add_files -tb src/load.[34C[2Kvitis_hls> add_files -tb src/load.c[35C[2Kvitis_hls> add_files -tb src/load.cc[36C
+INFO: [HLS 200-1510] Running: add_files -tb src/load.cc 
+INFO: [HLS 200-10] Adding test bench file 'src/load.cc' to the project
+[2Kvitis_hls> [11C[2Kvitis_hls> a[12C[2Kvitis_hls> ad[13C[2Kvitis_hls> add[14C[2Kvitis_hls> add_[15C[2Kvitis_hls> add_f[16C[2Kvitis_hls> add_fi[17C[2Kvitis_hls> add_fil[18C[2Kvitis_hls> add_file[19C[2Kvitis_hls> add_files[20C[2Kvitis_hls> add_files [21C[2Kvitis_hls> add_files -[22C[2Kvitis_hls> add_files -t[23C[2Kvitis_hls> add_files -tb[24C[2Kvitis_hls> add_files -tb [25C[2Kvitis_hls> add_files -tb I[26C[2Kvitis_hls> add_files -tb In[27C[2Kvitis_hls> add_files -tb Ins[28C[2Kvitis_hls> add_files -tb Inst[29C[2Kvitis_hls> add_files -tb Instr[30C[2Kvitis_hls> add_files -tb Instru[31C[2Kvitis_hls> add_files -tb Instruc[32C[2Kvitis_hls> add_files -tb Instruct[33C[2Kvitis_hls> add_files -tb Instruction.txt[40C
+INFO: [HLS 200-1510] Running: add_files -tb Instruction.txt 
+INFO: [HLS 200-10] Adding test bench file 'Instruction.txt' to the project
+[2Kvitis_hls> [11C[2Kvitis_hls> a[12C[2Kvitis_hls> ad[13C[2Kvitis_hls> add[14C[2Kvitis_hls> add_[15C[2Kvitis_hls> add_f[16C[2Kvitis_hls> add_fi[17C[2Kvitis_hls> add_fil[18C[2Kvitis_hls> add_file[19C[2Kvitis_hls> add_files[20C[2Kvitis_hls> add_files [21C[2Kvitis_hls> add_files G[22C[2Kvitis_hls> add_files GC[23C[2Kvitis_hls> add_files GCN[24C[2Kvitis_hls> add_files GCN_[25C[2Kvitis_hls> add_files GCN_w[26C[2Kvitis_hls> add_files GCN_we[27C[2Kvitis_hls> add_files GCN_wei[28C[2Kvitis_hls> add_files GCN_weig[29C[2Kvitis_hls> add_files GCN_weigh[30C[2Kvitis_hls> add_files GCN_weight[31C[2Kvitis_hls> add_files GCN_weights[32C[2Kvitis_hls> add_files GCN_weights_[33C[2Kvitis_hls> add_files GCN_weights_b[34C[2Kvitis_hls> add_files GCN_weights_bi[35C[2Kvitis_hls> add_files GCN_weights_bia[36C[2Kvitis_hls> add_files GCN_weights_bias[37C[2Kvitis_hls> add_files GCN_weights_biase[38C[2Kvitis_hls> add_files GCN_weights_biases[39C
+INFO: [HLS 200-1510] Running: add_files GCN_weights_biases 
+INFO: [HLS 200-10] Adding design file 'GCN_weights_biases' to the project
+[2Kvitis_hls> [11C[2Kvitis_hls> add_files GCN_weights_biases[39C[2Kvitis_hls> add_files GCN_weights_biases[38C[2Kvitis_hls> add_files GCN_weights_biases[37C[2Kvitis_hls> add_files GCN_weights_biases[36C[2Kvitis_hls> add_files GCN_weights_biases[35C[2Kvitis_hls> add_files GCN_weights_biases[34C[2Kvitis_hls> add_files GCN_weights_biases[33C[2Kvitis_hls> add_files GCN_weights_biases[32C[2Kvitis_hls> add_files GCN_weights_biases[31C[2Kvitis_hls> add_files GCN_weights_biases[30C[2Kvitis_hls> add_files GCN_weights_biases[29C[2Kvitis_hls> add_files GCN_weights_biases[28C[2Kvitis_hls> add_files GCN_weights_biases[27C[2Kvitis_hls> add_files GCN_weights_biases[26C[2Kvitis_hls> add_files GCN_weights_biases[25C[2Kvitis_hls> add_files GCN_weights_biases[24C[2Kvitis_hls> add_files GCN_weights_biases[23C[2Kvitis_hls> add_files GN_weights_biases[22C[2Kvitis_hls> add_files GIN_weights_biases[23C
+INFO: [HLS 200-1510] Running: add_files GIN_weights_biases 
+INFO: [HLS 200-10] Adding design file 'GIN_weights_biases' to the project
+[2Kvitis_hls> [11C[2Kvitis_hls> a[12C[2Kvitis_hls> ad[13C[2Kvitis_hls> add[14C[2Kvitis_hls> add_[15C[2Kvitis_hls> add_f[16C[2Kvitis_hls> add_fi[17C[2Kvitis_hls> add_fil[18C[2Kvitis_hls> add_file[19C[2Kvitis_hls> add_files[20C[2Kvitis_hls> add_files [21C[2Kvitis_hls> add_files -[22C[2Kvitis_hls> add_files -t[23C[2Kvitis_hls> add_files -tb[24C[2Kvitis_hls> add_files -tb [25C[2Kvitis_hls> add_files -tb P[26C[2Kvitis_hls> add_files -tb PN[27C[2Kvitis_hls> add_files -tb PNA[28C[2Kvitis_hls> add_files -tb PNA_[29C[2Kvitis_hls> add_files -tb PNA_w[30C[2Kvitis_hls> add_files -tb PNA_we[31C[2Kvitis_hls> add_files -tb PNA_wei[32C[2Kvitis_hls> add_files -tb PNA_weig[33C[2Kvitis_hls> add_files -tb PNA_weigh[34C[2Kvitis_hls> add_files -tb PNA_weight[35C[2Kvitis_hls> add_files -tb PNA_weights[36C[2Kvitis_hls> add_files -tb PNA_weights_[37C[2Kvitis_hls> add_files -tb PNA_weights_b[38C[2Kvitis_hls> add_files -tb PNA_weights_bi[39C[2Kvitis_hls> add_files -tb PNA_weights_bia[40C[2Kvitis_hls> add_files -tb PNA_weights_bias[41C[2Kvitis_hls> add_files -tb PNA_weights_biase[42C[2Kvitis_hls> add_files -tb PNA_weights_biases[43C
+INFO: [HLS 200-1510] Running: add_files -tb PNA_weights_biases 
+INFO: [HLS 200-10] Adding test bench file 'PNA_weights_biases' to the project
+[2Kvitis_hls> [11C[2Kvitis_hls> a[12C[2Kvitis_hls> ad[13C[2Kvitis_hls> add[14C[2Kvitis_hls> add_[15C[2Kvitis_hls> add_f[16C[2Kvitis_hls> add_fi[17C[2Kvitis_hls> add_fil[18C[2Kvitis_hls> add_file[19C[2Kvitis_hls> add_files[20C[2Kvitis_hls> add_files [21C[2Kvitis_hls> add_files -[22C[2Kvitis_hls> add_files -t[23C[2Kvitis_hls> add_files -tb[24C[2Kvitis_hls> add_files -tb [25C[2Kvitis_hls> add_files -tb D[26C[2Kvitis_hls> add_files -tb DG[27C[2Kvitis_hls> add_files -tb DGN[28C[2Kvitis_hls> add_files -tb DGN_[29C[2Kvitis_hls> add_files -tb DGN_w[30C[2Kvitis_hls> add_files -tb DGN_we[31C[2Kvitis_hls> add_files -tb DGN_wei[32C[2Kvitis_hls> add_files -tb DGN_weig[33C[2Kvitis_hls> add_files -tb DGN_weigh[34C[2Kvitis_hls> add_files -tb DGN_weight[35C[2Kvitis_hls> add_files -tb DGN_weights[36C[2Kvitis_hls> add_files -tb DGN_weights_[37C[2Kvitis_hls> add_files -tb DGN_weights_b[38C[2Kvitis_hls> add_files -tb DGN_weights_bi[39C[2Kvitis_hls> add_files -tb DGN_weights_bia[40C[2Kvitis_hls> add_files -tb DGN_weights_bias[41C[2Kvitis_hls> add_files -tb DGN_weights_biase[42C[2Kvitis_hls> add_files -tb DGN_weights_biases[43C
+INFO: [HLS 200-1510] Running: add_files -tb DGN_weights_biases 
+INFO: [HLS 200-10] Adding test bench file 'DGN_weights_biases' to the project
+[2Kvitis_hls> [11C[2Kvitis_hls> a[12C[2Kvitis_hls> ad[13C[2Kvitis_hls> add[14C[2Kvitis_hls> add_[15C[2Kvitis_hls> add_f[16C[2Kvitis_hls> add_fi[17C[2Kvitis_hls> add_fil[18C[2Kvitis_hls> add_file[19C[2Kvitis_hls> add_files[20C[2Kvitis_hls> add_files [21C[2Kvitis_hls> add_files -[22C[2Kvitis_hls> add_files -t[23C[2Kvitis_hls> add_files -tb[24C[2Kvitis_hls> add_files -tb [25C[2Kvitis_hls> add_files -tb e[26C[2Kvitis_hls> add_files -tb ei[27C[2Kvitis_hls> add_files -tb eig[28C
+INFO: [HLS 200-1510] Running: add_files -tb eig 
+INFO: [HLS 200-10] Adding test bench file 'eig' to the project
+[2Kvitis_hls> [11C[2Kvitis_hls> a[12C[2Kvitis_hls> ad[13C[2Kvitis_hls> add[14C[2Kvitis_hls> add_[15C[2Kvitis_hls> add_f[16C[2Kvitis_hls> add_fi[17C[2Kvitis_hls> add_fil[18C[2Kvitis_hls> add_file[19C[2Kvitis_hls> add_files[20C[2Kvitis_hls> add_files [21C[2Kvitis_hls> add_files -[22C[2Kvitis_hls> add_files -t[23C[2Kvitis_hls> add_files -tb[24C[2Kvitis_hls> add_files -tb [25C[2Kvitis_hls> add_files -tb .[26C[2Kvitis_hls> add_files -tb ..[27C[2Kvitis_hls> add_files -tb ../[28C[2Kvitis_hls> add_files -tb ../g[29C[2Kvitis_hls> add_files -tb ../gr[30C[2Kvitis_hls> add_files -tb ../gra[31C[2Kvitis_hls> add_files -tb ../grap[32C[2Kvitis_hls> add_files -tb ../graph[33C[2Kvitis_hls> add_files -tb ../graphs[34C
+INFO: [HLS 200-1510] Running: add_files -tb ../graphs 
+INFO: [HLS 200-10] Adding test bench file '../graphs' to the project
+[2Kvitis_hls> [11C[2Kvitis_hls> c[12C[2Kvitis_hls> cl[13C[2Kvitis_hls> cle[14C[2Kvitis_hls> clea[15C[2Kvitis_hls> clear[16C
+[H[J[2Kvitis_hls> [11C[2Kvitis_hls> g[12C[2Kvitis_hls> ge[13C[2Kvitis_hls> get[14C[2Kvitis_hls> get_[15C[2Kvitis_hls> get_f[16C[2Kvitis_hls> get_fi[17C[2Kvitis_hls> get_fil[18C[2Kvitis_hls> get_file[19C[2Kvitis_hls> get_files[20C
+GIN_weights_biases GCN_weights_biases src/message_passing.cc src/node_embedding.cc message_passing.cc src/load_inputs.cc src/linear.cc src/GNN_compute.cc src/globals.cc src/finalize.cc src/conv_layer.cc
+[2Kvitis_hls> [11C[2Kvitis_hls> c[12C[2Kvitis_hls> cl[13C[2Kvitis_hls> cle[14C[2Kvitis_hls> clea[15C[2Kvitis_hls> clear[16C
+[H[J[2Kvitis_hls> [11C[2Kvitis_hls> e[12C[2Kvitis_hls> ex[13C[2Kvitis_hls> exi[14C[2Kvitis_hls> exit[15C
+INFO: [HLS 200-112] Total CPU user time: 5.37 seconds. Total CPU system time: 3.42 seconds. Total elapsed time: 360.96 seconds; peak allocated memory: 450.359 MB.
+INFO: [Common 17-206] Exiting vitis_hls at Wed Dec 18 13:24:12 2024...
