@@ -54,7 +54,6 @@ void read_instruction()
 
 int main(int argc, char **argv) {
     if (argc != 2) {
-        //std::cout << "Usage: " << argv[0] << " <XCLBIN File>" << std::endl;
         return EXIT_FAILURE;
     }
 

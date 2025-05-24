@@ -64,7 +64,7 @@ void load_weights(
                     GCN_bn_weights[l][dim] = bn_weight_PNA_graph_DGN_MLP_1_weight_in[l][dim];
                     GCN_bn_bias[l][dim] = bn_bias_PNA_graph_DGN_MLP_1_bias_in[l][dim];
                     GCN_bn_mean[l][dim] = bn_mean_PNA_graph_DGN_MLP_2_weight_in[l][dim];
-                    GCN_bn_sqrt_var[l][dim] = hls::sqrt(bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_in[l][dim] + ap_fixed_epsilon<WT_TYPE>());
+                    GCN_bn_sqrt_var[l][dim] = hls::sqrt(bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_in[l][dim] + ap_fixed_epsilon<WT_TYPE>()) + ap_fixed_epsilon<WT_TYPE>();
                 }
                 else
                 {

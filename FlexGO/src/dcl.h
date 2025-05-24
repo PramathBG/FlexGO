@@ -82,10 +82,6 @@ constexpr int ANALYSIS_AVG_EDGES = 40;
 
 typedef ap_fixed<16, 6> FM_TYPE;
 typedef ap_fixed<16, 6> WT_TYPE;
-//typedef ap_fixed<18, 8, AP_RND, AP_SAT> FM_TYPE;
-//typedef ap_fixed<18, 8, AP_RND, AP_SAT> WT_TYPE;
-//typedef ap_fixed<18, 8> cast_type_FM_TYPE;
-//typedef ap_fixed<18, 8> cast_type_WT_TYPE;
 typedef std::array<FM_TYPE, APPLY_PARALLEL> ne_out_t;
 typedef std::array<FM_TYPE, SCATTER_PARALLEL> mp_in_t;
 typedef std::array<FM_TYPE, SCATTER_PARALLEL> me_out_t;
@@ -147,7 +143,6 @@ extern int degree_table[MAX_NODE];
 extern int degree_table_finalize[MAX_NODE];
 extern int degree_tables[EDGE_PARALLEL][MAX_NODE][2];
 extern int neighbor_tables[EDGE_PARALLEL][MAX_EDGE];
-//extern int neighbor_table[MAX_EDGE]
 extern edge_attr_t edge_attrs[EDGE_PARALLEL][MAX_EDGE];
 extern int num_of_edges_per_pe[EDGE_PARALLEL];
 extern WT_TYPE DGN_eig_w_GCN_norms[EDGE_PARALLEL][MAX_EDGE];
