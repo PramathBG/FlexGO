@@ -20,62 +20,6 @@ aligned_vector<WT_TYPE> graph_pred_PNA_graph_DGN_MLP_3_weight_fixed(NUM_TASK * E
 aligned_vector<WT_TYPE> graph_pred_PNA_graph_DGN_MLP_3_bias_fixed(NUM_TASK);
 aligned_vector<WT_TYPE> GIN_node_mlp_eps_PNA_avg_deg_fixed(NUM_LAYERS);
 
-std::string getCLErrorString(cl_int error);
-std::string getCLErrorString(cl_int error) {
-    switch (error) {
-        case CL_SUCCESS: return "CL_SUCCESS";
-        case CL_DEVICE_NOT_FOUND: return "CL_DEVICE_NOT_FOUND";
-        case CL_DEVICE_NOT_AVAILABLE: return "CL_DEVICE_NOT_AVAILABLE";
-        case CL_COMPILER_NOT_AVAILABLE: return "CL_COMPILER_NOT_AVAILABLE";
-        case CL_MEM_OBJECT_ALLOCATION_FAILURE: return "CL_MEM_OBJECT_ALLOCATION_FAILURE";
-        case CL_OUT_OF_RESOURCES: return "CL_OUT_OF_RESOURCES";
-        case CL_OUT_OF_HOST_MEMORY: return "CL_OUT_OF_HOST_MEMORY";
-        case CL_PROFILING_INFO_NOT_AVAILABLE: return "CL_PROFILING_INFO_NOT_AVAILABLE";
-        case CL_MEM_COPY_OVERLAP: return "CL_MEM_COPY_OVERLAP";
-        case CL_IMAGE_FORMAT_MISMATCH: return "CL_IMAGE_FORMAT_MISMATCH";
-        case CL_IMAGE_FORMAT_NOT_SUPPORTED: return "CL_IMAGE_FORMAT_NOT_SUPPORTED";
-        case CL_BUILD_PROGRAM_FAILURE: return "CL_BUILD_PROGRAM_FAILURE";
-        case CL_MAP_FAILURE: return "CL_MAP_FAILURE";
-        case CL_MISALIGNED_SUB_BUFFER_OFFSET: return "CL_MISALIGNED_SUB_BUFFER_OFFSET";
-        case CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST: return "CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST";
-        case CL_INVALID_VALUE: return "CL_INVALID_VALUE";
-        case CL_INVALID_DEVICE_TYPE: return "CL_INVALID_DEVICE_TYPE";
-        case CL_INVALID_PLATFORM: return "CL_INVALID_PLATFORM";
-        case CL_INVALID_DEVICE: return "CL_INVALID_DEVICE";
-        case CL_INVALID_CONTEXT: return "CL_INVALID_CONTEXT";
-        case CL_INVALID_QUEUE_PROPERTIES: return "CL_INVALID_QUEUE_PROPERTIES";
-        case CL_INVALID_COMMAND_QUEUE: return "CL_INVALID_COMMAND_QUEUE";
-        case CL_INVALID_HOST_PTR: return "CL_INVALID_HOST_PTR";
-        case CL_INVALID_MEM_OBJECT: return "CL_INVALID_MEM_OBJECT";
-        case CL_INVALID_IMAGE_FORMAT_DESCRIPTOR: return "CL_INVALID_IMAGE_FORMAT_DESCRIPTOR";
-        case CL_INVALID_IMAGE_SIZE: return "CL_INVALID_IMAGE_SIZE";
-        case CL_INVALID_SAMPLER: return "CL_INVALID_SAMPLER";
-        case CL_INVALID_BINARY: return "CL_INVALID_BINARY";
-        case CL_INVALID_BUILD_OPTIONS: return "CL_INVALID_BUILD_OPTIONS";
-        case CL_INVALID_PROGRAM: return "CL_INVALID_PROGRAM";
-        case CL_INVALID_PROGRAM_EXECUTABLE: return "CL_INVALID_PROGRAM_EXECUTABLE";
-        case CL_INVALID_KERNEL_NAME: return "CL_INVALID_KERNEL_NAME";
-        case CL_INVALID_KERNEL_DEFINITION: return "CL_INVALID_KERNEL_DEFINITION";
-        case CL_INVALID_KERNEL: return "CL_INVALID_KERNEL";
-        case CL_INVALID_ARG_INDEX: return "CL_INVALID_ARG_INDEX";
-        case CL_INVALID_ARG_VALUE: return "CL_INVALID_ARG_VALUE";
-        case CL_INVALID_ARG_SIZE: return "CL_INVALID_ARG_SIZE";
-        case CL_INVALID_KERNEL_ARGS: return "CL_INVALID_KERNEL_ARGS";
-        case CL_INVALID_WORK_DIMENSION: return "CL_INVALID_WORK_DIMENSION";
-        case CL_INVALID_WORK_GROUP_SIZE: return "CL_INVALID_WORK_GROUP_SIZE";
-        case CL_INVALID_WORK_ITEM_SIZE: return "CL_INVALID_WORK_ITEM_SIZE";
-        case CL_INVALID_GLOBAL_OFFSET: return "CL_INVALID_GLOBAL_OFFSET";
-        case CL_INVALID_EVENT_WAIT_LIST: return "CL_INVALID_EVENT_WAIT_LIST";
-        case CL_INVALID_EVENT: return "CL_INVALID_EVENT";
-        case CL_INVALID_OPERATION: return "CL_INVALID_OPERATION";
-        case CL_INVALID_GL_OBJECT: return "CL_INVALID_GL_OBJECT";
-        case CL_INVALID_BUFFER_SIZE: return "CL_INVALID_BUFFER_SIZE";
-        case CL_INVALID_MIP_LEVEL: return "CL_INVALID_MIP_LEVEL";
-        case CL_INVALID_GLOBAL_WORK_SIZE: return "CL_INVALID_GLOBAL_WORK_SIZE";
-        default: return "Unknown OpenCL error";
-    }
-}
-
 int GNN_instruction;
 
 const char* GNN_to_infer;
@@ -110,7 +54,6 @@ void read_instruction()
 
 int main(int argc, char **argv) {
     if (argc != 2) {
-        //std::cout << "Usage: " << argv[0] << " <XCLBIN File>" << std::endl;
         return EXIT_FAILURE;
     }
 
@@ -366,80 +309,6 @@ int main(int argc, char **argv) {
 
     int instruction_in = GNN_instruction;
 
-    if(num_of_graphs == 0)
-    {
-        std::cerr << "num_of_graphs is NULL!" << std::endl;
-    }
-    if(nums_of_nodes_buf() == nullptr)
-    {
-        std::cerr << "nums_of_nodes_buf is NULL!" << std::endl;
-    }
-    if(nums_of_edges_buf() == nullptr)
-    {
-        std::cerr << "nums_of_edges_buf is NULL!" << std::endl;
-    }
-    if(reload_weights_buf() == nullptr)
-    {
-        std::cerr << "reload_weights_buf is NULL!" << std::endl;
-    }
-    if(result_buf() == nullptr)
-    {
-        std::cerr << "result_buf is NULL!" << std::endl;
-    }
-    if(node_feature_buf() == nullptr)
-    {
-        std::cerr << "node_feature_buf is NULL!" << std::endl;
-    }
-    if(node_eigen_buf() == nullptr)
-    {
-        std::cerr << "node_eigen_buf is NULL!" << std::endl;
-    }
-    if(edge_list_buf() == nullptr)
-    {
-        std::cerr << "edge_list_buf is NULL!" << std::endl;
-    }
-    if(node_embedding_h_atom_embedding_list_weight_buf() == nullptr)
-    {
-        std::cerr << "node_embedding_h_atom_embedding_list_weight_buf is NULL!" << std::endl;
-    }
-    if(layers_posttrans_fully_connected_0_linear_weight_buf() == nullptr)
-    {
-        std::cerr << "layers_posttrans_fully_connected_0_linear_weight_buf is NULL!" << std::endl;
-    }
-    if(GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_buf() == nullptr)
-    {
-        std::cerr << "GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_buf is NULL!" << std::endl;
-    }
-    if(PNA_node_conv_weight_buf() == nullptr)
-    {
-        std::cerr << "PNA_node_conv_weight_buf is NULL!" << std::endl;
-    }
-    if(bn_weight_PNA_graph_DGN_MLP_1_weight_buf() == nullptr)
-    {
-        std::cerr << "bn_weight_PNA_graph_DGN_MLP_1_weight_buf is NULL!" << std::endl;
-    }
-    if(bn_bias_PNA_graph_DGN_MLP_1_bias_buf() == nullptr)
-    {
-        std::cerr << "bn_bias_PNA_graph_DGN_MLP_1_bias_buf is NULL!" << std::endl;
-    }
-    if(bn_mean_PNA_graph_DGN_MLP_2_weight_buf() == nullptr)
-    {
-        std::cerr << "bn_mean_PNA_graph_DGN_MLP_2_weight_buf is NULL!" << std::endl;
-    }
-    if(bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_buf() == nullptr)
-    {
-        std::cerr << "bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_buf is NULL!" << std::endl;
-    }
-    if(graph_pred_PNA_graph_DGN_MLP_3_weight_buf() == nullptr)
-    {
-        std::cerr << "graph_pred_PNA_graph_DGN_MLP_3_weight_buf is NULL!" << std::endl;
-    }
-    if(graph_pred_PNA_graph_DGN_MLP_3_bias_buf() == nullptr)
-    {
-        std::cerr << "graph_pred_PNA_graph_DGN_MLP_3_bias_buf is NULL!" << std::endl;
-    }
-
-    //krnl_GNN_compute_graphs.setArg(idx++, static_cast<Instruction>(instruction_in));
     OCL_CHECK(err, err = krnl_GNN_compute_graphs.setArg(idx++, num_of_graphs));
     OCL_CHECK(err, err = krnl_GNN_compute_graphs.setArg(idx++, nums_of_nodes_buf));
     OCL_CHECK(err, err = krnl_GNN_compute_graphs.setArg(idx++, nums_of_edges_buf));
@@ -448,12 +317,7 @@ int main(int argc, char **argv) {
     OCL_CHECK(err, err = krnl_GNN_compute_graphs.setArg(idx++, node_feature_buf));
     OCL_CHECK(err, err = krnl_GNN_compute_graphs.setArg(idx++, node_eigen_buf));
     OCL_CHECK(err, err = krnl_GNN_compute_graphs.setArg(idx++, edge_list_buf));
-    //krnl_GNN_compute_graphs.setArg(idx++, edge_attr_buf);
     OCL_CHECK(err, err = krnl_GNN_compute_graphs.setArg(idx++, node_embedding_h_atom_embedding_list_weight_buf));
-    //krnl_GNN_compute_graphs.setArg(idx++, edge_embedding_weight_buf);
-    //krnl_GNN_compute_graphs.setArg(idx++, GCN_convs_GIN_node_mlp_1_weight_buf);
-    //krnl_GNN_compute_graphs.setArg(idx++, GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_buf);
-    //krnl_GNN_compute_graphs.setArg(idx++, GIN_node_mlp_2_weight_buf);
     OCL_CHECK(err, err = krnl_GNN_compute_graphs.setArg(idx++, layers_posttrans_fully_connected_0_linear_weight_buf));
     OCL_CHECK(err, err = krnl_GNN_compute_graphs.setArg(idx++, GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_buf));
     OCL_CHECK(err, err = krnl_GNN_compute_graphs.setArg(idx++, PNA_node_conv_weight_buf));
@@ -463,7 +327,6 @@ int main(int argc, char **argv) {
     OCL_CHECK(err, err = krnl_GNN_compute_graphs.setArg(idx++, bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_buf));
     OCL_CHECK(err, err = krnl_GNN_compute_graphs.setArg(idx++, graph_pred_PNA_graph_DGN_MLP_3_weight_buf));
     OCL_CHECK(err, err = krnl_GNN_compute_graphs.setArg(idx++, graph_pred_PNA_graph_DGN_MLP_3_bias_buf));
-    //krnl_GNN_compute_graphs.setArg(idx++, GIN_node_mlp_eps_PNA_avg_deg_buf);
 
     if (err != CL_SUCCESS) 
     {

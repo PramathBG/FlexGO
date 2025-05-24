@@ -94,56 +94,23 @@ void check_message_passing(
 #pragma HLS INLINE off
 #pragma HLS ARRAY_PARTITION variable=message complete dim=1
 
-    //bool do_finalize = false;
-    //bool do_message_passing = false;
-    //if(instruction == GCN)
-    //{
-    //    if(layer_num > 0)
-    //    {
-    //        do_message_passing = true;
-    //    }
-    //}
-    //else
-    //{
-        if(layer_num < DGN_PNA_NUM_LAYERS)
-        {
-            //do_message_passing = true;
-            message_passing_all_pes(embeddings, message, layer_num, num_of_nodes);
-        }
-        else if(layer_num == DGN_PNA_NUM_LAYERS)
-        {
-            //do_finalize = true;
-            finalize(embeddings, 
-                message, 
-                PNA_graph_DGN_MLP_1_weights,
-                PNA_graph_DGN_MLP_1_bias,
-                PNA_graph_DGN_MLP_2_weights,
-                PNA_graph_DGN_MLP_2_bias,
-                PNA_graph_DGN_MLP_3_weights,
-                PNA_graph_DGN_MLP_3_bias, 
-                //graph_pred_weights, 
-                //graph_pred_bias, 
-                result, 
-                num_of_nodes);
-        }
-    //}
-    //if(do_finalize)
-    //{
-    //    finalize(embeddings, 
-    //            message, 
-    //            PNA_graph_DGN_MLP_1_weights,
-    //            PNA_graph_DGN_MLP_1_bias,
-    //            PNA_graph_DGN_MLP_2_weights,
-    //            PNA_graph_DGN_MLP_2_bias,
-    //            PNA_graph_DGN_MLP_3_weights,
-    //            PNA_graph_DGN_MLP_3_bias, 
-    //            //graph_pred_weights, 
-    //            //graph_pred_bias, 
-    //            result, 
-    //            num_of_nodes);
-    //}   
-    //else if (do_message_passing)
-    //    message_passing_all_pes(embeddings, message, layer_num, num_of_nodes);
+    if(layer_num < DGN_PNA_NUM_LAYERS)
+    {
+        message_passing_all_pes(embeddings, message, layer_num, num_of_nodes);
+    }
+    else if(layer_num == DGN_PNA_NUM_LAYERS)
+    {
+        finalize(embeddings, 
+            message, 
+            PNA_graph_DGN_MLP_1_weights,
+            PNA_graph_DGN_MLP_1_bias,
+            PNA_graph_DGN_MLP_2_weights,
+            PNA_graph_DGN_MLP_2_bias,
+            PNA_graph_DGN_MLP_3_weights,
+            PNA_graph_DGN_MLP_3_bias,  
+            result, 
+            num_of_nodes);
+    }
 }
 
 void message_passing_all_pes(
@@ -223,42 +190,3 @@ void ne_to_mp_adapter(
         }
     }
 }
-
-//void h_node_passthrough(
-//    hls::stream<ne_out_t> embeddings[NODE_PARALLEL],
-//    int num_of_nodes
-//)
-//{
-//    ne_out_t h_node_embeddings [NODE_PARALLEL];
-//#pragma HLS ARRAY_PARTITION variable=h_node_embeddings complete dim=1
-//#pragma HLS ARRAY_PARTITION variable=h_node_embeddings complete dim=2
-//#pragma HLS AGGREGATE variable=h_node_embeddings
-//    for(int dim_base = 0; dim_base < EMB_DIM; dim_base += APPLY_PARALLEL)
-//    {
-//        for(int nd_base = 0; nd_base < num_of_nodes; nd_base += NODE_PARALLEL)
-//        {
-//#pragma HLS PIPELINE II=1
-//#pragma HLS LOOP_TRIPCOUNT min=ANALYSIS_MIN_NODES max=ANALYSIS_MAX_NODES avg=ANALYSIS_AVG_NODES
-//
-//            for(int nd_offset = 0; nd_offset < NODE_PARALLEL; nd_offset++)
-//            {
-//#pragma HLS UNROLL
-//                int nd = nd_base + nd_offset;
-//#pragma HLS DEPENDENCE variable=nd inter false
-//                if(nd < num_of_nodes)
-//                {
-//                    for(int dim_offset = 0; dim_offset < APPLY_PARALLEL; dim_offset++)
-//                    {
-//#pragma HLS UNROLL
-//                        int dim = dim_base + dim_offset;
-//                        if(dim < EMB_DIM)
-//                        {
-//                            h_node_embeddings[nd_offset][dim_offset] = h_node[nd][dim];
-//                        }
-//                    }
-//                    embeddings[nd_offset] << h_node_embeddings[nd_offset]; 
-//                }
-//            }
-//        }   
-//    }
-//}
