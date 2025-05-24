@@ -13,8 +13,6 @@ void finalize(
     WT_TYPE PNA_graph_DGN_MLP_2_bias[DGN_MLP_PNA_GRAPH_MLP_2_OUT],
     WT_TYPE PNA_graph_DGN_MLP_3_weights[NUM_TASK][DGN_MLP_PNA_GRAPH_MLP_2_OUT],
     WT_TYPE PNA_graph_DGN_MLP_3_bias[NUM_TASK],
-    //WT_TYPE graph_pred_weights[NUM_TASK][EMB_DIM],
-    //WT_TYPE graph_pred_bias[NUM_TASK],
     FM_TYPE* result,
     int num_of_nodes
 );

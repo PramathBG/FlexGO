@@ -155,23 +155,6 @@ void linear_input_stationary(
 
 // From finalize.cc
 
-//template instantiation for GIN
-template void linear<EMB_DIM, NUM_TASK, NUM_TASK, false>(
-    FM_TYPE input[EMB_DIM],
-    WT_TYPE weight[NUM_TASK][EMB_DIM],
-    WT_TYPE bias[NUM_TASK],
-    FM_TYPE output[NUM_TASK]
-);
-
-//template instantiation for GCN 
-template void linear_input_stationary<EMB_DIM, NUM_TASK, APPLY_PARALLEL, false>(
-    hls::stream<array<FM_TYPE, APPLY_PARALLEL>>& input,
-    WT_TYPE weight[NUM_TASK][EMB_DIM],
-    WT_TYPE bias[NUM_TASK],
-    FM_TYPE output[NUM_TASK]
-);
-
-
 //template instantiation for PNA and DGN
 template void linear_output_stationary<EMB_DIM, DGN_MLP_PNA_GRAPH_MLP_1_OUT, APPLY_PARALLEL, true>(
     FM_TYPE input[EMB_DIM],

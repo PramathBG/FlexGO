@@ -14,9 +14,4 @@ void compute_CONV_layer(
     int num_of_nodes
 );
 
-//void h_node_passthrough(
-//    hls::stream<ne_out_t> embeddings[NODE_PARALLEL],
-//    int num_of_nodes
-//);
-
 #endif

@@ -1,8 +1,6 @@
 #include "message_passing.h"
 #include <iostream>
 
-//static const int ed_feature_offsets[EDGE_ATTR] = {0, 5, 11};
-
 // #region Internal Functions Declarations
 static void filter(
     int pe_id,
@@ -87,11 +85,6 @@ static void scatter(
 )
 {
 #pragma HLS INLINE off
-//#pragma HLS ARRAY_PARTITION variable=ed_feature_offsets complete dim=1
-//#pragma HLS ARRAY_PARTITION variable=edge_embedding_weights complete dim=1
-//#pragma HLS ARRAY_PARTITION variable=edge_embedding_weights cyclic factor=SCATTER_PARALLEL dim=4
-//#pragma HLS BIND_STORAGE variable=edge_embedding_weights type=ram_1wnr
-//#pragma HLS AGGREGATE variable=edge_attrs
 #pragma HLS AGGREGATE variable=message
 
     mp_in_t mp_ins[ceildiv(EMB_DIM, SCATTER_PARALLEL)];
@@ -104,11 +97,7 @@ static void scatter(
 #pragma HLS LOOP_TRIPCOUNT min=0 max=ANALYSIS_MAX_EDGES avg=ceildiv(ANALYSIS_AVG_EDGES, EDGE_PARALLEL)
 
         int v = neighbor_tables[pe_id][e];
-        //edge_attr_t attrs = edge_attrs[pe_id][e];
-        //WT_TYPE GCN_norm = DGN_eig_w_GCN_norms[pe_id][e];
         WT_TYPE DGN_eigen_w_e = DGN_eig_w_GCN_norms[pe_id][e];
-        //if(instruction == GIN)
-        //    GCN_norm = (FM_TYPE)1;
 
         for (int i = 0, dim_base = 0; i < ceildiv(EMB_DIM, SCATTER_PARALLEL); i++, dim_base += SCATTER_PARALLEL)
         {
@@ -152,25 +141,6 @@ static void scatter(
                         message_tmp[1][aggr] = message[v][1][dim][aggr];
                     }
 
-//                    if(instruction == GCN || instruction == GIN)
-//                    {
-//                        FM_TYPE edge_embed = (FM_TYPE)0;
-//                        edge_embed_loop: for(int ef = 0; ef < EDGE_ATTR; ef++)
-//                        {
-//#pragma HLS UNROLL
-//                            int e_ef = ed_feature_offsets[ef] + attrs[ef];
-//                            int layer_idx = layer_num;
-//
-//                            if(instruction == GCN)
-//                            {
-//                                layer_idx = layer_num - 1;
-//                            }
-//                            edge_embed += edge_embedding_weights[pe_id][layer_idx][e_ef][dim];
-//                        }
-//
-//                        FM_TYPE total_embed = edge_embed + node_embedding[dim_offset];
-//                        message_tmp[0][0] += GCN_norm * ap_fixed_relu(total_embed);
-//                    }
                     if(instruction == PNA)
                     {
                         FM_TYPE embedding_dim = node_embedding[dim_offset];
