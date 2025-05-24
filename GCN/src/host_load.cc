@@ -4,6 +4,7 @@
 
 int nd_feature_table[ND_FEATURE] = {119, 5, 12, 12, 10, 6, 6, 2, 2};
 int ed_feature_table[EDGE_ATTR] = {5, 6, 2};
+
 //Edge and node embedding parameters
 float node_embedding_h_atom_embedding_list_weight_float[ND_FEATURE][ND_FEATURE_TOTAL][EMB_DIM];
 float node_embedding_weight_float[ND_FEATURE_TOTAL][EMB_DIM];
@@ -657,8 +658,7 @@ void load_weights(int GNN_instruction)
 		    {
 		    	for(int dim = 0; dim < EMB_DIM; dim++)
 		    	{
-		    		node_embedding_h_atom_embedding_list_weight_fixed[i * nd_feature_table[i] * EMB_DIM + j * EMB_DIM + dim] = (WT_TYPE)node_embedding_h_atom_embedding_list_weight_float[i][j][dim];
-
+		    		node_embedding_h_atom_embedding_list_weight_fixed[i * ND_FEATURE_TOTAL * EMB_DIM + j * EMB_DIM + dim] = (WT_TYPE)node_embedding_h_atom_embedding_list_weight_float[i][j][dim];
 		    	}
 		    }
 	    }
@@ -696,7 +696,6 @@ void load_weights(int GNN_instruction)
 	    		for(int dim_in = 0; dim_in < 2 * EMB_DIM; dim_in++)
 	    		{
 	    			layers_posttrans_fully_connected_0_linear_weight_fixed[i * EMB_DIM * 2 * EMB_DIM + dim_out * 2 * EMB_DIM + dim_in] = (WT_TYPE)layers_posttrans_fully_connected_0_linear_weight_float_in[i][dim_out][dim_in];
-    
 	    		}
 	    	}
 	    }
@@ -722,7 +721,7 @@ void load_weights(int GNN_instruction)
 	    			GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_float[i][dim] = layers_3_posttrans_fully_connected_0_linear_bias_float[dim];
 	    		}
 	    	}
-	    }
+	    }   
 
         for(int i = 0; i < DGN_PNA_NUM_LAYERS; i++)
 	    {
@@ -746,7 +745,7 @@ void load_weights(int GNN_instruction)
 	    	bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_fixed[i] = (WT_TYPE)bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_float[0][i];
 	    	for(int dim = 0; dim < EMB_DIM / 2; dim++)
 	    	{
-	    		bn_mean_PNA_graph_DGN_MLP_2_weight_fixed[i * EMB_DIM / 2 + dim] = (WT_TYPE)bn_mean_PNA_graph_DGN_MLP_2_weight_float_PNA[i][dim];
+	    		bn_mean_PNA_graph_DGN_MLP_2_weight_fixed[i * EMB_DIM + dim] = (WT_TYPE)bn_mean_PNA_graph_DGN_MLP_2_weight_float_PNA[i][dim];
 	    	}
 	    }
 

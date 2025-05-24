@@ -106,9 +106,6 @@ static void scatter(
         int v = neighbor_tables[pe_id][e];
         edge_attr_t attrs = edge_attrs[pe_id][e];
         WT_TYPE GCN_norm = DGN_eig_w_GCN_norms[pe_id][e];
-        // WT_TYPE DGN_eigen_w_e = DGN_eig_w_GCN_norms[pe_id][e];
-        //if(instruction == GIN)
-        //    GCN_norm = (FM_TYPE)1;
 
         for (int i = 0, dim_base = 0; i < ceildiv(EMB_DIM, SCATTER_PARALLEL); i++, dim_base += SCATTER_PARALLEL)
         {
@@ -152,41 +149,19 @@ static void scatter(
                         message_tmp[1][aggr] = message[v][1][dim][aggr];
                     }
 
-                    //if(instruction == GCN || instruction == GIN)
-                    //{
-                        FM_TYPE edge_embed = (FM_TYPE)0;
-                        edge_embed_loop: for(int ef = 0; ef < EDGE_ATTR; ef++)
-                        {
+                    FM_TYPE edge_embed = (FM_TYPE)0;
+                    edge_embed_loop: for(int ef = 0; ef < EDGE_ATTR; ef++)
+                    {
 #pragma HLS UNROLL
-                            int e_ef = ed_feature_offsets[ef] + attrs[ef];
-                            int layer_idx = layer_num;
+                        int e_ef = ed_feature_offsets[ef] + attrs[ef];
+                        int layer_idx = layer_num;
+                        layer_idx = layer_num - 1;
+                        edge_embed += edge_embedding_weights[pe_id][layer_idx][e_ef][dim];
+                    }
 
-                            //if(instruction == GCN)
-                            //{
-                                layer_idx = layer_num - 1;
-                            //}
-                            edge_embed += edge_embedding_weights[pe_id][layer_idx][e_ef][dim];
-                        }
-
-                        FM_TYPE total_embed = edge_embed + node_embedding[dim_offset];
-                        message_tmp[0][0] += GCN_norm * ap_fixed_relu(total_embed);
-                    //}
-                    //else if(instruction == PNA)
-                    //{
-                    //    FM_TYPE embedding_dim = node_embedding[dim_offset];
-                    //    message_tmp[0][AGGR_MEAN] += embedding_dim;
-                    //    message_tmp[0][AGGR_STD] += FM_TYPE(embedding_dim * embedding_dim);
-                    //    if (embedding_dim < message_tmp[0][AGGR_MIN])
-                    //        message_tmp[0][AGGR_MIN] = embedding_dim;
-                    //    if (embedding_dim > message_tmp[0][AGGR_MAX])
-                    //        message_tmp[0][AGGR_MAX] = embedding_dim;
-                    //}
-                    //else if(instruction == DGN)
-                    //{
-                    //    FM_TYPE embedding_dim = node_embedding[dim_offset];
-                    //    message_tmp[0][0] += embedding_dim;
-                    //    message_tmp[1][0] += embedding_dim * DGN_eigen_w_e;
-                    //}
+                    FM_TYPE total_embed = edge_embed + node_embedding[dim_offset];
+                    message_tmp[0][0] += GCN_norm * ap_fixed_relu(total_embed);
+                    
                     for(int aggr = 0; aggr < NUM_AGGRS; aggr++)
                     {
                         message[v][0][dim][aggr] = message_tmp[0][aggr];

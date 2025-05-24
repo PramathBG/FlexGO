@@ -94,45 +94,10 @@ void check_message_passing(
 #pragma HLS INLINE off
 #pragma HLS ARRAY_PARTITION variable=message complete dim=1
 
-    // bool do_finalize = false;
-    // bool do_message_passing = false;
-    //if(instruction == GCN)
-    //{
-        if(layer_num > 0)
-        {
-            //do_message_passing = true;
-            message_passing_all_pes(embeddings, message, layer_num, num_of_nodes);
-        }
-    //}
-    //else
-    //{
-    //    if(layer_num < max_NUM_LAYERS)
-    //    {
-    //        do_message_passing = true;
-    //    }
-    //    else if(layer_num == max_NUM_LAYERS)
-    //    {
-    //        do_finalize = true;
-    //    }
-    //}
-    //if(do_finalize)
-    //{
-    //    finalize(embeddings, 
-    //            message, 
-    //            PNA_graph_DGN_MLP_1_weights,
-    //            PNA_graph_DGN_MLP_1_bias,
-    //            PNA_graph_DGN_MLP_2_weights,
-    //            PNA_graph_DGN_MLP_2_bias,
-    //            PNA_graph_DGN_MLP_3_weights,
-    //            PNA_graph_DGN_MLP_3_bias, 
-    //            graph_pred_weights, 
-    //            graph_pred_bias, 
-    //            result, 
-    //            num_of_nodes);
-    //}   
-    //else if (do_message_passing)
-    //if (do_message_passing)
-    //    message_passing_all_pes(embeddings, message, layer_num, num_of_nodes);
+    if(layer_num > 0)
+    {
+        message_passing_all_pes(embeddings, message, layer_num, num_of_nodes);
+    }
 }
 
 void message_passing_all_pes(
