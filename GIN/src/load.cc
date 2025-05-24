@@ -70,15 +70,15 @@ void load_weights(int GNN_instruction)
 {
     if(GNN_instruction == 0)
     {
-        //printf("Loading weights for GCN ...\n");
+        printf("Loading weights for GCN ...\n");
     }
     else if(GNN_instruction == 1)
     {
-        //printf("Loading weights for GIN ...\n");
+        printf("Loading weights for GIN ...\n");
     }
     else if(GNN_instruction == 2)
     {
-        //printf("Loading weights for PNA ...\n");
+        printf("Loading weights for PNA ...\n");
     }
 
     FILE* f;
@@ -284,7 +284,6 @@ void load_weights(int GNN_instruction)
             for(int dim = 0; dim < EMB_DIM; dim++)
             {
                 node_embedding_h_atom_embedding_list_weight_fixed[0][nft][dim] = (WT_TYPE)node_embedding_h_atom_embedding_list_weight_float[0][nft][dim];
-                //std::cout << node_embedding_h_atom_embedding_list_weight_fixed[0][nft][dim] << std::endl;
             }
         }
 
@@ -295,7 +294,6 @@ void load_weights(int GNN_instruction)
                 for(int dim = 0; dim < EMB_DIM; dim++)
                 {
                     edge_embedding_weight_fixed[l][ed_f][dim] = (WT_TYPE)GCN_edge_embedding_weight_float[l][ed_f][dim];
-                    //std::cout << edge_embedding_weight_fixed[l][ed_f][dim] << std::endl;
                 }
             }
         }
@@ -305,11 +303,9 @@ void load_weights(int GNN_instruction)
             for(int dim_out = 0; dim_out < EMB_DIM; dim_out++)
             {
                 GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_fixed[l][dim_out] = (WT_TYPE)GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_float[l][dim_out];
-                //std::cout << GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_fixed[l][dim_out] << std::endl;
                 for(int dim_in = 0; dim_in < EMB_DIM; dim_in++)
                 {
                     GCN_convs_GIN_node_mlp_1_weight_fixed[l][dim_out][dim_in] = (WT_TYPE)GCN_convs_GIN_node_mlp_1_weight_float[l][dim_out][dim_in];
-                    //std::cout << GCN_convs_GIN_node_mlp_1_weight_fixed[l][dim_out][dim_in] << std::endl;
                 }
             }
         }
@@ -539,13 +535,26 @@ void load_weights(int GNN_instruction)
                 bn_weight_PNA_graph_DGN_MLP_1_weight_fixed[dim_out][dim_in] = (WT_TYPE)bn_weight_PNA_graph_DGN_MLP_1_weight_float[dim_out][dim_in];
             }
         }
-
+        
         for(int dim_out = 0; dim_out < DGN_MLP_PNA_GRAPH_MLP_2_OUT; dim_out++)
         {
             bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_fixed[0][dim_out] = (WT_TYPE)bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_float[0][dim_out];
             for(int dim_in = 0; dim_in < DGN_MLP_PNA_GRAPH_MLP_1_OUT; dim_in++)
             {
                 bn_mean_PNA_graph_DGN_MLP_2_weight_fixed[dim_out][dim_in] = (WT_TYPE)bn_mean_PNA_graph_DGN_MLP_2_weight_float_PNA[dim_out][dim_in];
+            }
+        }
+
+        for(int dim = DGN_MLP_PNA_GRAPH_MLP_2_OUT; dim < EMB_DIM; dim++)
+        {
+            bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_fixed[0][dim] = (WT_TYPE)1;
+        }
+
+        for(int l = 1; l < NUM_LAYERS; l++)
+        {
+            for(int dim = 0; dim < EMB_DIM; dim++)
+            {
+                bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_fixed[l][dim] = (WT_TYPE)1;
             }
         }
 
@@ -686,13 +695,11 @@ void load_weights(int GNN_instruction)
 		    	for(int dim = 0; dim < EMB_DIM; dim++)
 		    	{
 		    		node_embedding_h_atom_embedding_list_weight_fixed_DGN[i][j][dim] = (WT_TYPE)node_embedding_h_atom_embedding_list_weight_float[i][j][dim];
-                    //std::cout << node_embedding_h_atom_embedding_list_weight_fixed[i][j][dim] << std::endl;
-
 		    	}
 		    }
 	    }
-
-        for(int i = 0; i < NUM_LAYERS; i++)
+        
+        for(int i = 0; i < DGN_PNA_NUM_LAYERS; i++)
 	    {
 		    for(int dim_out = 0; dim_out < EMB_DIM; dim_out++)
 		    {
@@ -718,19 +725,18 @@ void load_weights(int GNN_instruction)
 		    }
 	    }
 
-        for(int i = 0; i < NUM_LAYERS; i++)
+        for(int i = 0; i < DGN_PNA_NUM_LAYERS; i++)
 	    {
 	    	for(int dim_out = 0; dim_out < EMB_DIM; dim_out++)
 	    	{
 	    		for(int dim_in = 0; dim_in < 2 * EMB_DIM; dim_in++)
 	    		{
 	    			layers_posttrans_fully_connected_0_linear_weight_fixed[i][dim_out][dim_in] = (WT_TYPE)layers_posttrans_fully_connected_0_linear_weight_float_in[i][dim_out][dim_in];
-    
 	    		}
 	    	}
 	    }
 
-        for(int i = 0; i < NUM_LAYERS; i++)
+        for(int i = 0; i < DGN_PNA_NUM_LAYERS; i++)
 	    {
 	    	for(int dim = 0; dim < EMB_DIM; dim++)
 	    	{
@@ -753,7 +759,7 @@ void load_weights(int GNN_instruction)
 	    	}
 	    }
 
-        for(int i = 0; i < NUM_LAYERS; i++)
+        for(int i = 0; i < DGN_PNA_NUM_LAYERS; i++)
 	    {
 	    	for(int dim = 0; dim < EMB_DIM; dim++)
 	    	{
@@ -801,7 +807,7 @@ void fetch_one_graph(
     int num_of_edges
 )
 {
-    //printf("(%d/%d) Loading graph %s ...\n", g, NUM_GRAPHS, graph_name);
+    printf("(%d/%d) Loading graph %s ...\n", g, NUM_GRAPHS, graph_name);
     FILE* f;
 
     char f_node_feature[128];
