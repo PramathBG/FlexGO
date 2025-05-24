@@ -1,8 +1,6 @@
 #include "message_passing.h"
 #include <iostream>
 
-//static const int ed_feature_offsets[EDGE_ATTR] = {0, 5, 11};
-
 // #region Internal Functions Declarations
 static void filter(
     int pe_id,
