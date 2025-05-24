@@ -1,1 +1,1 @@
-# FlowGNN_Unified
+# FlexGO
