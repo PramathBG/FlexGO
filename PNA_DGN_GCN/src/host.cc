@@ -54,7 +54,6 @@ void read_instruction()
 
 int main(int argc, char **argv) {
     if (argc != 2) {
-        //std::cout << "Usage: " << argv[0] << " <XCLBIN File>" << std::endl;
         return EXIT_FAILURE;
     }
 
@@ -321,7 +320,6 @@ int main(int argc, char **argv) {
     krnl_GNN_compute_graphs.setArg(idx++, edge_embedding_weight_buf);
     krnl_GNN_compute_graphs.setArg(idx++, GCN_convs_GIN_node_mlp_1_weight_buf);
     krnl_GNN_compute_graphs.setArg(idx++, GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_buf);
-    //krnl_GNN_compute_graphs.setArg(idx++, GIN_node_mlp_2_weight_buf);
     krnl_GNN_compute_graphs.setArg(idx++, layers_posttrans_fully_connected_0_linear_weight_buf);
     krnl_GNN_compute_graphs.setArg(idx++, GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_buf);
     krnl_GNN_compute_graphs.setArg(idx++, PNA_node_conv_weight_buf);

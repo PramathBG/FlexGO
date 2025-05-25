@@ -8,7 +8,6 @@ static void accumulate(
     std::array<FM_TYPE, NUM_AGGRS> message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
     FM_TYPE accs[NODE_PARALLEL][DGN_LIN_GIN_MLP_1_OUT],
     FM_TYPE h_node_buf[NODE_PARALLEL][EMB_DIM],
-    //WT_TYPE eps,
     int layer_num,
     int v_base,
     int dim_base,
@@ -52,8 +51,6 @@ void node_embedding_multi_pe(
 #pragma HLS ARRAY_PARTITION variable=h_node_pong complete dim=1
 #pragma HLS ARRAY_PARTITION variable=h_node_pong cyclic factor=APPLY_PARALLEL dim=2
 
-    //WT_TYPE eps = GIN_node_mlp_eps_PNA_avg_deg[layer_num];
-
     int num_iters = ceildiv(num_of_nodes, NODE_PARALLEL) + 1;
     for (
         int i = 0, acc_v_base = 0, out_v_base = -NODE_PARALLEL;
@@ -84,7 +81,6 @@ void node_embedding_multi_pe(
                     message,
                     (i % 2 == 0) ? accs_ping : accs_pong,
                     (i % 2 == 0) ? h_node_ping : h_node_pong,
-                    //eps,
                     layer_num,
                     acc_v_base,
                     dim_base,
@@ -99,7 +95,6 @@ static void accumulate(
     std::array<FM_TYPE, NUM_AGGRS> message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
     FM_TYPE accs[NODE_PARALLEL][DGN_LIN_GIN_MLP_1_OUT],
     FM_TYPE h_node_buf[NODE_PARALLEL][EMB_DIM],
-    //WT_TYPE eps,
     int layer_num,
     int v_base,
     int dim_base,
@@ -130,11 +125,6 @@ static void accumulate(
 #pragma HLS ARRAY_PARTITION variable=GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias complete dim=2
 
 #pragma HLS ARRAY_PARTITION variable=DGN_eigw_sums cyclic factor=NODE_PARALLEL dim=1
-
-    //int max_dim_out = EMB_DIM;
-
-    //if(instruction == GIN)
-    //    max_dim_out = DGN_LIN_GIN_MLP_1_OUT;
     
     WT_TYPE PNA_avg_deg_reg = GIN_node_mlp_eps_PNA_avg_deg[0];
 
@@ -202,8 +192,6 @@ static void accumulate(
                 FM_TYPE h_node_v_dim = h_node[v][dim_in];
                 h_node_buf[v_offset][dim_in] = h_node_v_dim;
                 GCN_h_node_els[v_offset] = h_node_v_dim;
-                //GCN_h_node_els[v_offset] = (instruction == GCN) ? h_node_v_dim : (FM_TYPE)0;
-                //GIN_h_node_els[v_offset] = (instruction == GIN) ? h_node_v_dim : (FM_TYPE)0;
                 GIN_h_node_els[v_offset] = (FM_TYPE)0;
                 
                 in_degree = (degree_table[v] == 0) ? 1 : degree_table[v];
@@ -221,14 +209,11 @@ static void accumulate(
                     WT_TYPE bn_mean_dim = GCN_bn_mean[layer_num - 1][dim_in];
                     WT_TYPE bn_bias_dim = GCN_bn_bias[layer_num - 1][dim_in];
                     WT_TYPE convs_root_emb_weight_dim = GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias[layer_num - 1][dim_in];
-
-                    //if(instruction == GIN)
-                    //    convs_root_emb_weight_dim = (WT_TYPE)0;
                     
                     GCN_GIN_DGN_activations_PNA_mean[0][v_offset] = message_dim_1[0] + ap_fixed_relu<FM_TYPE>(GCN_h_node_els[v_offset] + convs_root_emb_weight_dim) / (in_degree + 1) + GIN_h_node_els[v_offset];
+                    GCN_GIN_DGN_activations_PNA_mean[0][v_offset] = (GCN_GIN_DGN_activations_PNA_mean[0][v_offset] - bn_mean_dim) / bn_sqrt_var_dim * bn_weight_dim + bn_bias_dim;
                     if(instruction == GCN)
                     {
-                        GCN_GIN_DGN_activations_PNA_mean[0][v_offset] = (GCN_GIN_DGN_activations_PNA_mean[0][v_offset] - bn_mean_dim) / bn_sqrt_var_dim * bn_weight_dim + bn_bias_dim;
                         GCN_GIN_DGN_activations_PNA_mean[0][v_offset] = ap_fixed_relu<FM_TYPE>(GCN_GIN_DGN_activations_PNA_mean[0][v_offset]);
                     }
                 }
@@ -262,13 +247,10 @@ static void accumulate(
             }
         }
 
-        //for (int dim_out = 0; dim_out < DGN_LIN_GIN_MLP_1_OUT; dim_out++)
         for (int dim_out = 0; dim_out < EMB_DIM; dim_out++)
         {
 #pragma HLS UNROLL
 
-            //if(dim_out < max_dim_out)
-            //{
                 WT_TYPE GCN_GIN_DGN_weight_dim_0;
                 WT_TYPE GCN_GIN_DGN_weight_dim_1;
                 GCN_GIN_DGN_weight_dim_0 = GCN_convs_GIN_node_mlp_1_weights[layer_num][dim_out][dim_in];
@@ -330,7 +312,6 @@ static void accumulate(
                     FM_TYPE accs_v_offset_dim_out_final = addend_slice_reg + augend;
                     accs[v_offset][dim_out] = accs_v_offset_dim_out_final;
                 }
-            //}
         }
     }
 }
@@ -346,8 +327,6 @@ static void output(
 )
 {
 #pragma HLS INLINE
-//#pragma HLS ARRAY_PARTITION variable=GIN_node_mlp_2_weights cyclic factor=APPLY_PARALLEL dim=2
-//#pragma HLS ARRAY_PARTITION variable=GIN_node_mlp_2_weights complete dim=3
 
     ne_out_t outputs[NODE_PARALLEL];
 #pragma HLS ARRAY_PARTITION variable=outputs complete dim=1
@@ -357,20 +336,10 @@ static void output(
 #pragma HLS ARRAY_PARTITION variable=GCN_PNA_DGN_emb_result cyclic dim=1 factor=NODE_PARALLEL
 #pragma HLS ARRAY_PARTITION variable=GCN_PNA_DGN_emb_result cyclic dim=2 factor=APPLY_PARALLEL
 
-//    FM_TYPE GIN_emb_result[MAX_NODE][EMB_DIM];
-//#pragma HLS ARRAY_PARTITION variable=GIN_emb_result cyclic dim=1 factor=NODE_PARALLEL
-//#pragma HLS ARRAY_PARTITION variable=GIN_emb_result cyclic dim=2 factor=APPLY_PARALLEL
-
     for(int dim_offset = 0; dim_offset < APPLY_PARALLEL; dim_offset++)
     {
 #pragma HLS UNROLL 
         int dim = dim_base + dim_offset;
-        
-        //GIN Parameters
-        //FM_TYPE GIN_bias;
-        //FM_TYPE GIN_results[NODE_PARALLEL];
-
-//#pragma HLS ARRAY_PARTITION variable=GIN_results complete dim=1
 
         for(int v_offset = 0; v_offset < NODE_PARALLEL; v_offset++)
         {
@@ -388,39 +357,7 @@ static void output(
                 GCN_PNA_DGN_emb_result[v][dim] = result;
                 outputs[v_offset][dim_offset] = result;
             }
-            //GIN_bias = GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias[layer_num][dim];
-            //GIN_results[v_offset] = GIN_bias;
-        }
-    
-
-//        if(instruction == GIN)
-//        {
-//            for(int dim_in = 0; dim_in < DGN_LIN_GIN_MLP_1_OUT; dim_in++)
-//            {
-//#pragma HLS UNROLL 
-//                WT_TYPE weight = GIN_node_mlp_2_weights[layer_num][dim][dim_in];
-//
-//                for(int v_offset = 0; v_offset < NODE_PARALLEL; v_offset++)
-//                {
-//#pragma HLS UNROLL 
-//                    FM_TYPE activation = accs[v_offset][dim_in];
-//                    GIN_results[v_offset] += ap_fixed_relu(activation) * weight;                                      
-//                }
-//            }
-//
-//            for (int v_offset = 0; v_offset < NODE_PARALLEL; v_offset++)
-//            {
-//#pragma HLS UNROLL
-//                int v = v_base + v_offset;
-//                FM_TYPE result = GIN_results[v_offset];
-//
-//                if (layer_num != NUM_LAYERS - 1) result = ap_fixed_relu(result);
-//
-//                outputs[v_offset][dim_offset] = result;
-//            
-//                if (v < num_of_nodes) GIN_emb_result[v][dim] = result;
-//            }
-//        }     
+        }   
     
         for(int v_offset = 0; v_offset < NODE_PARALLEL; v_offset++)
         {
@@ -430,10 +367,6 @@ static void output(
             if(v < num_of_nodes)
             {
                 h_node_v_dim = GCN_PNA_DGN_emb_result[v][dim];
-                //if(instruction == GIN)
-                //{
-                //    h_node_v_dim = GIN_emb_result[v][dim];
-                //}
                 h_node[v][dim] = h_node_v_dim;
             }
         }

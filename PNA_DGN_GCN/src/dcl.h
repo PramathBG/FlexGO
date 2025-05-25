@@ -109,7 +109,6 @@ extern Instruction instruction; // instruction to decide which GNN has to be inf
 // #region Global Variables
 // #Sub-region - Layer Weights of all models
 extern WT_TYPE GCN_convs_GIN_node_mlp_1_weights[NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT][EMB_DIM];
-//extern WT_TYPE GIN_node_mlp_2_weights[NUM_LAYERS][EMB_DIM][DGN_LIN_GIN_MLP_1_OUT];
 extern std::array<std::array<WT_TYPE, NUM_AGGRS>, NUM_SCALERS> PNA_node_conv_weights[NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT][EMB_DIM];
 extern WT_TYPE layers_posttrans_fully_connected_0_linear_weights[4][EMB_DIM][2][EMB_DIM];
 
@@ -143,7 +142,6 @@ extern int degree_table[MAX_NODE];
 extern int degree_table_finalize[MAX_NODE];
 extern int degree_tables[EDGE_PARALLEL][MAX_NODE][2];
 extern int neighbor_tables[EDGE_PARALLEL][MAX_EDGE];
-//extern int neighbor_table[MAX_EDGE]
 extern edge_attr_t edge_attrs[EDGE_PARALLEL][MAX_EDGE];
 extern int num_of_edges_per_pe[EDGE_PARALLEL];
 extern WT_TYPE DGN_eig_w_GCN_norms[EDGE_PARALLEL][MAX_EDGE];
@@ -166,8 +164,6 @@ extern WT_TYPE PNA_graph_DGN_MLP_2_bias[DGN_MLP_PNA_GRAPH_MLP_2_OUT];
 extern WT_TYPE PNA_graph_DGN_MLP_3_weights[NUM_TASK][DGN_MLP_PNA_GRAPH_MLP_2_OUT];
 extern WT_TYPE PNA_graph_DGN_MLP_3_bias[NUM_TASK];
 
-//extern int max_EMB_DIM;
-//extern int max_iter;
 extern int max_NUM_LAYERS;
 
 //Top Function
@@ -188,7 +184,6 @@ void GNN_compute_graphs(
     WT_TYPE edge_embedding_weight_in[][NUM_LAYERS][ED_FEATURE_PER_LAYER][EMB_DIM],
     WT_TYPE GCN_convs_GIN_node_mlp_1_weight_in[][NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT][EMB_DIM],
     WT_TYPE GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_in[][NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT],
-    //WT_TYPE GIN_node_mlp_2_weight_in[][NUM_LAYERS][EMB_DIM][DGN_LIN_GIN_MLP_1_OUT],
     WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[][4][EMB_DIM][2 * EMB_DIM],
     WT_TYPE GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_in [][NUM_LAYERS][EMB_DIM],
     WT_TYPE PNA_node_conv_weight_in[][NUM_LAYERS][EMB_DIM][NUM_SCALERS][NUM_AGGRS][EMB_DIM],

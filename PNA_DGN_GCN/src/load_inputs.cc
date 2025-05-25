@@ -23,7 +23,6 @@ static const int nd_feature_offsets[ND_FEATURE] = {
 void load_weights(
     WT_TYPE GCN_convs_GIN_node_mlp_1_weight_in[NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT][EMB_DIM],
     WT_TYPE GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_in[NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT],
-    //WT_TYPE GIN_node_mlp_2_weight_in[NUM_LAYERS][EMB_DIM][DGN_LIN_GIN_MLP_1_OUT],
     WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][EMB_DIM][2 * EMB_DIM],
     WT_TYPE GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_in[NUM_LAYERS][EMB_DIM],
     WT_TYPE PNA_node_conv_weight_in[NUM_LAYERS][EMB_DIM][NUM_SCALERS][NUM_AGGRS][EMB_DIM],
@@ -42,7 +41,6 @@ void load_weights(
     GIN_node_mlp_eps_PNA_avg_deg[0] = avg_deg_in;
     std::memcpy(GCN_convs_GIN_node_mlp_1_weights, GCN_convs_GIN_node_mlp_1_weight_in, sizeof(WT_TYPE) * NUM_LAYERS * DGN_LIN_GIN_MLP_1_OUT * EMB_DIM);
     std::memcpy(GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias, GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_in, sizeof(WT_TYPE) * NUM_LAYERS * DGN_LIN_GIN_MLP_1_OUT);
-    //std::memcpy(GIN_node_mlp_2_weights, GIN_node_mlp_2_weight_in, sizeof(WT_TYPE) * NUM_LAYERS * EMB_DIM * DGN_LIN_GIN_MLP_1_OUT);
     std::memcpy(layers_posttrans_fully_connected_0_linear_weights, layers_posttrans_fully_connected_0_linear_weight_in, sizeof(WT_TYPE) * 4 * EMB_DIM * 2 * EMB_DIM);
     std::memcpy(GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias, GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_in, sizeof(WT_TYPE) * NUM_LAYERS * EMB_DIM);
 
@@ -64,7 +62,7 @@ void load_weights(
                     GCN_bn_weights[l][dim] = bn_weight_PNA_graph_DGN_MLP_1_weight_in[l][dim];
                     GCN_bn_bias[l][dim] = bn_bias_PNA_graph_DGN_MLP_1_bias_in[l][dim];
                     GCN_bn_mean[l][dim] = bn_mean_PNA_graph_DGN_MLP_2_weight_in[l][dim];
-                    GCN_bn_sqrt_var[l][dim] = hls::sqrt(bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_in[l][dim] + ap_fixed_epsilon<WT_TYPE>());
+                    GCN_bn_sqrt_var[l][dim] = hls::sqrt(bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_in[l][dim] + ap_fixed_epsilon<WT_TYPE>()) + ap_fixed_epsilon<WT_TYPE>();
                 }
                 else
                 {
@@ -314,7 +312,7 @@ void load_input_node_embeddings(
                     reset_message(messages[nd % EDGE_PARALLEL][nd / EDGE_PARALLEL], dim);
                 }
             }
-            if(instruction != GCN)
+            if(instruction == GIN || instruction == PNA || instruction == DGN)
             {
                 embeddings[nd % NODE_PARALLEL] << embedding;
             }

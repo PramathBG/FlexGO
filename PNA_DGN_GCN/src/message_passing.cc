@@ -107,8 +107,6 @@ static void scatter(
         edge_attr_t attrs = edge_attrs[pe_id][e];
         WT_TYPE GCN_norm = DGN_eig_w_GCN_norms[pe_id][e];
         WT_TYPE DGN_eigen_w_e = DGN_eig_w_GCN_norms[pe_id][e];
-        //if(instruction == GIN)
-        //    GCN_norm = (FM_TYPE)1;
 
         for (int i = 0, dim_base = 0; i < ceildiv(EMB_DIM, SCATTER_PARALLEL); i++, dim_base += SCATTER_PARALLEL)
         {

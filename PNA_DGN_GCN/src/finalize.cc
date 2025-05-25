@@ -9,13 +9,11 @@ void global_mean_pooling(
     hls::stream<ne_out_t>& GCN_h_graph,
     hls::stream<ne_out_t> embeddings[NODE_PARALLEL],
     std::array<FM_TYPE, NUM_AGGRS> message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
-    //FM_TYPE GIN_h_graph[EMB_DIM],
     FM_TYPE PNA_DGN_h_graph[EMB_DIM],
     int num_of_nodes
 );
 void check_linear(
     hls::stream<ne_out_t>& GCN_h_graph,
-    //FM_TYPE GIN_h_graph[EMB_DIM],
     FM_TYPE PNA_DGN_h_graph[EMB_DIM],
     WT_TYPE PNA_graph_DGN_MLP_1_weights[DGN_MLP_PNA_GRAPH_MLP_1_OUT][EMB_DIM],
     WT_TYPE PNA_graph_DGN_MLP_1_bias[DGN_MLP_PNA_GRAPH_MLP_1_OUT],
@@ -61,20 +59,17 @@ void finalize(
     hls::stream<ne_out_t> GCN_h_graph; 
 #pragma HLS STREAM variable=GCN_h_graph depth=ceildiv(EMB_DIM, APPLY_PARALLEL)
 
-//    FM_TYPE GIN_h_graph[EMB_DIM];
     FM_TYPE PNA_DGN_h_graph[EMB_DIM];
 
     global_mean_pooling(
         GCN_h_graph,
         embeddings,
         message,
-        //GIN_h_graph,
         PNA_DGN_h_graph,
         num_of_nodes
     );
 
     check_linear(GCN_h_graph,
-    //GIN_h_graph,
     PNA_DGN_h_graph,
     PNA_graph_DGN_MLP_1_weights, 
     PNA_graph_DGN_MLP_1_bias,
@@ -90,7 +85,6 @@ void global_mean_pooling(
     hls::stream<ne_out_t>& GCN_h_graph,
     hls::stream<ne_out_t> embeddings[NODE_PARALLEL],
     std::array<FM_TYPE, NUM_AGGRS> message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
-    //FM_TYPE GIN_h_graph[EMB_DIM],
     FM_TYPE PNA_DGN_h_graph[EMB_DIM],
     int num_of_nodes
 )
@@ -256,7 +250,6 @@ void global_mean_pooling(
                 {
                     h_graph_el += sums[dim];
                 }
-                //GIN_h_graph[dim] = h_graph_el / num_of_nodes;
                 PNA_DGN_h_graph[dim] = h_graph_el / num_of_nodes;
             }
         }
@@ -265,7 +258,6 @@ void global_mean_pooling(
 
 void check_linear(
     hls::stream<ne_out_t>& GCN_h_graph,
-    //FM_TYPE GIN_h_graph[EMB_DIM],
     FM_TYPE PNA_DGN_h_graph[EMB_DIM],
     WT_TYPE PNA_graph_DGN_MLP_1_weights[DGN_MLP_PNA_GRAPH_MLP_1_OUT][EMB_DIM],
     WT_TYPE PNA_graph_DGN_MLP_1_bias[DGN_MLP_PNA_GRAPH_MLP_1_OUT],
@@ -289,15 +281,7 @@ void check_linear(
             result_tmp
         );
     }
-    //if(instruction == GIN)
-    //{
-    //    linear<EMB_DIM, NUM_TASK, NUM_TASK, false>(
-    //        GIN_h_graph,
-    //        graph_pred_weights,
-    //        graph_pred_bias,
-    //        result_tmp
-    //    );
-    //}
+    
     if(instruction == PNA || instruction == DGN)
     {
         linear_PNA_DGN(

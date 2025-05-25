@@ -22,7 +22,6 @@ void GNN_compute_graphs(
     WT_TYPE edge_embedding_weight_in[][NUM_LAYERS][ED_FEATURE_PER_LAYER][EMB_DIM],
     WT_TYPE GCN_convs_GIN_node_mlp_1_weight_in[][NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT][EMB_DIM],
     WT_TYPE GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_in[][NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT],
-    //WT_TYPE GIN_node_mlp_2_weight_in[][NUM_LAYERS][EMB_DIM][DGN_LIN_GIN_MLP_1_OUT],
     WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[][4][EMB_DIM][2 * EMB_DIM],
     WT_TYPE GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_in [][NUM_LAYERS][EMB_DIM],
     WT_TYPE PNA_node_conv_weight_in[][NUM_LAYERS][EMB_DIM][NUM_SCALERS][NUM_AGGRS][EMB_DIM],
@@ -50,7 +49,6 @@ void GNN_compute_graphs(
 #pragma HLS INTERFACE m_axi depth=(1) port=edge_embedding_weight_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=GCN_convs_GIN_node_mlp_1_weight_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_in offset=slave bundle=mem
-//#pragma HLS INTERFACE m_axi depth=(1) port=GIN_node_mlp_2_weight_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=layers_posttrans_fully_connected_0_linear_weight_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=PNA_node_conv_weight_in offset=slave bundle=mem
@@ -67,7 +65,6 @@ void GNN_compute_graphs(
 #pragma HLS BIND_STORAGE variable=GCN_convs_GIN_node_mlp_1_weights type=RAM_1WNR impl=bram
 
     instruction = instrcution_in;
-    //max_iter = ceildiv(EMB_DIM, SCATTER_PARALLEL);
     max_NUM_LAYERS = (instruction == PNA || instruction == DGN) ? DGN_PNA_NUM_LAYERS : NUM_LAYERS;
 
     for(int graph = 0, weights_ndx = -1, nodes_offset = 0, edges_offset = 0; graph < num_graphs; graph++)
@@ -83,7 +80,6 @@ void GNN_compute_graphs(
             load_weights(
                 GCN_convs_GIN_node_mlp_1_weight_in[weights_ndx],
                 GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_in[weights_ndx],
-                //GIN_node_mlp_2_weight_in[weights_ndx],
                 layers_posttrans_fully_connected_0_linear_weight_in[weights_ndx],
                 GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_in[weights_ndx],
                 PNA_node_conv_weight_in[weights_ndx],
