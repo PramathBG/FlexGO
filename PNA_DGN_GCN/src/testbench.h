@@ -1,8 +1,8 @@
 #ifndef __TESTBENCH_H__
 #define __TESTBENCH_H__
 
-#include "../src_PNA_DGN_GCN/dcl.h"
-#include "../src_PNA_DGN_GCN/util.h"
+#include "../src/dcl.h"
+#include "../src/util.h"
 
 constexpr int NUM_GRAPHS = 1; // 4113;
 
