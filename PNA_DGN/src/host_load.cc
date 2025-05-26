@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "testbench.h"
+#include "host.h"
 
 int nd_feature_table[ND_FEATURE] = {119, 5, 12, 12, 10, 6, 6, 2, 2};
 int ed_feature_table[EDGE_ATTR] = {5, 6, 2};
@@ -49,38 +49,8 @@ float layers_1_posttrans_fully_connected_0_linear_bias_float[EMB_DIM];
 float layers_2_posttrans_fully_connected_0_linear_bias_float[EMB_DIM];
 float layers_3_posttrans_fully_connected_0_linear_bias_float[EMB_DIM];
 
-WT_TYPE GCN_convs_GIN_node_mlp_1_weight_fixed[NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT][EMB_DIM];
-WT_TYPE GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_fixed[NUM_LAYERS][DGN_LIN_GIN_MLP_1_OUT];
-WT_TYPE GIN_node_mlp_2_weight_fixed[NUM_LAYERS][EMB_DIM][DGN_LIN_GIN_MLP_1_OUT];
-WT_TYPE GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_fixed[NUM_LAYERS][EMB_DIM];
-WT_TYPE PNA_node_conv_weight_fixed[NUM_LAYERS][EMB_DIM][NUM_SCALERS][NUM_AGGRS][EMB_DIM];
-WT_TYPE layers_posttrans_fully_connected_0_linear_weight_fixed [4][EMB_DIM][2 * EMB_DIM];
-WT_TYPE bn_weight_PNA_graph_DGN_MLP_1_weight_fixed[DGN_MLP_PNA_GRAPH_MLP_1_OUT][EMB_DIM];
-WT_TYPE bn_bias_PNA_graph_DGN_MLP_1_bias_fixed[NUM_LAYERS][EMB_DIM];
-WT_TYPE bn_mean_PNA_graph_DGN_MLP_2_weight_fixed[DGN_MLP_PNA_GRAPH_MLP_2_OUT][EMB_DIM];
-WT_TYPE bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_fixed[NUM_LAYERS][EMB_DIM];
-WT_TYPE node_embedding_h_atom_embedding_list_weight_fixed[ND_FEATURE][ND_FEATURE_TOTAL][EMB_DIM];
-WT_TYPE edge_embedding_weight_fixed[NUM_LAYERS][ED_FEATURE_PER_LAYER][EMB_DIM];
-WT_TYPE graph_pred_PNA_graph_DGN_MLP_3_weight_fixed[NUM_TASK][EMB_DIM];
-WT_TYPE graph_pred_PNA_graph_DGN_MLP_3_bias_fixed[NUM_TASK];
-WT_TYPE GIN_node_mlp_eps_PNA_avg_deg_fixed[NUM_LAYERS];
-WT_TYPE node_embedding_h_atom_embedding_list_weight_fixed_DGN[ND_FEATURE][ND_FEATURE_TOTAL][EMB_DIM];
-
 void load_weights(int GNN_instruction)
 {
-    if(GNN_instruction == 0)
-    {
-        printf("Loading weights for GCN ...\n");
-    }
-    else if(GNN_instruction == 1)
-    {
-        printf("Loading weights for GIN ...\n");
-    }
-    else if(GNN_instruction == 2)
-    {
-        printf("Loading weights for PNA ...\n");
-    }
-
     FILE* f;
 
     if(GNN_instruction != 2)
@@ -95,7 +65,7 @@ void load_weights(int GNN_instruction)
                     {
                         for(int aggr = 0; aggr < NUM_AGGRS; aggr++)
                         {
-                            PNA_node_conv_weight_fixed[l][dim_out][scaler][aggr][dim_in] = (WT_TYPE)0;
+                            PNA_node_conv_weight_fixed[(l * EMB_DIM * NUM_SCALERS * NUM_AGGRS * EMB_DIM) + (dim_out * NUM_SCALERS * NUM_AGGRS * EMB_DIM) + (scaler * NUM_AGGRS * EMB_DIM) + (aggr * EMB_DIM) + dim_in] = (WT_TYPE)0;
                         }
                     }
                 }
@@ -252,13 +222,12 @@ void load_weights(int GNN_instruction)
             {
 			    for(int dim = 0; dim < EMB_DIM; dim++) 
                 {
-				node_embedding_weight_float[idx + j][dim] = node_embedding_weight_raw[(idx + j) * EMB_DIM + dim];
-                node_embedding_h_atom_embedding_list_weight_float[0][idx + j][dim] = node_embedding_weight_raw[(idx + j) * EMB_DIM + dim];
+				    node_embedding_weight_float[idx + j][dim] = node_embedding_weight_raw[(idx + j) * EMB_DIM + dim];
+                    node_embedding_h_atom_embedding_list_weight_float[0][idx + j][dim] = node_embedding_weight_raw[(idx + j) * EMB_DIM + dim];
 			    }
 		    }
 		    idx += nd_f;
 	    }
-
 		
 	    for(int l = 0; l < NUM_LAYERS; l++) 
         {
@@ -279,11 +248,14 @@ void load_weights(int GNN_instruction)
             }
         }
 
-        for(int nft = 0; nft < ND_FEATURE_TOTAL; nft++)
+        for(int ndf = 0; ndf < 1; ndf++)
         {
-            for(int dim = 0; dim < EMB_DIM; dim++)
+            for(int nft = 0; nft < ND_FEATURE_TOTAL; nft++)
             {
-                node_embedding_h_atom_embedding_list_weight_fixed[0][nft][dim] = (WT_TYPE)node_embedding_h_atom_embedding_list_weight_float[0][nft][dim];
+                for(int dim = 0; dim < EMB_DIM; dim++)
+                {
+                    node_embedding_h_atom_embedding_list_weight_fixed[(ndf * ND_FEATURE_TOTAL * EMB_DIM) + (nft * EMB_DIM) + dim] = (WT_TYPE)node_embedding_h_atom_embedding_list_weight_float[ndf][nft][dim];
+                }
             }
         }
 
@@ -293,19 +265,7 @@ void load_weights(int GNN_instruction)
             {
                 for(int dim = 0; dim < EMB_DIM; dim++)
                 {
-                    edge_embedding_weight_fixed[l][ed_f][dim] = (WT_TYPE)GCN_edge_embedding_weight_float[l][ed_f][dim];
-                }
-            }
-        }
-        
-        for(int l = 0; l < NUM_LAYERS; l++)
-        {
-            for(int dim_out = 0; dim_out < EMB_DIM; dim_out++)
-            {
-                GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_fixed[l][dim_out] = (WT_TYPE)GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_float[l][dim_out];
-                for(int dim_in = 0; dim_in < EMB_DIM; dim_in++)
-                {
-                    GCN_convs_GIN_node_mlp_1_weight_fixed[l][dim_out][dim_in] = (WT_TYPE)GCN_convs_GIN_node_mlp_1_weight_float[l][dim_out][dim_in];
+                    edge_embedding_weight_fixed[l * ED_FEATURE_PER_LAYER * EMB_DIM + ed_f * EMB_DIM + dim] = (WT_TYPE)GCN_edge_embedding_weight_float[l][ed_f][dim];
                 }
             }
         }
@@ -314,11 +274,23 @@ void load_weights(int GNN_instruction)
         {
             for(int dim_out = 0; dim_out < EMB_DIM; dim_out++)
             {
-                bn_weight_PNA_graph_DGN_MLP_1_weight_fixed[l][dim_out] = (WT_TYPE)bn_weight_PNA_graph_DGN_MLP_1_weight_float[l][dim_out];
-                bn_bias_PNA_graph_DGN_MLP_1_bias_fixed[l][dim_out] = (WT_TYPE)bn_bias_PNA_graph_DGN_MLP_1_bias_float[l][dim_out];
-                bn_mean_PNA_graph_DGN_MLP_2_weight_fixed[l][dim_out] = (WT_TYPE)bn_mean_PNA_graph_DGN_MLP_2_weight_float[l][dim_out];
-                bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_fixed[l][dim_out] = (WT_TYPE)bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_float[l][dim_out];
-                GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_fixed[l][dim_out] = (WT_TYPE)GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_float[l][dim_out];
+                GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_fixed[l * DGN_LIN_GIN_MLP_1_OUT + dim_out] = (WT_TYPE)GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_float[l][dim_out];
+                for(int dim_in = 0; dim_in < EMB_DIM; dim_in++)
+                {
+                    GCN_convs_GIN_node_mlp_1_weight_fixed[l * DGN_LIN_GIN_MLP_1_OUT * EMB_DIM + dim_out * EMB_DIM + dim_in] = (WT_TYPE)GCN_convs_GIN_node_mlp_1_weight_float[l][dim_out][dim_in];
+                }
+            }
+        }
+
+        for(int l = 0; l < NUM_LAYERS; l++)
+        {
+            for(int dim_out = 0; dim_out < EMB_DIM; dim_out++)
+            {
+                bn_weight_PNA_graph_DGN_MLP_1_weight_fixed[l * EMB_DIM + dim_out] = (WT_TYPE)bn_weight_PNA_graph_DGN_MLP_1_weight_float[l][dim_out];
+                bn_bias_PNA_graph_DGN_MLP_1_bias_fixed[l * EMB_DIM + dim_out] = (WT_TYPE)bn_bias_PNA_graph_DGN_MLP_1_bias_float[l][dim_out];
+                bn_mean_PNA_graph_DGN_MLP_2_weight_fixed[l * EMB_DIM + dim_out] = (WT_TYPE)bn_mean_PNA_graph_DGN_MLP_2_weight_float[l][dim_out];
+                bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_fixed[l * EMB_DIM + dim_out] = (WT_TYPE)bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_float[l][dim_out];
+                GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_fixed[l * EMB_DIM + dim_out] = (WT_TYPE)GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_float[l][dim_out];
             }
         }
 
@@ -327,7 +299,7 @@ void load_weights(int GNN_instruction)
             graph_pred_PNA_graph_DGN_MLP_3_bias_fixed[t] = graph_pred_PNA_graph_DGN_MLP_3_bias_float[t];
             for(int dim = 0; dim < EMB_DIM; dim++)
             {
-                graph_pred_PNA_graph_DGN_MLP_3_weight_fixed[t][dim] = (WT_TYPE)graph_pred_PNA_graph_DGN_MLP_3_weight_float[t][dim];
+                graph_pred_PNA_graph_DGN_MLP_3_weight_fixed[t * EMB_DIM + dim] = (WT_TYPE)graph_pred_PNA_graph_DGN_MLP_3_weight_float[t][dim];
             }
         }
     }
@@ -369,11 +341,14 @@ void load_weights(int GNN_instruction)
         fread(graph_pred_PNA_graph_DGN_MLP_3_bias_float, sizeof(float), NUM_TASK, f);
         fclose(f);
 
-        for(int nft = 0; nft < ND_FEATURE_TOTAL; nft++)
+        for(int ndf = 0; ndf < 1; ndf++)
         {
-            for(int dim = 0; dim < EMB_DIM; dim++)
+            for(int nft = 0; nft < ND_FEATURE_TOTAL; nft++)
             {
-                node_embedding_h_atom_embedding_list_weight_fixed[0][nft][dim] = (WT_TYPE)node_embedding_weight_float[nft][dim];
+                for(int dim = 0; dim < EMB_DIM; dim++)
+                {
+                    node_embedding_h_atom_embedding_list_weight_fixed[ndf * ND_FEATURE_TOTAL * EMB_DIM + nft * EMB_DIM + dim] = (WT_TYPE)node_embedding_weight_float[nft][dim];
+                }
             }
         }
 
@@ -383,7 +358,7 @@ void load_weights(int GNN_instruction)
             {
                 for(int dim = 0; dim < EMB_DIM; dim++)
                 {
-                    edge_embedding_weight_fixed[l][ed_f][dim] = (WT_TYPE)GIN_edge_embedding_weight_float[l][ed_f][dim];
+                    edge_embedding_weight_fixed[l * ED_FEATURE_PER_LAYER * EMB_DIM + ed_f * EMB_DIM + dim] = (WT_TYPE)GIN_edge_embedding_weight_float[l][ed_f][dim];
                 }
             }
         }
@@ -393,10 +368,10 @@ void load_weights(int GNN_instruction)
             GIN_node_mlp_eps_PNA_avg_deg_fixed[l] = (WT_TYPE)GIN_node_mlp_eps_PNA_avg_deg_float[l];
             for(int dim_out = 0; dim_out < DGN_LIN_GIN_MLP_1_OUT; dim_out++)
             {
-                GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_fixed[l][dim_out] = (WT_TYPE)GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_float[l][dim_out];
+                GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_fixed[l * DGN_LIN_GIN_MLP_1_OUT + dim_out] = (WT_TYPE)GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_float[l][dim_out];
                 for(int dim_in = 0; dim_in < EMB_DIM; dim_in++)
                 {
-                    GCN_convs_GIN_node_mlp_1_weight_fixed[l][dim_out][dim_in] = (WT_TYPE)GCN_convs_GIN_node_mlp_1_weight_float[l][dim_out][dim_in];
+                    GCN_convs_GIN_node_mlp_1_weight_fixed[l * DGN_LIN_GIN_MLP_1_OUT * EMB_DIM + dim_out * EMB_DIM + dim_in] = (WT_TYPE)GCN_convs_GIN_node_mlp_1_weight_float[l][dim_out][dim_in];
                 }
             }
         }
@@ -405,15 +380,14 @@ void load_weights(int GNN_instruction)
         {
             for(int dim_out = 0; dim_out < EMB_DIM; dim_out++)
             {
-                GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_fixed[l][dim_out] = (WT_TYPE)GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_float[l][dim_out];
-                bn_weight_PNA_graph_DGN_MLP_1_weight_fixed[l][dim_out] = (WT_TYPE)1;
-                bn_bias_PNA_graph_DGN_MLP_1_bias_fixed[l][dim_out] = (WT_TYPE)0;
-                bn_mean_PNA_graph_DGN_MLP_2_weight_fixed[l][dim_out] = (WT_TYPE)0;
-                bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_fixed[l][dim_out] = (WT_TYPE)1;
-            
+                GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_fixed[l * EMB_DIM + dim_out] = (WT_TYPE)GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_float[l][dim_out];
+                bn_weight_PNA_graph_DGN_MLP_1_weight_fixed[l * EMB_DIM + dim_out] = (WT_TYPE)1;
+                bn_bias_PNA_graph_DGN_MLP_1_bias_fixed[l * EMB_DIM + dim_out] = (WT_TYPE)0;
+                bn_mean_PNA_graph_DGN_MLP_2_weight_fixed[l * EMB_DIM + dim_out] = (WT_TYPE)0;
+                bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_fixed[l * EMB_DIM + dim_out] = (WT_TYPE)1;
                 for(int dim_in = 0; dim_in < DGN_LIN_GIN_MLP_1_OUT; dim_in++)
                 {
-                    GIN_node_mlp_2_weight_fixed[l][dim_out][dim_in] = (WT_TYPE)GIN_node_mlp_2_weight_float[l][dim_out][dim_in];
+                    GIN_node_mlp_2_weight_fixed[l * EMB_DIM * DGN_LIN_GIN_MLP_1_OUT + dim_out * DGN_LIN_GIN_MLP_1_OUT + dim_in] = (WT_TYPE)GIN_node_mlp_2_weight_float[l][dim_out][dim_in];
                 }
             }
         }
@@ -423,7 +397,7 @@ void load_weights(int GNN_instruction)
             graph_pred_PNA_graph_DGN_MLP_3_bias_fixed[t] = graph_pred_PNA_graph_DGN_MLP_3_bias_float[t];
             for(int dim = 0; dim < EMB_DIM; dim++)
             {
-                graph_pred_PNA_graph_DGN_MLP_3_weight_fixed[t][dim] = (WT_TYPE)graph_pred_PNA_graph_DGN_MLP_3_weight_float[t][dim];
+                graph_pred_PNA_graph_DGN_MLP_3_weight_fixed[t * EMB_DIM + dim] = (WT_TYPE)graph_pred_PNA_graph_DGN_MLP_3_weight_float[t][dim];
             }
         }
 
@@ -494,11 +468,14 @@ void load_weights(int GNN_instruction)
             idx += nd_f;
         }
 
-        for(int ntf = 0; ntf < ND_FEATURE_TOTAL; ntf++)
+        for(int ndf = 0; ndf < 1; ndf++)
         {
-            for(int dim = 0; dim < EMB_DIM; dim++)
+            for(int ntf = 0; ntf < ND_FEATURE_TOTAL; ntf++)
             {
-                node_embedding_h_atom_embedding_list_weight_fixed[0][ntf][dim] = (WT_TYPE)node_embedding_weight_float[ntf][dim];
+                for(int dim = 0; dim < EMB_DIM; dim++)
+                {
+                    node_embedding_h_atom_embedding_list_weight_fixed[ndf * ND_FEATURE_TOTAL * EMB_DIM + ntf * EMB_DIM + dim] = (WT_TYPE)node_embedding_weight_float[ntf][dim];
+                }
             }
         }
 
@@ -512,7 +489,7 @@ void load_weights(int GNN_instruction)
                     {
                         for(int aggr = 0; aggr < NUM_AGGRS; aggr++)
                         {
-                            PNA_node_conv_weight_fixed[l][dim_out][scaler][aggr][dim_in] = (WT_TYPE)PNA_node_conv_weight_float[l][dim_out][scaler][aggr][dim_in];
+                            PNA_node_conv_weight_fixed[(l * EMB_DIM * NUM_SCALERS * NUM_AGGRS * EMB_DIM) + (dim_out * NUM_SCALERS * NUM_AGGRS * EMB_DIM) + (scaler * NUM_AGGRS * EMB_DIM) + (aggr * EMB_DIM) + dim_in] = (WT_TYPE)PNA_node_conv_weight_float[l][dim_out][scaler][aggr][dim_in];
                         }
                     }
                 }
@@ -523,38 +500,25 @@ void load_weights(int GNN_instruction)
         {
             for(int dim_out = 0; dim_out < EMB_DIM; dim_out++)
             {
-                GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_fixed[l][dim_out] = (WT_TYPE)GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_float[l][dim_out];
+                GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_fixed[l * DGN_LIN_GIN_MLP_1_OUT + dim_out] = (WT_TYPE)GCN_convs_GIN_node_mlp_1_PNA_node_conv_bias_float[l][dim_out];
             }
         }
 
         for(int dim_out = 0; dim_out < DGN_MLP_PNA_GRAPH_MLP_1_OUT; dim_out ++)
         {
-            bn_bias_PNA_graph_DGN_MLP_1_bias_fixed[0][dim_out] = (WT_TYPE)bn_bias_PNA_graph_DGN_MLP_1_bias_float[0][dim_out];
+            bn_bias_PNA_graph_DGN_MLP_1_bias_fixed[dim_out] = (WT_TYPE)bn_bias_PNA_graph_DGN_MLP_1_bias_float[0][dim_out];
             for(int dim_in = 0; dim_in < EMB_DIM; dim_in++)
             {
-                bn_weight_PNA_graph_DGN_MLP_1_weight_fixed[dim_out][dim_in] = (WT_TYPE)bn_weight_PNA_graph_DGN_MLP_1_weight_float[dim_out][dim_in];
+                bn_weight_PNA_graph_DGN_MLP_1_weight_fixed[dim_out * EMB_DIM + dim_in] = (WT_TYPE)bn_weight_PNA_graph_DGN_MLP_1_weight_float[dim_out][dim_in];
             }
         }
-        
+
         for(int dim_out = 0; dim_out < DGN_MLP_PNA_GRAPH_MLP_2_OUT; dim_out++)
         {
-            bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_fixed[0][dim_out] = (WT_TYPE)bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_float[0][dim_out];
+            bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_fixed[dim_out] = (WT_TYPE)bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_float[0][dim_out];
             for(int dim_in = 0; dim_in < DGN_MLP_PNA_GRAPH_MLP_1_OUT; dim_in++)
             {
-                bn_mean_PNA_graph_DGN_MLP_2_weight_fixed[dim_out][dim_in] = (WT_TYPE)bn_mean_PNA_graph_DGN_MLP_2_weight_float_PNA[dim_out][dim_in];
-            }
-        }
-
-        for(int dim = DGN_MLP_PNA_GRAPH_MLP_2_OUT; dim < EMB_DIM; dim++)
-        {
-            bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_fixed[0][dim] = (WT_TYPE)1;
-        }
-
-        for(int l = 1; l < NUM_LAYERS; l++)
-        {
-            for(int dim = 0; dim < EMB_DIM; dim++)
-            {
-                bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_fixed[l][dim] = (WT_TYPE)1;
+                bn_mean_PNA_graph_DGN_MLP_2_weight_fixed[dim_out * EMB_DIM + dim_in] = (WT_TYPE)bn_mean_PNA_graph_DGN_MLP_2_weight_float_PNA[dim_out][dim_in];
             }
         }
 
@@ -563,7 +527,7 @@ void load_weights(int GNN_instruction)
             graph_pred_PNA_graph_DGN_MLP_3_bias_fixed[t] = (WT_TYPE)graph_pred_PNA_graph_DGN_MLP_3_bias_float[t];
             for(int dim_in = 0; dim_in < DGN_MLP_PNA_GRAPH_MLP_2_OUT; dim_in++)
             {
-                graph_pred_PNA_graph_DGN_MLP_3_weight_fixed[t][dim_in] = (WT_TYPE)graph_pred_PNA_graph_DGN_MLP_3_weight_float[t][dim_in];
+                graph_pred_PNA_graph_DGN_MLP_3_weight_fixed[t * EMB_DIM + dim_in] = (WT_TYPE)graph_pred_PNA_graph_DGN_MLP_3_weight_float[t][dim_in];
             }
         }
         GIN_node_mlp_eps_PNA_avg_deg_fixed[0] = 6.885701656341553;
@@ -603,7 +567,7 @@ void load_weights(int GNN_instruction)
 
 	    fseek(f, 7616*sizeof(float), SEEK_SET);
 	    fread(layers_0_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 32, f);
-	
+
 	    fseek(f, 7648*sizeof(float), SEEK_SET);
 	    fread(layers_1_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 2048, f);
 
@@ -694,11 +658,11 @@ void load_weights(int GNN_instruction)
 		    {
 		    	for(int dim = 0; dim < EMB_DIM; dim++)
 		    	{
-		    		node_embedding_h_atom_embedding_list_weight_fixed_DGN[i][j][dim] = (WT_TYPE)node_embedding_h_atom_embedding_list_weight_float[i][j][dim];
+		    		node_embedding_h_atom_embedding_list_weight_fixed[i * ND_FEATURE_TOTAL * EMB_DIM + j * EMB_DIM + dim] = (WT_TYPE)node_embedding_h_atom_embedding_list_weight_float[i][j][dim];
 		    	}
 		    }
 	    }
-        
+
         for(int i = 0; i < DGN_PNA_NUM_LAYERS; i++)
 	    {
 		    for(int dim_out = 0; dim_out < EMB_DIM; dim_out++)
@@ -731,7 +695,8 @@ void load_weights(int GNN_instruction)
 	    	{
 	    		for(int dim_in = 0; dim_in < 2 * EMB_DIM; dim_in++)
 	    		{
-	    			layers_posttrans_fully_connected_0_linear_weight_fixed[i][dim_out][dim_in] = (WT_TYPE)layers_posttrans_fully_connected_0_linear_weight_float_in[i][dim_out][dim_in];
+	    			layers_posttrans_fully_connected_0_linear_weight_fixed[i * EMB_DIM * 2 * EMB_DIM + dim_out * 2 * EMB_DIM + dim_in] = (WT_TYPE)layers_posttrans_fully_connected_0_linear_weight_float_in[i][dim_out][dim_in];
+    
 	    		}
 	    	}
 	    }
@@ -757,31 +722,31 @@ void load_weights(int GNN_instruction)
 	    			GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_float[i][dim] = layers_3_posttrans_fully_connected_0_linear_bias_float[dim];
 	    		}
 	    	}
-	    }
+	    }   
 
         for(int i = 0; i < DGN_PNA_NUM_LAYERS; i++)
 	    {
 	    	for(int dim = 0; dim < EMB_DIM; dim++)
 	    	{
-	    		GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_fixed[i][dim] = (WT_TYPE)GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_float[i][dim];
+	    		GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_fixed[i * EMB_DIM + dim] = (WT_TYPE)GCN_convs_root_emb_weight_GIN_node_mlp_2_LPFC_0_linear_bias_float[i][dim];
 	    	}
 	    }
 
         for(int i = 0; i < EMB_DIM / 2; i++)
 	    {
-	    	bn_bias_PNA_graph_DGN_MLP_1_bias_fixed[0][i] = (WT_TYPE)bn_bias_PNA_graph_DGN_MLP_1_bias_float[0][i];
+	    	bn_bias_PNA_graph_DGN_MLP_1_bias_fixed[i] = (WT_TYPE)bn_bias_PNA_graph_DGN_MLP_1_bias_float[0][i];
 	    	for(int dim = 0; dim < EMB_DIM; dim++)
 	    	{
-	    		bn_weight_PNA_graph_DGN_MLP_1_weight_fixed[i][dim] = (WT_TYPE)bn_weight_PNA_graph_DGN_MLP_1_weight_float[i][dim];
+	    		bn_weight_PNA_graph_DGN_MLP_1_weight_fixed[i * EMB_DIM + dim] = (WT_TYPE)bn_weight_PNA_graph_DGN_MLP_1_weight_float[i][dim];
 	    	}
 	    }
 
         for(int i = 0; i < EMB_DIM / 4; i++)
 	    {
-	    	bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_fixed[0][i] = (WT_TYPE)bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_float[0][i];
+	    	bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_fixed[i] = (WT_TYPE)bn_sqrt_var_PNA_graph_DGN_MLP_2_bias_float[0][i];
 	    	for(int dim = 0; dim < EMB_DIM / 2; dim++)
 	    	{
-	    		bn_mean_PNA_graph_DGN_MLP_2_weight_fixed[i][dim] = (WT_TYPE)bn_mean_PNA_graph_DGN_MLP_2_weight_float_PNA[i][dim];
+	    		bn_mean_PNA_graph_DGN_MLP_2_weight_fixed[i * EMB_DIM + dim] = (WT_TYPE)bn_mean_PNA_graph_DGN_MLP_2_weight_float_PNA[i][dim];
 	    	}
 	    }
 
@@ -790,7 +755,7 @@ void load_weights(int GNN_instruction)
 	    	graph_pred_PNA_graph_DGN_MLP_3_bias_fixed[i] = (WT_TYPE)graph_pred_PNA_graph_DGN_MLP_3_bias_float[i];
 	    	for(int dim = 0; dim < EMB_DIM / 4; dim++)
 	    	{
-	    		graph_pred_PNA_graph_DGN_MLP_3_weight_fixed[i][dim] = (WT_TYPE)graph_pred_PNA_graph_DGN_MLP_3_weight_float[i][dim];
+	    		graph_pred_PNA_graph_DGN_MLP_3_weight_fixed[i * EMB_DIM / 4 + dim] = (WT_TYPE)graph_pred_PNA_graph_DGN_MLP_3_weight_float[i][dim];
 	    	}
 	    }
     }
@@ -799,15 +764,17 @@ void load_weights(int GNN_instruction)
 void fetch_one_graph(
     int g,
     char* graph_name,
-    node_feature_t* node_feature,
-    edge_t* edge_list,
-    edge_attr_t* edge_attr,
-    node_eigen_t* node_eigen,
-    int num_of_nodes,
+    aligned_vector<node_feature_t>& node_feature, 
+    aligned_vector<edge_t>& edge_list,
+    aligned_vector<edge_attr_t>& edge_attr,
+    aligned_vector<node_eigen_t>& node_eigen,
+    int num_of_nodes, 
     int num_of_edges
 )
 {
-    printf("(%d/%d) Loading graph %s ...\n", g, NUM_GRAPHS, graph_name);
+    printf("(%d/%d) Loading graph %s ...\r", g, NUM_GRAPHS, graph_name);
+    fflush(stdout);
+
     FILE* f;
 
     char f_node_feature[128];
@@ -821,47 +788,39 @@ void fetch_one_graph(
     sprintf(f_node_eigen, "eig/g%d.txt", g);
 
     f = fopen(f_node_feature, "rb");
-    if (!f)
-    {
-        fprintf(stderr, "failed to open %s\n", f_node_feature);
-        exit(1);
-    }
-    fread(node_feature, sizeof(node_feature_t), num_of_nodes, f);
+    size_t node_feature_start = node_feature.size();
+    node_feature.resize(node_feature_start + num_of_nodes);
+    node_feature_t* node_feature_ptr = &node_feature.data()[node_feature_start];
+    fread(node_feature_ptr, sizeof(node_feature_t), num_of_nodes, f);
     fclose(f);
 
     f = fopen(f_edge_list, "rb");
-    if (!f)
-    {
-        fprintf(stderr, "failed to open %s\n", f_edge_list);
-        exit(1);
-    }
-    fread(edge_list, sizeof(edge_t), num_of_edges, f);
+    size_t edge_list_start = edge_list.size();
+    edge_list.resize(edge_list_start + num_of_edges);
+    edge_t* edge_list_ptr = &edge_list.data()[edge_list_start];
+    fread(edge_list_ptr, sizeof(edge_t), num_of_edges, f);
     fclose(f);
 
     f = fopen(f_edge_attr, "rb");
-    if (!f)
-    {
-        fprintf(stderr, "failed to open %s\n", f_edge_attr);
-        exit(1);
-    }
-    fread(edge_attr, sizeof(edge_attr_t), num_of_edges, f);
+    size_t edge_attr_start = edge_attr.size();
+    edge_attr.resize(edge_attr_start + num_of_edges);
+    edge_attr_t* edge_attr_ptr = &edge_attr.data()[edge_attr_start];
+    fread(edge_attr_ptr, sizeof(edge_attr_t), num_of_edges, f);
     fclose(f);
 
     f = fopen(f_node_eigen, "r");
-	if(!f)
-	{
-		fprintf(stderr, "failed to open %s\n", f_node_eigen);
-        exit(1);
-	}
-	float node_eigen_float[4];
-	fscanf(f, "tensor([[%e, %e,%e,%e],\n", &node_eigen_float[0], &node_eigen_float[1], &node_eigen_float[2], &node_eigen_float[3]);
-	for(int i = 0; i < 4; i++) node_eigen[0][i] = (WT_TYPE)node_eigen_float[i];
-	for(int nd = 1; nd < num_of_nodes - 1; nd++)
-	{
-		fscanf(f, "[%e, %e,%e,%e],\n", &node_eigen_float[0], &node_eigen_float[1], &node_eigen_float[2], &node_eigen_float[3]);
-        for (int i = 0; i < 4; i++) node_eigen[nd][i] = WT_TYPE(node_eigen_float[i]);
-	}
-	fscanf(f, "[%e, %e,%e,%e]])", &node_eigen_float[0], &node_eigen_float[1], &node_eigen_float[2], &node_eigen_float[3]);
-    for (int i = 0; i < 4; i++) node_eigen[num_of_nodes - 1][i] = WT_TYPE(node_eigen_float[i]);
-	fclose(f);
+    size_t node_eigen_start = node_eigen.size();
+    node_eigen.resize(node_eigen_start + num_of_nodes);
+    node_eigen_t* node_eigen_ptr = &node_eigen.data()[node_eigen_start];
+    float node_eigen_float[4];
+    fscanf(f, "tensor([[%e, %e,%e,%e],\n", &node_eigen_float[0], &node_eigen_float[1], &node_eigen_float[2], &node_eigen_float[3]);
+    for (int i = 0; i < 4; i++) node_eigen_ptr[0][i] = WT_TYPE(node_eigen_float[i]);
+    for (int nd = 1; nd < num_of_nodes - 1; nd++)
+    {
+        fscanf(f, "[%e, %e,%e,%e],\n", &node_eigen_float[0], &node_eigen_float[1], &node_eigen_float[2], &node_eigen_float[3]);
+        for (int i = 0; i < 4; i++) node_eigen_ptr[nd][i] = WT_TYPE(node_eigen_float[i]);
+    }
+    fscanf(f, "[%e, %e,%e,%e]])", &node_eigen_float[0], &node_eigen_float[1], &node_eigen_float[2], &node_eigen_float[3]);
+    for (int i = 0; i < 4; i++) node_eigen_ptr[num_of_nodes - 1][i] = WT_TYPE(node_eigen_float[i]);
+    fclose(f);
 }
