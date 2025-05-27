@@ -328,11 +328,6 @@ int main(int argc, char **argv) {
     OCL_CHECK(err, err = krnl_GNN_compute_graphs.setArg(idx++, graph_pred_PNA_graph_DGN_MLP_3_weight_buf));
     OCL_CHECK(err, err = krnl_GNN_compute_graphs.setArg(idx++, graph_pred_PNA_graph_DGN_MLP_3_bias_buf));
 
-    if (err != CL_SUCCESS) 
-    {
-        std::cerr << "Error setting kernel argument 0: " << err << " (" << getCLErrorString(err) << ")" << std::endl;
-    }
-
     for (int i = 0; i < NUM_TRIALS; i++)
     {
        switch(GNN_instruction)
@@ -354,23 +349,8 @@ int main(int argc, char **argv) {
        }
         fflush(stdout);
         OCL_CHECK(err, err = q.enqueueTask(krnl_GNN_compute_graphs));
-        if (err != CL_SUCCESS) 
-        {
-            std::cerr << err << " (" << getCLErrorString(err) << ")" << std::endl;
-            std::cerr << "Error 1" << std::endl;
-        }
         OCL_CHECK(err, err = q.enqueueMigrateMemObjects({result_buf}, CL_MIGRATE_MEM_OBJECT_HOST));
-        if (err != CL_SUCCESS) 
-        {
-            std::cerr << err << " (" << getCLErrorString(err) << ")" << std::endl;
-            std::cerr << "Error 2" << std::endl;
-        }
         OCL_CHECK(err, err = q.finish());
-        if (err != CL_SUCCESS) 
-        {
-            std::cerr << err << " (" << getCLErrorString(err) << ")" << std::endl;
-            std::cerr << "Error 3" << std::endl;
-        }
     }
     printf("\n******* Computation done *******\n");
 
