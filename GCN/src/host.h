@@ -6,7 +6,7 @@
 #include "xcl2.hpp"
 #include "../../common/includes/dataset/dataset.hpp"
 
-constexpr int NUM_TRIALS = 1;
+constexpr int NUM_TRIALS = 25;
 
 
 template <typename T>
