@@ -9,10 +9,10 @@
 <ENTRY>
 {
  "type": "ET_CmdStep",
- "dateTimestamp": "Tue Mar  4 23:37:29 2025",
- "timestampMillis": "1741149449009",
+ "dateTimestamp": "Fri May 23 03:47:44 2025",
+ "timestampMillis": "1747986464720",
  "buildStep": {
-  "cmdId": "61c22ffb-8ecc-4cff-93b1-49805972b923",
+  "cmdId": "3e1df4be-73dd-41ff-b5c9-c98911d85ed1",
   "name": "v++",
   "logFile": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x/package/package.steps.log",
   "commandLine": "/projects/tools/x86_64/rhel-8/xilinx/Vitis/2022.1/bin/unwrapped/lnx64.o/v++  --vivado.prop \"run.__KERNEL__.{STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS}={-directive sdx_optimization_effort_high}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_route_design_summary steps {route_design} runs {impl_1} options {-max_paths 10}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_post_route_phys_opt_design_summary steps {post_route_phys_opt_design} runs {impl_1} options {-max_paths 10}\" --vivado.prop run.synth_1.steps.retiming.is_enabled=1 --vivado.prop run.synth_1.steps.keep_equivalent_registers.is_enabled=0 --vivado.prop run.impl_1.strategy=Performance_ExploreWithRemap -p ./build_dir.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.link.xclbin -t hw --platform xilinx_u50_gen3x16_xdma_5_202210_1 --package.out_dir ./package.hw -o ./build_dir.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.xclbin ",
@@ -42,10 +42,10 @@
 <ENTRY>
 {
  "type": "ET_Status",
- "dateTimestamp": "Tue Mar  4 23:37:29 2025",
- "timestampMillis": "1741149449010",
+ "dateTimestamp": "Fri May 23 03:47:44 2025",
+ "timestampMillis": "1747986464721",
  "status": {
-  "cmdId": "61c22ffb-8ecc-4cff-93b1-49805972b923",
+  "cmdId": "3e1df4be-73dd-41ff-b5c9-c98911d85ed1",
   "state": "CS_RUNNING"
  }
 }
@@ -53,8 +53,8 @@
 <ENTRY>
 {
  "type": "ET_FlowMetaData",
- "dateTimestamp": "Tue Mar  4 23:39:10 2025",
- "timestampMillis": "1741149550402",
+ "dateTimestamp": "Fri May 23 03:47:52 2025",
+ "timestampMillis": "1747986472341",
  "buildSummary": {
   "hardwarePlatform": "xilinx_u50_gen3x16_xdma_5_202210_1.xpfm",
   "hardwareDsa": "",
@@ -81,7 +81,7 @@
     "name": "GNN_compute_graphs.link",
     "file": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/build_dir.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.link.xclbin",
     "reports": [],
-    "uuid": "df348506-5a75-45b7-af4b-a4418c5b34e7"
+    "uuid": "b98310b8-6cc0-43c7-bc6b-5a773f671132"
    },
    "kernels": []
   }
@@ -91,8 +91,8 @@
 <ENTRY>
 {
  "type": "ET_Report",
- "dateTimestamp": "Tue Mar  4 23:39:11 2025",
- "timestampMillis": "1741149551174",
+ "dateTimestamp": "Fri May 23 03:47:53 2025",
+ "timestampMillis": "1747986473114",
  "report": {
   "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x/reports/package/v++_package_GNN_compute_graphs_guidance.html",
   "name": "",
@@ -105,8 +105,8 @@
 <ENTRY>
 {
  "type": "ET_Report",
- "dateTimestamp": "Tue Mar  4 23:39:11 2025",
- "timestampMillis": "1741149551176",
+ "dateTimestamp": "Fri May 23 03:47:53 2025",
+ "timestampMillis": "1747986473115",
  "report": {
   "path": "/net/netscratch/pguruprasanna3/FlowGNN/FlowGNN_Unified/_x/v++_package_GNN_compute_graphs_guidance.pb",
   "name": "",
@@ -119,10 +119,10 @@
 <ENTRY>
 {
  "type": "ET_Status",
- "dateTimestamp": "Tue Mar  4 23:39:11 2025",
- "timestampMillis": "1741149551179",
+ "dateTimestamp": "Fri May 23 03:47:53 2025",
+ "timestampMillis": "1747986473119",
  "status": {
-  "cmdId": "61c22ffb-8ecc-4cff-93b1-49805972b923",
+  "cmdId": "3e1df4be-73dd-41ff-b5c9-c98911d85ed1",
   "state": "CS_PASSED"
  }
 }
