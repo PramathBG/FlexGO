@@ -141,16 +141,10 @@ $(TEMP_DIR)/GNN_compute_graphs.xo: src/GNN_compute.cc src/conv_layer.cc src/fina
 	$(VPP) $(VPP_FLAGS) --vivado.prop run.synth_1.steps.retiming.is_enabled=1 --vivado.prop run.synth_1.steps.keep_equivalent_registers.is_enabled=0 --vivado.prop run.impl_1.strategy=Performance_ExploreWithRemap -c -k GNN_compute_graphs --hls.clock 100000000:GNN_compute_graphs --temp_dir $(TEMP_DIR)  -I'$(<D)' -o'$@' $^
 $(BUILD_DIR)/GNN_compute_graphs.xclbin: $(BINARY_CONTAINER_OBJS)
 	mkdir -p $(BUILD_DIR)
-##--hls.clock 100000000:GNN_compute_graphs##
-##--vivado.prop run.synth_1.steps.retiming.is_enabled=1##
-##--vivado.prop run.synth_1.steps.keep_equivalent_registers.is_enabled=0##
-##--vivado.prop run.synth_1.steps.fsm_extraction=one_hot##
-##--vivado.prop run.synth_1.steps.resource_sharing=off##
-##--clock.defaultFreqHz 100000000
+
 ifeq ($(HOST_ARCH), x86)
 	$(VPP) $(VPP_FLAGS) --vivado.prop run.synth_1.steps.retiming.is_enabled=1 --vivado.prop run.synth_1.steps.keep_equivalent_registers.is_enabled=0 --vivado.prop run.impl_1.strategy=Performance_ExploreWithRemap -l --hls.clock 100000000:GNN_compute_graphs $(VPP_LDFLAGS) --temp_dir $(TEMP_DIR) -o'$(BUILD_DIR)/GNN_compute_graphs.link.xclbin' $(+)
 	$(VPP) --vivado.prop run.synth_1.steps.retiming.is_enabled=1 --vivado.prop run.synth_1.steps.keep_equivalent_registers.is_enabled=0 --vivado.prop run.impl_1.strategy=Performance_ExploreWithRemap -p $(BUILD_DIR)/GNN_compute_graphs.link.xclbin -t $(TARGET) --platform $(DEVICE) --package.out_dir $(PACKAGE_OUT) -o $(BUILD_DIR)/GNN_compute_graphs.xclbin
-##--hls.clock 100000000:GNN_compute_graphs##
 else
 	$(VPP) $(VPP_FLAGS) --vivado.prop run.synth_1.steps.retiming.is_enabled=1 --vivado.prop run.synth_1.steps.keep_equivalent_registers.is_enabled=0 --vivado.prop run.impl_1.strategy=Performance_ExploreWithRemap -l --hls.clock 100000000:GNN_compute_graphs $(VPP_LDFLAGS) --temp_dir $(TEMP_DIR) -o'$(BUILD_DIR)/GNN_compute_graphs.xclbin' $(+)
 endif
