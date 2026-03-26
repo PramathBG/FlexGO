@@ -1,0 +1,520 @@
+<ENTRY>
+{
+ "thisFile": "/export/hdd/scratch/pguruprasanna3/GIN_isolated/GIN_compute_graphs.xclbin.link_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Mon May 26 14:59:32 2025",
+ "timestampMillis": "1748285972872",
+ "buildStep": {
+  "cmdId": "7d28abb5-c63d-4e65-9c5b-65379031eb06",
+  "name": "v++",
+  "logFile": "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/link.steps.log",
+  "commandLine": "/tools/software/xilinx/Vitis/2022.1/bin/unwrapped/lnx64.o/v++  --vivado.prop \"run.__KERNEL__.{STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS}={-directive sdx_optimization_effort_high}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_route_design_summary steps {route_design} runs {impl_1} options {-max_paths 10}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_post_route_phys_opt_design_summary steps {post_route_phys_opt_design} runs {impl_1} options {-max_paths 10}\" --link --platform xilinx_u50_gen3x16_xdma_5_202210_1 -oGIN_compute_graphs.xclbin ./_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.xo --reuse_impl ./GIN_implemented_design.dcp ",
+  "args": [
+   "--link",
+   "--platform",
+   "xilinx_u50_gen3x16_xdma_5_202210_1",
+   "-oGIN_compute_graphs.xclbin",
+   "./_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.xo",
+   "--reuse_impl",
+   "./GIN_implemented_design.dcp"
+  ],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/pguruprasanna3/GIN_isolated"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 14:59:32 2025",
+ "timestampMillis": "1748285972872",
+ "status": {
+  "cmdId": "7d28abb5-c63d-4e65-9c5b-65379031eb06",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "Mon May 26 14:59:39 2025",
+ "timestampMillis": "1748285979907",
+ "buildSummary": {
+  "hardwarePlatform": "xilinx_u50_gen3x16_xdma_5_202210_1.xpfm",
+  "hardwareDsa": "",
+  "platformDirectory": "/export/hdd/scratch/common/xilinx/opt/xilinx/platforms/xilinx_u50_gen3x16_xdma_5_202210_1",
+  "runtime": "OpenCL",
+  "systemConfig": "Linux",
+  "flow": "BF_LINK",
+  "target": "TT_HW",
+  "binaryContainer": {
+   "base": {
+    "type": "BT_UKNOWN",
+    "name": "GIN_compute_graphs",
+    "file": "/export/hdd/scratch/pguruprasanna3/GIN_isolated/GIN_compute_graphs.xclbin",
+    "reports": [],
+    "uuid": ""
+   },
+   "kernels": []
+  },
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "GNN_compute_graphs",
+     "file": "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.xo",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/node_embedding.cc",
+     "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/message_passing.cc",
+     "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/load_inputs.cc",
+     "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/linear.cc",
+     "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/globals.cc",
+     "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/finalize.cc",
+     "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/conv_layer.cc",
+     "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/GNN_compute.cc"
+    ],
+    "psSources": [],
+    "cuNames": [
+     "GNN_compute_graphs_1"
+    ],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "Vitis V++ Compiler Release 2022.1.2. SW Build 3602371 on 2022-08-02-23:13:43"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Mon May 26 14:59:41 2025",
+ "timestampMillis": "1748285981110",
+ "buildStep": {
+  "cmdId": "f974f4e8-8b72-4e0d-84c0-6595a16eca3e",
+  "name": "rtdgen",
+  "logFile": "",
+  "commandLine": "rtdgen",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/pguruprasanna3/GIN_isolated"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 14:59:41 2025",
+ "timestampMillis": "1748285981111",
+ "status": {
+  "cmdId": "f974f4e8-8b72-4e0d-84c0-6595a16eca3e",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Mon May 26 14:59:41 2025",
+ "timestampMillis": "1748285981198",
+ "report": {
+  "path": "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/GIN_compute_graphs_xml.rtd",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "XCLBIN_INFO",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Mon May 26 14:59:41 2025",
+ "timestampMillis": "1748285981201",
+ "buildStep": {
+  "cmdId": "ad3d2206-7a51-4fe0-88c8-97b39cd95d7d",
+  "name": "cf2sw",
+  "logFile": "",
+  "commandLine": "cf2sw -a /export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/address_map.xml -sdsl /export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/sdsl.dat -xclbin /export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/xclbin_orig.xml -rtd /export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/GIN_compute_graphs.rtd -o /export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/GIN_compute_graphs.xml",
+  "args": [
+   "-a",
+   "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/address_map.xml",
+   "-sdsl",
+   "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/sdsl.dat",
+   "-xclbin",
+   "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/xclbin_orig.xml",
+   "-rtd",
+   "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/GIN_compute_graphs.rtd",
+   "-o",
+   "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/GIN_compute_graphs.xml"
+  ],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/pguruprasanna3/GIN_isolated"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 14:59:41 2025",
+ "timestampMillis": "1748285981202",
+ "status": {
+  "cmdId": "ad3d2206-7a51-4fe0-88c8-97b39cd95d7d",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 14:59:44 2025",
+ "timestampMillis": "1748285984371",
+ "status": {
+  "cmdId": "ad3d2206-7a51-4fe0-88c8-97b39cd95d7d",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Mon May 26 14:59:44 2025",
+ "timestampMillis": "1748285984372",
+ "buildStep": {
+  "cmdId": "599c0c9e-9d27-4ac3-af29-71e9e86a32c6",
+  "name": "rtdgen",
+  "logFile": "",
+  "commandLine": "writeSystemDiagram",
+  "args": [
+   "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/GIN_compute_graphs.rtd",
+   "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/systemDiagramModelSlrBaseAddress.json"
+  ],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/pguruprasanna3/GIN_isolated"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 14:59:44 2025",
+ "timestampMillis": "1748285984372",
+ "status": {
+  "cmdId": "599c0c9e-9d27-4ac3-af29-71e9e86a32c6",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Mon May 26 14:59:44 2025",
+ "timestampMillis": "1748285984376",
+ "report": {
+  "path": "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/systemDiagramModelSlrBaseAddress.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM_PLUS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 14:59:44 2025",
+ "timestampMillis": "1748285984376",
+ "status": {
+  "cmdId": "599c0c9e-9d27-4ac3-af29-71e9e86a32c6",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Mon May 26 14:59:44 2025",
+ "timestampMillis": "1748285984376",
+ "buildStep": {
+  "cmdId": "c68b4353-b700-4c88-941a-f3bd797d46ef",
+  "name": "rtdgen",
+  "logFile": "",
+  "commandLine": "writeAutomationSummary",
+  "args": [
+   "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/automation_summary.txt"
+  ],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/pguruprasanna3/GIN_isolated"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 14:59:44 2025",
+ "timestampMillis": "1748285984376",
+ "status": {
+  "cmdId": "c68b4353-b700-4c88-941a-f3bd797d46ef",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Mon May 26 14:59:44 2025",
+ "timestampMillis": "1748285984378",
+ "report": {
+  "path": "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/automation_summary.txt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "VITIS_DESIGN_FLOW",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 14:59:44 2025",
+ "timestampMillis": "1748285984378",
+ "status": {
+  "cmdId": "c68b4353-b700-4c88-941a-f3bd797d46ef",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 14:59:44 2025",
+ "timestampMillis": "1748285984384",
+ "status": {
+  "cmdId": "f974f4e8-8b72-4e0d-84c0-6595a16eca3e",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Mon May 26 14:59:44 2025",
+ "timestampMillis": "1748285984388",
+ "buildStep": {
+  "cmdId": "b2a8cb01-8299-4427-96f3-83a560f4cff6",
+  "name": "xclbinutil",
+  "logFile": "",
+  "commandLine": "xclbinutil --add-section BITSTREAM:RAW:/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/partial.bit --force --target hw --key-value SYS:dfx_enable:true --add-section :JSON:/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/GIN_compute_graphs.rtd --append-section :JSON:/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/appendSection.rtd --add-section CLOCK_FREQ_TOPOLOGY:JSON:/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/GIN_compute_graphs_xml.rtd --add-section BUILD_METADATA:JSON:/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/GIN_compute_graphs_build.rtd --add-section EMBEDDED_METADATA:RAW:/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/GIN_compute_graphs.xml --add-section SYSTEM_METADATA:RAW:/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/systemDiagramModelSlrBaseAddress.json --key-value SYS:PlatformVBNV:xilinx_u50_gen3x16_xdma_5_202210_1 --output /export/hdd/scratch/pguruprasanna3/GIN_isolated/GIN_compute_graphs.xclbin",
+  "args": [
+   "--add-section",
+   "BITSTREAM:RAW:/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/partial.bit",
+   "--force",
+   "--target",
+   "hw",
+   "--key-value",
+   "SYS:dfx_enable:true",
+   "--add-section",
+   ":JSON:/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/GIN_compute_graphs.rtd",
+   "--append-section",
+   ":JSON:/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/appendSection.rtd",
+   "--add-section",
+   "CLOCK_FREQ_TOPOLOGY:JSON:/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/GIN_compute_graphs_xml.rtd",
+   "--add-section",
+   "BUILD_METADATA:JSON:/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/GIN_compute_graphs_build.rtd",
+   "--add-section",
+   "EMBEDDED_METADATA:RAW:/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/GIN_compute_graphs.xml",
+   "--add-section",
+   "SYSTEM_METADATA:RAW:/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/link/int/systemDiagramModelSlrBaseAddress.json",
+   "--key-value",
+   "SYS:PlatformVBNV:xilinx_u50_gen3x16_xdma_5_202210_1",
+   "--output",
+   "/export/hdd/scratch/pguruprasanna3/GIN_isolated/GIN_compute_graphs.xclbin"
+  ],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/pguruprasanna3/GIN_isolated"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 14:59:44 2025",
+ "timestampMillis": "1748285984388",
+ "status": {
+  "cmdId": "b2a8cb01-8299-4427-96f3-83a560f4cff6",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 14:59:44 2025",
+ "timestampMillis": "1748285984542",
+ "status": {
+  "cmdId": "b2a8cb01-8299-4427-96f3-83a560f4cff6",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Mon May 26 14:59:44 2025",
+ "timestampMillis": "1748285984546",
+ "buildStep": {
+  "cmdId": "86a8f228-271d-40ee-8305-152f3eb6f21b",
+  "name": "xclbinutilinfo",
+  "logFile": "",
+  "commandLine": "xclbinutil --quiet --force --info /export/hdd/scratch/pguruprasanna3/GIN_isolated/GIN_compute_graphs.xclbin.info --input /export/hdd/scratch/pguruprasanna3/GIN_isolated/GIN_compute_graphs.xclbin",
+  "args": [
+   "--quiet",
+   "--force",
+   "--info",
+   "/export/hdd/scratch/pguruprasanna3/GIN_isolated/GIN_compute_graphs.xclbin.info",
+   "--input",
+   "/export/hdd/scratch/pguruprasanna3/GIN_isolated/GIN_compute_graphs.xclbin"
+  ],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/pguruprasanna3/GIN_isolated"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 14:59:44 2025",
+ "timestampMillis": "1748285984546",
+ "status": {
+  "cmdId": "86a8f228-271d-40ee-8305-152f3eb6f21b",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 14:59:44 2025",
+ "timestampMillis": "1748285984965",
+ "status": {
+  "cmdId": "86a8f228-271d-40ee-8305-152f3eb6f21b",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Mon May 26 14:59:44 2025",
+ "timestampMillis": "1748285984968",
+ "buildStep": {
+  "cmdId": "69d63a54-0c9b-41b0-ba79-e124a00a4bc5",
+  "name": "generate_sc_driver",
+  "logFile": "",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/pguruprasanna3/GIN_isolated"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 14:59:44 2025",
+ "timestampMillis": "1748285984968",
+ "status": {
+  "cmdId": "69d63a54-0c9b-41b0-ba79-e124a00a4bc5",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 14:59:44 2025",
+ "timestampMillis": "1748285984970",
+ "status": {
+  "cmdId": "69d63a54-0c9b-41b0-ba79-e124a00a4bc5",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Mon May 26 14:59:45 2025",
+ "timestampMillis": "1748285985350",
+ "report": {
+  "path": "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/reports/link/system_estimate_GIN_compute_graphs.xtxt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_SYSTEM_ESTIMATE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Mon May 26 14:59:45 2025",
+ "timestampMillis": "1748285985503",
+ "report": {
+  "path": "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/reports/link/v++_link_GIN_compute_graphs_guidance.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Mon May 26 14:59:45 2025",
+ "timestampMillis": "1748285985504",
+ "report": {
+  "path": "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/v++_link_GIN_compute_graphs_guidance.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Mon May 26 14:59:45 2025",
+ "timestampMillis": "1748285985504",
+ "report": {
+  "path": "/export/hdd/scratch/pguruprasanna3/GIN_isolated/_x/logs/optraceViewer.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "OPERATION_TRACE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 14:59:45 2025",
+ "timestampMillis": "1748285985505",
+ "status": {
+  "cmdId": "7d28abb5-c63d-4e65-9c5b-65379031eb06",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
