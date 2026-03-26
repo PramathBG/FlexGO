@@ -141,16 +141,10 @@ $(TEMP_DIR)/GNN_compute_graphs.xo: src/GNN_compute.cc src/conv_layer.cc src/fina
 	$(VPP) $(VPP_FLAGS) --clock.defaultFreqHz 144500000 --kernel_frequency 144.5 --vivado.prop run.synth_1.strategy=Flow_AlternateRoutability --vivado.prop run.synth_1.steps.resource_sharing.is_enabled=1 --vivado.prop run.impl_1.strategy=Flow_RunPostRoutePhysOpt -c -k GNN_compute_graphs --hls.clock 100000000:GNN_compute_graphs --temp_dir $(TEMP_DIR)  -I'$(<D)' -o'$@' $^
 $(BUILD_DIR)/GCN_compute_graphs.xclbin: $(BINARY_CONTAINER_OBJS)
 	mkdir -p $(BUILD_DIR)
-##  --vivado.prop run.synth_1.steps.retiming.is_enabled=1 --vivado.prop run.synth_1.steps.keep_equivalent_registers.is_enabled=0
-##--hls.clock 100000000:GNN_compute_graphs##
-##--vivado.prop run.synth_1.steps.keep_equivalent_registers.is_enabled=0##
-##--vivado.prop run.synth_1.steps.fsm_extraction=one_hot##
-##--vivado.prop run.synth_1.steps.resource_sharing=off##
-##--clock.defaultFreqHz 100000000
+
 ifeq ($(HOST_ARCH), x86)
 	$(VPP) $(VPP_FLAGS) --clock.defaultFreqHz 144500000 --kernel_frequency 144.5 --vivado.prop run.synth_1.strategy=Flow_AlternateRoutability --vivado.prop run.synth_1.steps.resource_sharing.is_enabled=1 --vivado.prop run.impl_1.strategy=Flow_RunPostRoutePhysOpt -l --hls.clock 100000000:GNN_compute_graphs $(VPP_LDFLAGS) --temp_dir $(TEMP_DIR) -o'$(BUILD_DIR)/GNN_compute_graphs.link.xclbin' $(+)
 	$(VPP) --clock.defaultFreqHz 144500000 --kernel_frequency 144.5 --vivado.prop run.synth_1.strategy=Flow_AlternateRoutability --vivado.prop run.synth_1.steps.resource_sharing.is_enabled=1 --vivado.prop run.impl_1.strategy=Flow_RunPostRoutePhysOpt -p $(BUILD_DIR)/GNN_compute_graphs.link.xclbin -t $(TARGET) --platform $(DEVICE) --package.out_dir $(PACKAGE_OUT) -o $(BUILD_DIR)/GCN_compute_graphs.xclbin
-##--hls.clock 100000000:GNN_compute_graphs##
 else
 	$(VPP) $(VPP_FLAGS) --clock.defaultFreqHz 144500000 --kernel_frequency 144.5 --vivado.prop run.synth_1.strategy=Flow_AlternateRoutability --vivado.prop run.synth_1.steps.resource_sharing.is_enabled=1 --vivado.prop run.impl_1.strategy=Flow_RunPostRoutePhysOpt -l --hls.clock 100000000:GNN_compute_graphs $(VPP_LDFLAGS) --temp_dir $(TEMP_DIR) -o'$(BUILD_DIR)/GCN_compute_graphs.xclbin' $(+)
 endif
