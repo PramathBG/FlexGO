@@ -1,0 +1,520 @@
+<ENTRY>
+{
+ "thisFile": "/export/hdd/scratch/pguruprasanna3/DGN_isolated/DGN_compute_graphs.xclbin.link_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Mon May 26 18:54:33 2025",
+ "timestampMillis": "1748300073131",
+ "buildStep": {
+  "cmdId": "7067fb11-cba3-4da3-8cd1-cbf009e683e8",
+  "name": "v++",
+  "logFile": "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/link.steps.log",
+  "commandLine": "/tools/software/xilinx/Vitis/2022.1/bin/unwrapped/lnx64.o/v++  --vivado.prop \"run.__KERNEL__.{STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS}={-directive sdx_optimization_effort_high}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_route_design_summary steps {route_design} runs {impl_1} options {-max_paths 10}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_post_route_phys_opt_design_summary steps {post_route_phys_opt_design} runs {impl_1} options {-max_paths 10}\" --link --platform xilinx_u50_gen3x16_xdma_5_202210_1 -oDGN_compute_graphs.xclbin ./_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.xo --reuse_impl ./DGN_implemented_design.dcp ",
+  "args": [
+   "--link",
+   "--platform",
+   "xilinx_u50_gen3x16_xdma_5_202210_1",
+   "-oDGN_compute_graphs.xclbin",
+   "./_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.xo",
+   "--reuse_impl",
+   "./DGN_implemented_design.dcp"
+  ],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/pguruprasanna3/DGN_isolated"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 18:54:33 2025",
+ "timestampMillis": "1748300073131",
+ "status": {
+  "cmdId": "7067fb11-cba3-4da3-8cd1-cbf009e683e8",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "Mon May 26 18:54:39 2025",
+ "timestampMillis": "1748300079634",
+ "buildSummary": {
+  "hardwarePlatform": "xilinx_u50_gen3x16_xdma_5_202210_1.xpfm",
+  "hardwareDsa": "",
+  "platformDirectory": "/export/hdd/scratch/common/xilinx/opt/xilinx/platforms/xilinx_u50_gen3x16_xdma_5_202210_1",
+  "runtime": "OpenCL",
+  "systemConfig": "Linux",
+  "flow": "BF_LINK",
+  "target": "TT_HW",
+  "binaryContainer": {
+   "base": {
+    "type": "BT_UKNOWN",
+    "name": "DGN_compute_graphs",
+    "file": "/export/hdd/scratch/pguruprasanna3/DGN_isolated/DGN_compute_graphs.xclbin",
+    "reports": [],
+    "uuid": ""
+   },
+   "kernels": []
+  },
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "GNN_compute_graphs",
+     "file": "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.xo",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/node_embedding.cc",
+     "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/message_passing.cc",
+     "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/load_inputs.cc",
+     "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/linear.cc",
+     "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/globals.cc",
+     "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/finalize.cc",
+     "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/conv_layer.cc",
+     "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/xo/GNN_compute_graphs/GNN_compute_graphs/cpu_sources/GNN_compute.cc"
+    ],
+    "psSources": [],
+    "cuNames": [
+     "GNN_compute_graphs_1"
+    ],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "Vitis V++ Compiler Release 2022.1.2. SW Build 3602371 on 2022-08-02-23:13:43"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Mon May 26 18:54:40 2025",
+ "timestampMillis": "1748300080369",
+ "buildStep": {
+  "cmdId": "b8d85f37-d0f3-4de1-9601-cb6d61ff170c",
+  "name": "rtdgen",
+  "logFile": "",
+  "commandLine": "rtdgen",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/pguruprasanna3/DGN_isolated"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 18:54:40 2025",
+ "timestampMillis": "1748300080370",
+ "status": {
+  "cmdId": "b8d85f37-d0f3-4de1-9601-cb6d61ff170c",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Mon May 26 18:54:40 2025",
+ "timestampMillis": "1748300080422",
+ "report": {
+  "path": "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/DGN_compute_graphs_xml.rtd",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "XCLBIN_INFO",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Mon May 26 18:54:40 2025",
+ "timestampMillis": "1748300080424",
+ "buildStep": {
+  "cmdId": "3ca68da4-4694-444e-80d8-cf01b70f5bb5",
+  "name": "cf2sw",
+  "logFile": "",
+  "commandLine": "cf2sw -a /export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/address_map.xml -sdsl /export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/sdsl.dat -xclbin /export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/xclbin_orig.xml -rtd /export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/DGN_compute_graphs.rtd -o /export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/DGN_compute_graphs.xml",
+  "args": [
+   "-a",
+   "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/address_map.xml",
+   "-sdsl",
+   "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/sdsl.dat",
+   "-xclbin",
+   "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/xclbin_orig.xml",
+   "-rtd",
+   "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/DGN_compute_graphs.rtd",
+   "-o",
+   "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/DGN_compute_graphs.xml"
+  ],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/pguruprasanna3/DGN_isolated"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 18:54:40 2025",
+ "timestampMillis": "1748300080424",
+ "status": {
+  "cmdId": "3ca68da4-4694-444e-80d8-cf01b70f5bb5",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 18:54:43 2025",
+ "timestampMillis": "1748300083371",
+ "status": {
+  "cmdId": "3ca68da4-4694-444e-80d8-cf01b70f5bb5",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Mon May 26 18:54:43 2025",
+ "timestampMillis": "1748300083372",
+ "buildStep": {
+  "cmdId": "3bc484e0-80e9-4d15-b90d-2ef7c8f636f8",
+  "name": "rtdgen",
+  "logFile": "",
+  "commandLine": "writeSystemDiagram",
+  "args": [
+   "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/DGN_compute_graphs.rtd",
+   "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/systemDiagramModelSlrBaseAddress.json"
+  ],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/pguruprasanna3/DGN_isolated"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 18:54:43 2025",
+ "timestampMillis": "1748300083372",
+ "status": {
+  "cmdId": "3bc484e0-80e9-4d15-b90d-2ef7c8f636f8",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Mon May 26 18:54:43 2025",
+ "timestampMillis": "1748300083374",
+ "report": {
+  "path": "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/systemDiagramModelSlrBaseAddress.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM_PLUS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 18:54:43 2025",
+ "timestampMillis": "1748300083374",
+ "status": {
+  "cmdId": "3bc484e0-80e9-4d15-b90d-2ef7c8f636f8",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Mon May 26 18:54:43 2025",
+ "timestampMillis": "1748300083375",
+ "buildStep": {
+  "cmdId": "6701d8b1-50a0-42ba-92b1-5570819f0e39",
+  "name": "rtdgen",
+  "logFile": "",
+  "commandLine": "writeAutomationSummary",
+  "args": [
+   "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/automation_summary.txt"
+  ],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/pguruprasanna3/DGN_isolated"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 18:54:43 2025",
+ "timestampMillis": "1748300083375",
+ "status": {
+  "cmdId": "6701d8b1-50a0-42ba-92b1-5570819f0e39",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Mon May 26 18:54:43 2025",
+ "timestampMillis": "1748300083375",
+ "report": {
+  "path": "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/automation_summary.txt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "VITIS_DESIGN_FLOW",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 18:54:43 2025",
+ "timestampMillis": "1748300083375",
+ "status": {
+  "cmdId": "6701d8b1-50a0-42ba-92b1-5570819f0e39",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 18:54:43 2025",
+ "timestampMillis": "1748300083375",
+ "status": {
+  "cmdId": "b8d85f37-d0f3-4de1-9601-cb6d61ff170c",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Mon May 26 18:54:43 2025",
+ "timestampMillis": "1748300083379",
+ "buildStep": {
+  "cmdId": "af2b5446-3025-4162-a5d0-a3cfee6f4de9",
+  "name": "xclbinutil",
+  "logFile": "",
+  "commandLine": "xclbinutil --add-section BITSTREAM:RAW:/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/partial.bit --force --target hw --key-value SYS:dfx_enable:true --add-section :JSON:/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/DGN_compute_graphs.rtd --append-section :JSON:/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/appendSection.rtd --add-section CLOCK_FREQ_TOPOLOGY:JSON:/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/DGN_compute_graphs_xml.rtd --add-section BUILD_METADATA:JSON:/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/DGN_compute_graphs_build.rtd --add-section EMBEDDED_METADATA:RAW:/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/DGN_compute_graphs.xml --add-section SYSTEM_METADATA:RAW:/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/systemDiagramModelSlrBaseAddress.json --key-value SYS:PlatformVBNV:xilinx_u50_gen3x16_xdma_5_202210_1 --output /export/hdd/scratch/pguruprasanna3/DGN_isolated/DGN_compute_graphs.xclbin",
+  "args": [
+   "--add-section",
+   "BITSTREAM:RAW:/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/partial.bit",
+   "--force",
+   "--target",
+   "hw",
+   "--key-value",
+   "SYS:dfx_enable:true",
+   "--add-section",
+   ":JSON:/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/DGN_compute_graphs.rtd",
+   "--append-section",
+   ":JSON:/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/appendSection.rtd",
+   "--add-section",
+   "CLOCK_FREQ_TOPOLOGY:JSON:/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/DGN_compute_graphs_xml.rtd",
+   "--add-section",
+   "BUILD_METADATA:JSON:/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/DGN_compute_graphs_build.rtd",
+   "--add-section",
+   "EMBEDDED_METADATA:RAW:/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/DGN_compute_graphs.xml",
+   "--add-section",
+   "SYSTEM_METADATA:RAW:/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/link/int/systemDiagramModelSlrBaseAddress.json",
+   "--key-value",
+   "SYS:PlatformVBNV:xilinx_u50_gen3x16_xdma_5_202210_1",
+   "--output",
+   "/export/hdd/scratch/pguruprasanna3/DGN_isolated/DGN_compute_graphs.xclbin"
+  ],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/pguruprasanna3/DGN_isolated"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 18:54:43 2025",
+ "timestampMillis": "1748300083379",
+ "status": {
+  "cmdId": "af2b5446-3025-4162-a5d0-a3cfee6f4de9",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 18:54:43 2025",
+ "timestampMillis": "1748300083544",
+ "status": {
+  "cmdId": "af2b5446-3025-4162-a5d0-a3cfee6f4de9",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Mon May 26 18:54:43 2025",
+ "timestampMillis": "1748300083545",
+ "buildStep": {
+  "cmdId": "75838de1-a1da-46d7-838f-24559bf62eeb",
+  "name": "xclbinutilinfo",
+  "logFile": "",
+  "commandLine": "xclbinutil --quiet --force --info /export/hdd/scratch/pguruprasanna3/DGN_isolated/DGN_compute_graphs.xclbin.info --input /export/hdd/scratch/pguruprasanna3/DGN_isolated/DGN_compute_graphs.xclbin",
+  "args": [
+   "--quiet",
+   "--force",
+   "--info",
+   "/export/hdd/scratch/pguruprasanna3/DGN_isolated/DGN_compute_graphs.xclbin.info",
+   "--input",
+   "/export/hdd/scratch/pguruprasanna3/DGN_isolated/DGN_compute_graphs.xclbin"
+  ],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/pguruprasanna3/DGN_isolated"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 18:54:43 2025",
+ "timestampMillis": "1748300083546",
+ "status": {
+  "cmdId": "75838de1-a1da-46d7-838f-24559bf62eeb",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 18:54:43 2025",
+ "timestampMillis": "1748300083948",
+ "status": {
+  "cmdId": "75838de1-a1da-46d7-838f-24559bf62eeb",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Mon May 26 18:54:43 2025",
+ "timestampMillis": "1748300083950",
+ "buildStep": {
+  "cmdId": "6d01414c-f712-404b-b064-20d643b9a68d",
+  "name": "generate_sc_driver",
+  "logFile": "",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/pguruprasanna3/DGN_isolated"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 18:54:43 2025",
+ "timestampMillis": "1748300083950",
+ "status": {
+  "cmdId": "6d01414c-f712-404b-b064-20d643b9a68d",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 18:54:43 2025",
+ "timestampMillis": "1748300083950",
+ "status": {
+  "cmdId": "6d01414c-f712-404b-b064-20d643b9a68d",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Mon May 26 18:54:44 2025",
+ "timestampMillis": "1748300084167",
+ "report": {
+  "path": "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/reports/link/system_estimate_DGN_compute_graphs.xtxt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_SYSTEM_ESTIMATE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Mon May 26 18:54:44 2025",
+ "timestampMillis": "1748300084310",
+ "report": {
+  "path": "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/reports/link/v++_link_DGN_compute_graphs_guidance.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Mon May 26 18:54:44 2025",
+ "timestampMillis": "1748300084311",
+ "report": {
+  "path": "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/v++_link_DGN_compute_graphs_guidance.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Mon May 26 18:54:44 2025",
+ "timestampMillis": "1748300084311",
+ "report": {
+  "path": "/export/hdd/scratch/pguruprasanna3/DGN_isolated/_x/logs/optraceViewer.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "OPERATION_TRACE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 18:54:44 2025",
+ "timestampMillis": "1748300084312",
+ "status": {
+  "cmdId": "7067fb11-cba3-4da3-8cd1-cbf009e683e8",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
