@@ -1,0 +1,133 @@
+<ENTRY>
+{
+ "thisFile": "/export/hdd/scratch/pguruprasanna3/PNA_DGN/build_dir.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.xclbin.package_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Mon May 26 05:07:19 2025",
+ "timestampMillis": "1748250439401",
+ "buildStep": {
+  "cmdId": "09efadc4-71cb-4e50-a696-3a8abea4855a",
+  "name": "v++",
+  "logFile": "/export/hdd/scratch/pguruprasanna3/PNA_DGN/_x/package/package.steps.log",
+  "commandLine": "/tools/software/xilinx/Vitis/2022.1/bin/unwrapped/lnx64.o/v++  --vivado.prop \"run.__KERNEL__.{STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS}={-directive sdx_optimization_effort_high}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_route_design_summary steps {route_design} runs {impl_1} options {-max_paths 10}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_post_route_phys_opt_design_summary steps {post_route_phys_opt_design} runs {impl_1} options {-max_paths 10}\" --clock.defaultFreqHz 144500000 --kernel_frequency 144.5 --vivado.prop run.synth_1.strategy=Flow_AlternateRoutability --vivado.prop run.synth_1.steps.resource_sharing.is_enabled=1 --vivado.prop run.impl_1.strategy=Flow_RunPostRoutePhysOpt -p ./build_dir.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.link.xclbin -t hw --platform xilinx_u50_gen3x16_xdma_5_202210_1 --package.out_dir ./package.hw -o ./build_dir.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.xclbin ",
+  "args": [
+   "--clock.defaultFreqHz",
+   "144500000",
+   "--kernel_frequency",
+   "144.5",
+   "--vivado.prop",
+   "run.synth_1.strategy=Flow_AlternateRoutability",
+   "--vivado.prop",
+   "run.synth_1.steps.resource_sharing.is_enabled=1",
+   "--vivado.prop",
+   "run.impl_1.strategy=Flow_RunPostRoutePhysOpt",
+   "-p",
+   "./build_dir.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.link.xclbin",
+   "-t",
+   "hw",
+   "--platform",
+   "xilinx_u50_gen3x16_xdma_5_202210_1",
+   "--package.out_dir",
+   "./package.hw",
+   "-o",
+   "./build_dir.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.xclbin"
+  ],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/pguruprasanna3/PNA_DGN"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 05:07:19 2025",
+ "timestampMillis": "1748250439401",
+ "status": {
+  "cmdId": "09efadc4-71cb-4e50-a696-3a8abea4855a",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "Mon May 26 05:07:25 2025",
+ "timestampMillis": "1748250445367",
+ "buildSummary": {
+  "hardwarePlatform": "xilinx_u50_gen3x16_xdma_5_202210_1.xpfm",
+  "hardwareDsa": "",
+  "platformDirectory": "/export/hdd/scratch/common/xilinx/opt/xilinx/platforms/xilinx_u50_gen3x16_xdma_5_202210_1",
+  "runtime": "OpenCL",
+  "systemConfig": "Linux",
+  "flow": "BF_PACKAGE",
+  "target": "TT_HW",
+  "binaryContainer": {
+   "base": {
+    "type": "BT_UKNOWN",
+    "name": "GNN_compute_graphs",
+    "file": "/export/hdd/scratch/pguruprasanna3/PNA_DGN/build_dir.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.xclbin",
+    "reports": [],
+    "uuid": ""
+   },
+   "kernels": []
+  },
+  "kernels": [],
+  "toolVersion": "Vitis V++ Compiler Release 2022.1.2. SW Build 3602371 on 2022-08-02-23:13:43",
+  "inputBinaryContainer": {
+   "base": {
+    "type": "BT_UKNOWN",
+    "name": "GNN_compute_graphs.link",
+    "file": "/export/hdd/scratch/pguruprasanna3/PNA_DGN/build_dir.hw.xilinx_u50_gen3x16_xdma_5_202210_1/GNN_compute_graphs.link.xclbin",
+    "reports": [],
+    "uuid": "84b1baa8-0727-41d7-8edf-ed75fb0aca02"
+   },
+   "kernels": []
+  }
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Mon May 26 05:07:25 2025",
+ "timestampMillis": "1748250445743",
+ "report": {
+  "path": "/export/hdd/scratch/pguruprasanna3/PNA_DGN/_x/reports/package/v++_package_GNN_compute_graphs_guidance.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Mon May 26 05:07:25 2025",
+ "timestampMillis": "1748250445743",
+ "report": {
+  "path": "/export/hdd/scratch/pguruprasanna3/PNA_DGN/_x/v++_package_GNN_compute_graphs_guidance.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon May 26 05:07:25 2025",
+ "timestampMillis": "1748250445746",
+ "status": {
+  "cmdId": "09efadc4-71cb-4e50-a696-3a8abea4855a",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
