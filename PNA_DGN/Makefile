@@ -76,7 +76,7 @@ RESULT_STRING = TEST PASSED
 
 VPP := v++
 VPP_PFLAGS := 
-CMD_ARGS = $(BUILD_DIR)/GNN_compute_graphs.xclbin
+CMD_ARGS = $(BUILD_DIR)/PNA_DGN_compute_graphs.xclbin
 SDCARD := sd_card
 
 include $(XF_PROJ_ROOT)/../common/includes/opencl/opencl.mk
@@ -117,7 +117,7 @@ EMCONFIG_DIR = $(TEMP_DIR)
 EMU_DIR = $(SDCARD)/data/emulation
 
 ############################## Declaring Binary Containers ##############################
-BINARY_CONTAINERS += $(BUILD_DIR)/GNN_compute_graphs.xclbin
+BINARY_CONTAINERS += $(BUILD_DIR)/PNA_DGN_compute_graphs.xclbin
 BINARY_CONTAINER_OBJS += $(TEMP_DIR)/GNN_compute_graphs.xo
 
 ############################## Setting Targets ##############################
@@ -138,21 +138,15 @@ xclbin: build
 ############################## Setting Rules for Binary Containers (Building Kernels) ##############################
 $(TEMP_DIR)/GNN_compute_graphs.xo: src/GNN_compute.cc src/conv_layer.cc src/finalize.cc src/globals.cc src/linear.cc src/load_inputs.cc src/message_passing.cc src/node_embedding.cc
 	mkdir -p $(TEMP_DIR)
-	$(VPP) $(VPP_FLAGS) --clock.defaultFreqHz 162700000 --kernel_frequency 162.7 --vivado.prop run.synth_1.steps.retiming.is_enabled=1 --vivado.prop run.synth_1.steps.keep_equivalent_registers.is_enabled=0 --vivado.prop run.impl_1.strategy=Performance_ExplorePostRoutePhysOpt -c -k GNN_compute_graphs --hls.clock 100000000:GNN_compute_graphs --temp_dir $(TEMP_DIR)  -I'$(<D)' -o'$@' $^
-$(BUILD_DIR)/GNN_compute_graphs.xclbin: $(BINARY_CONTAINER_OBJS)
+	$(VPP) $(VPP_FLAGS) --clock.defaultFreqHz 144500000 --kernel_frequency 144.5 --vivado.prop run.synth_1.strategy=Flow_AlternateRoutability --vivado.prop run.synth_1.steps.resource_sharing.is_enabled=1 --vivado.prop run.impl_1.strategy=Flow_RunPostRoutePhysOpt -c -k GNN_compute_graphs --hls.clock 100000000:GNN_compute_graphs --temp_dir $(TEMP_DIR)  -I'$(<D)' -o'$@' $^
+$(BUILD_DIR)/PNA_DGN_compute_graphs.xclbin: $(BINARY_CONTAINER_OBJS)
 	mkdir -p $(BUILD_DIR)
-##--hls.clock 100000000:GNN_compute_graphs##
-##--vivado.prop run.synth_1.steps.retiming.is_enabled=1##
-##--vivado.prop run.synth_1.steps.keep_equivalent_registers.is_enabled=0##
-##--vivado.prop run.synth_1.steps.fsm_extraction=one_hot##
-##--vivado.prop run.synth_1.steps.resource_sharing=off##
-##--clock.defaultFreqHz 100000000
+
 ifeq ($(HOST_ARCH), x86)
-	$(VPP) $(VPP_FLAGS) --clock.defaultFreqHz 162700000 --kernel_frequency 162.7 --vivado.prop run.synth_1.steps.retiming.is_enabled=1 --vivado.prop run.synth_1.steps.keep_equivalent_registers.is_enabled=0 --vivado.prop run.impl_1.strategy=Performance_ExplorePostRoutePhysOpt -l --hls.clock 100000000:GNN_compute_graphs $(VPP_LDFLAGS) --temp_dir $(TEMP_DIR) -o'$(BUILD_DIR)/GNN_compute_graphs.link.xclbin' $(+)
-	$(VPP) --clock.defaultFreqHz 162700000 --kernel_frequency 162.7 --vivado.prop run.synth_1.steps.retiming.is_enabled=1 --vivado.prop run.synth_1.steps.keep_equivalent_registers.is_enabled=0 --vivado.prop run.impl_1.strategy=Performance_ExplorePostRoutePhysOpt -p $(BUILD_DIR)/GNN_compute_graphs.link.xclbin -t $(TARGET) --platform $(DEVICE) --package.out_dir $(PACKAGE_OUT) -o $(BUILD_DIR)/GNN_compute_graphs.xclbin
-##--hls.clock 100000000:GNN_compute_graphs##
+	$(VPP) $(VPP_FLAGS) --clock.defaultFreqHz 144500000 --kernel_frequency 144.5 --vivado.prop run.synth_1.strategy=Flow_AlternateRoutability --vivado.prop run.synth_1.steps.resource_sharing.is_enabled=1 --vivado.prop run.impl_1.strategy=Flow_RunPostRoutePhysOpt -l --hls.clock 100000000:GNN_compute_graphs $(VPP_LDFLAGS) --temp_dir $(TEMP_DIR) -o'$(BUILD_DIR)/GNN_compute_graphs.link.xclbin' $(+)
+	$(VPP) --clock.defaultFreqHz 144500000 --kernel_frequency 144.5 --vivado.prop run.synth_1.strategy=Flow_AlternateRoutability --vivado.prop run.synth_1.steps.resource_sharing.is_enabled=1 --vivado.prop run.impl_1.strategy=Flow_RunPostRoutePhysOpt -p $(BUILD_DIR)/GNN_compute_graphs.link.xclbin -t $(TARGET) --platform $(DEVICE) --package.out_dir $(PACKAGE_OUT) -o $(BUILD_DIR)/PNA_DGN_compute_graphs.xclbin
 else
-	$(VPP) $(VPP_FLAGS) --clock.defaultFreqHz 162700000 --kernel_frequency 162.7 --vivado.prop run.synth_1.steps.retiming.is_enabled=1 --vivado.prop run.synth_1.steps.keep_equivalent_registers.is_enabled=0 --vivado.prop run.impl_1.strategy=Performance_ExplorePostRoutePhysOpt -l --hls.clock 100000000:GNN_compute_graphs $(VPP_LDFLAGS) --temp_dir $(TEMP_DIR) -o'$(BUILD_DIR)/GNN_compute_graphs.xclbin' $(+)
+	$(VPP) $(VPP_FLAGS) --clock.defaultFreqHz 144500000 --kernel_frequency 144.5 --vivado.prop run.synth_1.strategy=Flow_AlternateRoutability --vivado.prop run.synth_1.steps.resource_sharing.is_enabled=1 --vivado.prop run.impl_1.strategy=Flow_RunPostRoutePhysOpt -l --hls.clock 100000000:GNN_compute_graphs $(VPP_LDFLAGS) --temp_dir $(TEMP_DIR) -o'$(BUILD_DIR)/PNA_DGN_compute_graphs.xclbin' $(+)
 endif
 
 ############################## Setting Rules for Host (Building Host Executable) ##############################
@@ -202,7 +196,7 @@ endif
 ############################## Preparing sdcard ##############################
 sd_card: $(BINARY_CONTAINERS) $(EXECUTABLE) gen_run_app
 ifneq ($(HOST_ARCH), x86)
-	$(VPP) $(VPP_PFLAGS) --clock.defaultFreqHz 162700000 --kernel_frequency 162.7 --vivado.prop run.synth_1.steps.retiming.is_enabled=1 --vivado.prop run.impl_1.strategy=Performance_ExplorePostRoutePhysOpt -p $(BUILD_DIR)/GNN_compute_graphs.xclbin -t $(TARGET) --platform $(DEVICE) --package.out_dir $(PACKAGE_OUT) --package.rootfs $(EDGE_COMMON_SW)/rootfs.ext4 --package.sd_file $(SD_IMAGE_FILE) --package.sd_file xrt.ini --package.sd_file $(RUN_APP_SCRIPT) --package.sd_file $(EXECUTABLE) -o GNN_compute_graphs.xclbin
+	$(VPP) $(VPP_PFLAGS) --clock.defaultFreqHz 144500000 --kernel_frequency 144.5 --vivado.prop run.synth_1.strategy=Flow_AlternateRoutability --vivado.prop run.synth_1.steps.resource_sharing.is_enabled=1 --vivado.prop run.impl_1.strategy=Flow_RunPostRoutePhysOpt -p $(BUILD_DIR)/PNA_DGN_compute_graphs.xclbin -t $(TARGET) --platform $(DEVICE) --package.out_dir $(PACKAGE_OUT) --package.rootfs $(EDGE_COMMON_SW)/rootfs.ext4 --package.sd_file $(SD_IMAGE_FILE) --package.sd_file xrt.ini --package.sd_file $(RUN_APP_SCRIPT) --package.sd_file $(EXECUTABLE) -o PNA_DGN_compute_graphs.xclbin
 endif
 
 ############################## Cleaning Rules ##############################
