@@ -344,6 +344,9 @@ int main(int argc, char **argv) {
             case 2 : printf("(%d/%d) Computing PNA ...\r", i + 1, NUM_TRIALS);
                      break;
             
+            case 3 : printf("(%d/%d) Computing DGN ...\r", i + 1, NUM_TRIALS);
+                     break;
+            
             default : break;
 
        }
