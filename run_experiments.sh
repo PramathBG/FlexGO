@@ -10,7 +10,7 @@ load_dataset ()
 {
     if [[ "$1" != "$current_dataset" ]]; then
         printf 'Preparing to extract dataset %s...\n' "$1"
-        rm -rf graphs/graph_bin/ graphs/graph_info/ DGN/eig/g*.txt graphs/dataset.txt common/includes/dataset/dataset_size.txt 2>/dev/null
+        rm -rf graphs/graph_bin/ graphs/graph_info/ FlexGO/eig/g*.txt GCN/eig/g*.txt GIN/eig/g*.txt PNA/eig/g*.txt DGN/eig/g*.txt PNA_DGN/eig/g*.txt PNA_DGN_GCN/eig/g*.txt graphs/dataset.txt common/includes/dataset/dataset_size.txt 2>/dev/null
         total="$(unzip -Z1 "$1" | grep -c -v '/$')"
         i=1
         printf 'Extracting dataset %s: %d/%d\r' "$1" 0 "$total"
@@ -49,7 +49,7 @@ run_case ()
 }
 
 datasets=(molhiv molpcba hep10k)
-models=(GIN GIN-VN GCN GAT PNA DGN)
+models=(FlexGO GCN GIN PNA DGN PNA_DGN PNA_DGN_GCN)
 run_all ()
 {
     for dataset in "${datasets[@]}"; do
